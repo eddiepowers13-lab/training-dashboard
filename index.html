@@ -152,11 +152,6 @@ tr:hover td{background:rgba(255,255,255,.02)}
 .lx-info{font-size:13px;margin:6px 0;line-height:1.5}
 .lx-last{display:inline-block;background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:2px 8px;margin:2px 4px 2px 0;font-variant-numeric:tabular-nums;font-weight:600}
 .lx-done{display:flex;flex-direction:column;gap:6px;margin:10px 0}
-.lx-set{display:flex;align-items:center;gap:10px;min-height:46px;width:100%;background:rgba(61,220,151,.08);border:1px solid rgba(61,220,151,.28);border-radius:12px;color:var(--tx);font-weight:600;font-size:15px;font-family:inherit;padding:0 12px;cursor:pointer;text-align:left}
-.lx-set b{width:24px;height:24px;border-radius:50%;background:var(--ac);color:#04140c;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none}
-.lx-set span{flex:1;font-variant-numeric:tabular-nums}
-.lx-set em{font-style:normal;color:var(--am);font-size:12.5px}
-.lx-set u{text-decoration:none;color:var(--mu)}
 .lx-entry{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:10px}
 .lx-et{font-weight:800;font-size:16px;margin-bottom:6px}
 .lx-et small{color:var(--mu);font-weight:600;font-size:13px}
@@ -205,6 +200,42 @@ tr:hover td{background:rgba(255,255,255,.02)}
 .lx-ib{width:44px;height:44px;border-radius:10px;background:transparent;border:1px solid var(--line);color:var(--mu);font-size:16px;cursor:pointer;padding:0;flex:none}
 .lx-ib.danger{color:var(--rd);border-color:#4a2a30}
 .lx-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.lx-sets{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+.lx-set{display:flex;gap:6px;align-items:stretch}
+.lx-sb{flex:1;min-width:0;display:flex;align-items:center;gap:10px;min-height:48px;background:rgba(61,220,151,.08);border:1px solid rgba(61,220,151,.28);border-radius:12px;color:var(--tx);font-weight:600;font-size:15px;font-family:inherit;padding:0 12px;cursor:pointer;text-align:left}
+.lx-sb b{width:24px;height:24px;border-radius:50%;background:var(--ac);color:#04140c;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none}
+.lx-sb span{flex:1;font-variant-numeric:tabular-nums}
+.lx-sb em{font-style:normal;color:var(--am);font-size:12.5px}
+.lx-sb u{text-decoration:none;color:var(--mu)}
+.lx-set .lx-ib{height:auto;min-height:48px}
+.lx-plan{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border:1px dashed var(--line);border-radius:12px;color:var(--mu);font-size:14px;font-variant-numeric:tabular-nums}
+.lx-pn{width:24px;height:24px;border-radius:50%;border:1px solid var(--line);font-size:13px;display:flex;align-items:center;justify-content:center;flex:none}
+.lx-entry{margin-top:0}
+.lx-tg{color:var(--ac)!important}
+.lx-lv{display:block;font-size:13px;font-weight:600;opacity:.8;margin-top:1px}
+.lx-log.sm{min-height:50px;margin:0;font-size:16px}
+.lx-row3{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:8px;margin-top:12px}
+.lx-sec.danger{color:var(--rd);border-color:#4a2a30}
+.lx-ed{background:var(--bg2);border:1px solid var(--ac2);border-radius:14px;padding:12px}
+.lx-sum{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:6px;margin-top:6px}
+.lx-sum>span{display:flex;flex-direction:column;font-size:13.5px;font-weight:600;font-variant-numeric:tabular-nums;min-width:0;line-height:1.25}
+.lx-sum small{font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.lx-sum b{font-weight:800}
+.lx-tag{font-style:normal;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--ac2);background:rgba(91,140,255,.12);border-radius:6px;padding:1px 6px;vertical-align:middle}
+.lx-prev{margin-top:8px;border:1px solid var(--line);border-radius:12px;background:var(--bg2)}
+.lx-prev>summary{list-style:none;cursor:pointer;min-height:46px;padding:6px 12px;display:flex;flex-direction:column;justify-content:center;font-size:13px;color:var(--mu);position:relative;padding-right:34px}
+.lx-prev>summary::-webkit-details-marker{display:none}
+.lx-prev>summary::after{content:"⌄";position:absolute;right:12px;top:10px;font-size:18px}
+.lx-prev[open]>summary::after{transform:rotate(180deg)}
+.lx-prev>.lx-set,.lx-prev>.lx-ed{margin:0 8px 8px}
+.lx-pc{display:flex;flex-wrap:wrap}
+.lx-cnt.mini{font-size:13px;flex-direction:row;gap:4px;align-items:baseline}
+.lx-pvc{padding:12px}
+.lx-pvr{display:block;width:100%;text-align:left;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px;color:var(--tx);font-family:inherit;cursor:pointer;min-height:64px}
+.lx-pvr.info{cursor:default;opacity:.7;min-height:0}
+.lx-pvh{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.lx-pvn{font-weight:700;font-size:15px;overflow-wrap:anywhere}
+.lx-pvn i{font-style:normal;color:var(--mu);margin-right:6px}
 #modal .btn,#modal input,#modal select{min-height:46px}
 #main code{overflow-wrap:anywhere;word-break:break-word}
 .lx-hist,.lx-grp{min-width:0;overflow-wrap:anywhere}
@@ -431,7 +462,7 @@ function seriesOf(rows,mode){const g=new Map();rows.forEach(r=>{const x=mode==='
  return[...g.entries()].sort((a,b)=>a[0]-b[0]).map(([x,rs])=>{const v=rs.filter(validE1),ld=rs.filter(r=>r.weight>1);
   return{x,rows:rs,e1:v.length?Math.max(...v.map(e1of)):null,top:ld.length?Math.max(...ld.map(r=>r.weight)):null,vol:sum(ld.map(r=>r.weight*r.reps)),reps:sum(rs.map(r=>r.reps)),best:Math.max(...rs.map(r=>r.reps)),sets:rs.length}})}
 const exOrder=n=>{const i=EXNAMES.findIndex(e=>e.name===n);return i<0?999:i};
-function lastGroup(name){const rows=L().filter(r=>r.exercise===name&&r.ses!==todayStr());if(!rows.length)return null;
+function lastGroup(name){const rows=L().filter(r=>r.exercise===name&&r.ses!==(UI.ldate||todayStr()));if(!rows.length)return null;
  const key=r=>(Number.isFinite(dayNum(r.date))?dayNum(r.date):0)*1000+(r.week||0);let mk=Math.max(...rows.map(key));const g=rows.filter(r=>key(r)===mk).sort((a,b)=>a.set-b.set);return{rows:g,week:g[0].week,date:g[0].date}}
 function suggest(it){const g=lastGroup(it.name);const inc=it.inc==='small'?S.settings.smallStep:S.settings.step;if(!g)return{none:1,inc};
  const rs=g.rows;const maxW=Math.max(...rs.map(r=>r.weight));const top=rs.filter(r=>r.weight===maxW);const u=it.type==='time'?' s':it.type==='dist'?' m':' reps';
@@ -538,38 +569,65 @@ function itemsFor(day,date){const p=progDay(day),out=[],seen=new Set();p.items.f
  const names=[];L().filter(r=>r.date===date&&sameDayRow(r,day)).forEach(r=>{if(!seen.has(r.exercise)&&!names.includes(r.exercise))names.push(r.exercise)});
  ((UI.lx||{})[date]||[]).forEach(n=>{if(!seen.has(n)&&!names.includes(n))names.push(n)});
  names.forEach(n=>out.push({it:freeItem(n),free:1}));return out}
-function defDraft(it,rows){const bw=it.type!=='load';let w=0,r=it.lo||8,rir=null;
+const topSet=rows=>rows.reduce((b,r)=>!b||r.weight>b.weight||(r.weight===b.weight&&r.reps>b.reps)?r:b,null);
+const wShort=(it,w)=>it.type==='load'?(w>0?fmtW(w):'–'):(w>1?'+'+fmtW(w):'BW');
+const setTxt=(it,r)=>wShort(it,r.weight)+'×'+r.reps;
+function rec(it){const sg=suggest(it);
+ if(sg.none)return{none:1,w:0,reps:it.lo||8,text:'No history yet — start light, 1–2 reps from failure.',last:null,top:null};
+ const bump=!!sg.add;let w=sg.w;if(it.type!=='load'&&w<=1)w=0;
+ return{w,reps:bump?(it.lo||8):(it.hi||it.lo||8),bump,text:sg.text||'',last:sg.last,top:topSet(sg.last.rows)}}
+const todayTxt=(it,R)=>R.none?'new':(it.type==='load'?fmtW(R.w)+' lb':(R.w>0?'+'+fmtW(R.w)+' lb':'BW'))+' × '+R.reps+(R.bump?' ↑':'');
+function sumGrid(it,R,free){return'<span class="lx-sum"><span><small>Target</small>'+(free?'–':esc(rx(it)))+'</span><span><small>Today</small><b class="'+(R.bump?'pos':'')+'">'+todayTxt(it,R)+'</b></span><span><small>Last top</small>'+(R.top?setTxt(it,R.top):'–')+'</span></span>'}
+function defDraft(it,rows){let w,r,rir=null;
  if(rows.length){const p=rows[rows.length-1];w=p.weight;r=p.reps;rir=p.rir==null?null:p.rir}
- else{const sg=suggest(it);if(!sg.none){w=sg.w;const lg=sg.last.rows,mw=Math.max(...lg.map(x=>x.weight)),t0=lg.find(x=>x.weight===mw)||lg[0];r=sg.add?(it.lo||t0.reps):Math.max(it.lo||0,t0.reps)}}
- if(bw&&w<=1)w=0;return{w,r,rir}}
+ else{const R=rec(it);w=R.w;r=R.reps}
+ if(it.type!=='load'&&w<=1)w=0;return{w,r,rir}}
 function getDraft(it,date,rows){const k=date+'|'+it.name;let d=UI.draft[k];if(!d||!d.t){d=UI.draft[k]=defDraft(it,rows)}return d}
 function lstat(items,date,day){let d=0,t=0;items.forEach(o=>{if(o.free||!isLoggable(o.it)||!o.it.sets)return;const n=rowsFor(o.it,date,day).length;d+=Math.min(n,o.it.sets);t+=o.it.sets});return{d,t}}
 function stepper(key,f,label,val,unit,it){return'<div class="lx-st"><div class="lx-sl">'+label+'</div><div class="lx-sr">'+
  '<button type="button" class="lx-pm" data-a="lstep" data-k="'+esc(key)+'" data-f="'+f+'" data-d="-1" aria-label="Decrease '+label+'">−</button>'+
  '<input type="number" inputmode="decimal" step="any" min="0" data-dk="'+esc(key)+'" data-df="'+f+'" value="'+(val==null?'':fmtW(val))+'" aria-label="'+label+'">'+
  '<button type="button" class="lx-pm" data-a="lstep" data-k="'+esc(key)+'" data-f="'+f+'" data-d="1" aria-label="Increase '+label+'">＋</button></div></div>'}
+function rirBtns(k,cur,act){return'<div class="lx-rir">'+[0,1,2,3,4].map(n=>'<button type="button" class="lx-rb'+(cur===n?' on':'')+'" data-a="'+act+'" data-k="'+esc(k)+'" data-v="'+n+'">'+n+'</button>').join('')+'</div>'}
+function setEditor(r){const it=metaOf(r.exercise),e=UI.edraft||{w:r.weight,r:r.reps,rir:null},k='e:'+r.id,bw=it.type!=='load',u=it.type==='time'?'Seconds':it.type==='dist'?'Meters':'Reps';
+ return'<div class="lx-ed"><div class="lx-et">Edit set '+r.set+' <small>· '+fmtS(r.date)+'</small></div>'+stepper(k,'w',bw?'Added weight (lb), 0 = bodyweight':'Weight (lb)',e.w)+stepper(k,'r',u,e.r)+
+  '<div class="lx-st"><div class="lx-sl">RIR <span class="mut">(optional)</span></div>'+rirBtns(k,e.rir,'lerir')+'</div>'+
+  '<div class="lx-row3"><button type="button" class="lx-log sm" data-a="lesave" data-v="'+r.id+'">Save</button><button type="button" class="lx-sec" data-a="lecancel">Cancel</button><button type="button" class="lx-sec danger" data-a="delset" data-v="'+r.id+'">Delete</button></div></div>'}
+function setRow(r,it){if(UI.ledit===r.id)return setEditor(r);
+ return'<div class="lx-set"><button type="button" class="lx-sb" data-a="lined" data-v="'+r.id+'" aria-label="Edit set '+r.set+'"><b>'+r.set+'</b><span>'+(it.type==='load'?fmtW(r.weight)+' lb':(r.weight<=1?'BW':'+'+fmtW(r.weight)+' lb'))+' × '+r.reps+(it.type==='time'?' s':it.type==='dist'?' m':'')+'</span>'+(r.rir!=null?'<em>RIR '+r.rir+'</em>':'')+'<u>✎</u></button><button type="button" class="lx-ib danger" data-a="delset" data-v="'+r.id+'" aria-label="Delete set '+r.set+'">✕</button></div>'}
+function logLbl(it,w,r){return(it.type==='load'?(w>0?fmtW(w)+' lb':'– lb'):(w>1?'+'+fmtW(w)+' lb':'BW'))+' × '+(r==null?'–':fmtW(r))}
 function renderLogCard(o,date,day){const it=o.it;const rows=rowsFor(it,date,day);const done=rows.length;const tgt=o.free?0:it.sets;const open=UI.lopen===it.name;
  if(!isLoggable(it)){return'<div class="lx-card info"><div class="lx-h static"><div class="lx-n">'+esc(it.name)+'</div><div class="lx-s">'+(it.type==='cardio'?it.mins+' min · not logged here':'Note')+'</div></div></div>'}
- const pct=tgt?Math.min(100,Math.round(done/tgt*100)):(done?100:0);const ok=tgt?done>=tgt:done>0;
+ const pct=tgt?Math.min(100,Math.round(done/tgt*100)):(done?100:0);const ok=tgt?done>=tgt:done>0;const R=rec(it);
  let h='<div class="lx-card'+(open?' open':'')+(ok?' ok':'')+'" data-card="'+esc(it.name)+'"><button type="button" class="lx-h" data-a="lopen" data-v="'+esc(it.name)+'" aria-expanded="'+open+'">'+
-  '<span class="lx-hl"><span class="lx-n">'+(it.n?'<i>'+it.n+'</i>':'')+esc(it.name)+'</span><span class="lx-s">'+(o.free?'Added exercise':rx(it))+(it.warm?' · warm-up':'')+(it.opt?' · optional':'')+(it.note?' · '+esc(it.note):'')+'</span></span>'+
+  '<span class="lx-hl"><span class="lx-n">'+(it.n?'<i>'+it.n+'</i>':'')+esc(it.name)+(o.free?' <em class="lx-tag">added</em>':'')+(it.warm?' <em class="lx-tag">warm-up</em>':'')+(it.opt?' <em class="lx-tag">optional</em>':'')+'</span>'+
+  (it.note?'<span class="lx-s">'+esc(it.note)+'</span>':'')+sumGrid(it,R,o.free)+'</span>'+
   '<span class="lx-cnt'+(ok?' ok':'')+'">'+(ok&&tgt?'✓ ':'')+done+(tgt?'/'+tgt:'')+'<small>sets</small></span><span class="lx-chev">⌄</span></button>'+
   '<div class="lx-bar"><i style="width:'+pct+'%"></i></div>';
- if(open){const key=date+'|'+it.name;const d=getDraft(it,date,rows);const sg=suggest(it);const bw=it.type!=='load';
+ if(open){const key=date+'|'+it.name;const d=getDraft(it,date,rows);const bw=it.type!=='load';
   h+='<div class="lx-body">';
-  if(sg.none)h+='<div class="lx-info mut">No previous session logged. Start light, 1–2 reps from failure.</div>';
-  else{h+='<div class="lx-info"><span class="mut">Last'+(sg.last.date?' ('+fmtS(sg.last.date)+')':'')+(sg.last.week!=null?' · Wk '+sg.last.week:'')+':</span> '+sg.last.rows.map(r=>'<span class="lx-last">'+(r.weight<=1?'BW':fmtW(r.weight))+'×'+r.reps+'</span>').join('')+'</div>'+
-   '<div class="lx-info"><span class="mut">Next:</span> <b class="pos">'+(bw?(sg.w<=1?'bodyweight':'+'+fmtW(sg.w)+' lb'):fmtW(sg.w)+' lb')+'</b> <span class="mut">'+esc(sg.text||'')+'</span></div>'}
-  if(rows.length){h+='<div class="lx-done">'+rows.map(r=>'<button type="button" class="lx-set" data-a="editset" data-v="'+r.id+'" aria-label="Edit set '+r.set+'"><b>'+r.set+'</b><span>'+(r.weight<=1?'BW':fmtW(r.weight))+' × '+r.reps+(it.type==='time'?'s':it.type==='dist'?'m':'')+'</span>'+(r.rir!=null?'<em>RIR '+r.rir+'</em>':'')+'<u>✎</u></button>').join('')+'</div>'}
+  h+='<div class="lx-info">'+(R.none?'<span class="mut">'+esc(R.text)+'</span>':'<span class="mut">Today:</span> <b class="pos">'+todayTxt(it,R)+'</b> <span class="mut">'+esc(R.text)+'</span>')+'</div>';
+  if(R.last){const pr=R.last.rows.slice().sort((a,b)=>a.set-b.set);const pk='p|'+it.name;
+   h+='<details class="lx-prev" data-h="'+esc(pk)+'"'+(UI.hopen[pk]?' open':'')+'><summary><span>Last session · '+(R.last.date?fmtS(R.last.date):'')+(R.last.week!=null?' · Wk '+R.last.week:'')+'</span><span class="lx-pc">'+pr.map(r=>'<span class="lx-last">'+setTxt(it,r)+'</span>').join('')+'</span></summary>'+pr.map(r=>setRow(r,it)).join('')+'</details>'}
+  const sorted=rows.slice().sort((a,b)=>a.set-b.set);
+  h+='<div class="lx-sets">'+sorted.map(r=>setRow(r,it)).join('');
   const nextN=rows.length?Math.max(...rows.map(x=>x.set||0))+1:1;
-  h+='<div class="lx-entry"><div class="lx-et">Set '+nextN+(tgt?'<small> of '+tgt+(done>=tgt?' · extra':'')+'</small>':'')+'</div>'+
-   stepper(key,'w',bw?(it.type==='dist'?'Load (lb), 0 = none':'Added weight (lb), 0 = bodyweight'):'Weight (lb)',d.w,'lb',it)+
-   stepper(key,'r',it.type==='time'?'Seconds':it.type==='dist'?'Meters':'Reps',d.r,'',it)+
-   '<div class="lx-st"><div class="lx-sl">RIR <span class="mut">(optional)</span></div><div class="lx-rir">'+[0,1,2,3,4].map(n=>'<button type="button" class="lx-rb'+(d.rir===n?' on':'')+'" data-a="lrir" data-k="'+esc(key)+'" data-v="'+n+'">'+n+'</button>').join('')+'</div></div>'+
-   '<button type="button" class="lx-log" data-a="lset" data-k="'+esc(key)+'">Log set '+nextN+'</button>'+
+  h+='<div class="lx-entry"><div class="lx-et">Set '+nextN+(tgt?'<small> of '+tgt+(done>=tgt?' · extra':'')+'</small>':'')+(R.none?'':'<small class="lx-tg"> · target '+todayTxt(it,R).replace(' ↑','')+'</small>')+'</div>'+
+   stepper(key,'w',bw?(it.type==='dist'?'Load (lb), 0 = none':'Added weight (lb), 0 = bodyweight'):'Weight (lb)',d.w)+
+   stepper(key,'r',it.type==='time'?'Seconds':it.type==='dist'?'Meters':'Reps',d.r)+
+   '<div class="lx-st"><div class="lx-sl">RIR <span class="mut">(optional)</span></div>'+rirBtns(key,d.rir,'lrir')+'</div>'+
+   '<button type="button" class="lx-log" data-a="lset" data-k="'+esc(key)+'">Log set '+nextN+'<span class="lx-lv">'+logLbl(it,d.w,d.r)+'</span></button>'+
    '<div class="lx-row2">'+(rows.length?'<button type="button" class="lx-sec" data-a="lundo" data-k="'+esc(key)+'">↶ Undo last set</button>':'')+
-   (o.free&&!rows.length?'<button type="button" class="lx-sec" data-a="lrmx" data-v="'+esc(it.name)+'">Remove exercise</button>':'')+'</div></div></div>'}
+   (o.free&&!rows.length?'<button type="button" class="lx-sec" data-a="lrmx" data-v="'+esc(it.name)+'">Remove exercise</button>':'')+'</div></div>';
+  for(let i=Math.max(done,0)+2;i<=tgt;i++)h+='<div class="lx-plan"><span class="lx-pn">'+i+'</span><span>Planned · '+(R.none?'– × '+R.reps:todayTxt(it,R).replace(' ↑',''))+'</span></div>';
+  h+='</div></div>'}
  return h+'</div>'}
+function renderPreview(items,date,day,p){const lg=items.filter(o=>isLoggable(o.it)&&!o.free&&o.it.sets);const tot=lg.reduce((a,o)=>a+o.it.sets,0);
+ let h='<div class="card lx-pvc"><div class="row sp"><h3 style="margin:0">Session preview</h3><span class="note">'+lg.length+' exercises · '+tot+' sets</span></div><div class="note" style="margin:2px 0 8px">Today = recommended weight × rep target (double progression from your last session). ↑ means add weight.</div>';
+ h+=items.map(o=>{const it=o.it;if(!isLoggable(it))return'<div class="lx-pvr info"><div class="lx-pvn">'+esc(it.name)+'</div><div class="note">'+(it.type==='cardio'?it.mins+' min':'Note')+'</div></div>';
+  const n=rowsFor(it,date,day).length,R=rec(it);
+  return'<button type="button" class="lx-pvr" data-a="lgo" data-v="'+esc(it.name)+'"><span class="lx-pvh"><span class="lx-pvn">'+(it.n?'<i>'+it.n+'</i>':'')+esc(it.name)+(it.warm?' <em class="lx-tag">warm-up</em>':'')+(o.free?' <em class="lx-tag">added</em>':'')+'</span>'+(n?'<span class="lx-cnt mini'+(it.sets&&n>=it.sets?' ok':'')+'">'+n+(it.sets&&!o.free?'/'+it.sets:'')+' done</span>':'')+'</span>'+sumGrid(it,R,o.free)+'</button>'}).join('');
+ h+='<button type="button" class="lx-log" data-a="lprev">▶ Start logging</button></div>';return h}
 function renderLogSession(){const date=logDate(),day=logDay(),p=progDay(day);const items=itemsFor(day,date);const st=lstat(items,date,day);
  if(UI.lopen===undefined){const f=items.find(o=>isLoggable(o.it)&&!o.it.warm&&(o.free||rowsFor(o.it,date,day).length<o.it.sets))||items.find(o=>isLoggable(o.it)&&(o.free||rowsFor(o.it,date,day).length<o.it.sets));UI.lopen=f?f.it.name:''}
  const wk=weekKey(dayNum(date));const isDone=!!(S.done[wk]&&S.done[wk][day]);const tdy=todayDay();
@@ -578,10 +636,11 @@ function renderLogSession(){const date=logDate(),day=logDay(),p=progDay(day);con
  (p.warn?'<div class="banner" style="margin:8px 0 0">'+esc(p.warn)+'</div>':'')+
  '<div class="lx-prog"><div class="row sp"><span><b>'+st.d+'/'+st.t+'</b> <span class="mut">sets today</span></span><span id="lxrest" class="timer lx-rest"></span></div><div class="lx-bar big"><i style="width:'+(st.t?Math.round(st.d/st.t*100):0)+'%"></i></div></div>'+
  '<div class="lx-meta"><label class="f">Date<input type="date" data-a2="ldate" value="'+date+'"></label><div class="lx-wk"><span class="note">Week</span><button type="button" class="lx-pm sm" data-a="wk" data-v="-1" aria-label="Previous week">−</button><b>'+S.settings.week+'</b><button type="button" class="lx-pm sm" data-a="wk" data-v="1" aria-label="Next week">＋</button></div></div>'+
- '<button type="button" class="lx-sec wide'+(isDone?' on':'')+'" data-a="ldone">'+(isDone?'✓ '+day+' marked done (tap to undo)':'Mark '+day+' done')+'</button></div>';
- h+=items.map(o=>renderLogCard(o,date,day)).join('');
+ '<div class="lx-btns" style="margin-top:10px"><button type="button" class="lx-sec'+(UI.lprev?' on':'')+'" data-a="lprev">'+(UI.lprev?'▶ Back to logging':'👁 Preview day')+'</button><button type="button" class="lx-sec'+(isDone?' on':'')+'" data-a="ldone">'+(isDone?'✓ Done (undo)':'Mark '+day+' done')+'</button></div></div>';
+ h+=UI.lprev?renderPreview(items,date,day,p):items.map(o=>renderLogCard(o,date,day)).join('');
  h+=items.length===0||!items.some(o=>isLoggable(o.it))?'<div class="note" style="margin:8px 2px">Nothing to log for this day — add an exercise below if you did something extra.</div>':'';
  const known=[...new Set(EXNAMES.map(e=>e.name).concat(S.log.map(r=>r.exercise)))];
+ if(UI.lprev)return h;
  h+=UI.ladd?'<form class="card lx-add" data-form="ladd"><h3>Add exercise</h3><input name="name" list="lxnames" placeholder="Exercise name" autocomplete="off" autocapitalize="sentences" required><datalist id="lxnames">'+known.map(n=>'<option value="'+esc(n)+'">').join('')+'</datalist><div class="lx-row2"><button class="lx-log" style="margin:0">Add</button><button type="button" class="lx-sec" data-a="ladd">Cancel</button></div></form>':
   '<button type="button" class="lx-sec wide" data-a="ladd" style="margin-bottom:14px">＋ Add exercise not in program</button>';
  return h}
@@ -599,7 +658,7 @@ function renderHistory(){const all=L();const f=UI.lf;let fr=all.filter(r=>(!f.da
  if(!groups.length)h+=emptyBox('No sets logged yet','Log a set above, or import your CSV below.');
  else{groups.slice(0,UI.hg).forEach((g,i)=>{const gk='g|'+g.k;const op=UI.hopen[gk]===undefined?i===0:UI.hopen[gk];const dn=g.date?dayOfDate(g.date):'';
   h+='<details class="lx-grp" data-h="'+esc(gk)+'"'+(op?' open':'')+'><summary><span class="lx-gt"><b>'+(g.date?(dn?dn.charAt(0)+dn.slice(1).toLowerCase()+', ':'')+fmtS(g.date):'No date')+'</b><small>'+[...g.days].join('/')+(g.week!=null?' · Wk '+g.week:'')+'</small></span><span class="pill">'+g.n+(g.n===1?' set':' sets')+'</span></summary>';
-  g.ex.forEach((rs,name)=>{rs=rs.slice().sort((a,b)=>a.set-b.set);h+='<div class="lx-hx"><div class="lx-hn">'+esc(name)+'</div>'+rs.map(r=>{const u=metaOf(r.exercise).type;return'<div class="lx-hr"><span class="lx-hs">Set '+r.set+'</span><span class="lx-hv">'+(r.weight<=1?'BW':fmtW(r.weight)+' lb')+' × '+r.reps+(u==='time'?' s':u==='dist'?' m':'')+'</span><span class="lx-hm">'+(r.rir==null?'':'RIR '+r.rir)+'</span><button type="button" class="lx-ib" data-a="editset" data-v="'+r.id+'" aria-label="Edit set">✎</button><button type="button" class="lx-ib danger" data-a="delset" data-v="'+r.id+'" aria-label="Delete set">✕</button></div>'}).join('')+'</div>'});
+  g.ex.forEach((rs,name)=>{rs=rs.slice().sort((a,b)=>a.set-b.set);h+='<div class="lx-hx"><div class="lx-hn">'+esc(name)+'</div>'+rs.map(r=>{const u=metaOf(r.exercise).type;if(UI.ledit===r.id)return setEditor(r);return'<div class="lx-hr"><span class="lx-hs">Set '+r.set+'</span><span class="lx-hv">'+(r.weight<=1?'BW':fmtW(r.weight)+' lb')+' × '+r.reps+(u==='time'?' s':u==='dist'?' m':'')+'</span><span class="lx-hm">'+(r.rir==null?'':'RIR '+r.rir)+'</span><button type="button" class="lx-ib" data-a="lined" data-v="'+r.id+'" aria-label="Edit set">✎</button><button type="button" class="lx-ib danger" data-a="delset" data-v="'+r.id+'" aria-label="Delete set">✕</button></div>'}).join('')+'</div>'});
   h+='</details>'});
   if(groups.length>UI.hg)h+='<button type="button" class="lx-sec wide" data-a="hmore">Show more ('+(groups.length-UI.hg)+' sessions)</button>'}
  return h+'</details>'}
@@ -612,14 +671,23 @@ function renderLog(){
 function logAct(a,t){const v=t.dataset.v,k=t.dataset.k;
  const find=key=>{const i=key.indexOf('|');const date=key.slice(0,i),name=key.slice(i+1);const day=logDay();const o=itemsFor(day,date).find(x=>x.it.name===name);return o?{o,date,name,day,it:o.it,rows:rowsFor(o.it,date,day),key}:null};
  switch(a){
- case'lday':UI.lday=v;UI.lopen=undefined;render();return true;
+case'lprev':UI.lprev=!UI.lprev;render();window.scrollTo(0,0);return true;
+ case'lgo':UI.lprev=false;UI.lopen=v;UI.lscroll=v;render();setTimeout(()=>{const el=[...document.querySelectorAll('.lx-card[data-card]')].find(x=>x.dataset.card===v);if(el)el.scrollIntoView({block:'start'})},30);return true;
+ case'lined':{const r=S.log.find(x=>x.id===v);if(!r)return true;const ty=metaOf(r.exercise).type;UI.ledit=v;UI.edraft={w:ty!=='load'&&r.weight<=1?0:r.weight,r:r.reps,rir:r.rir==null?null:r.rir};render();return true}
+ case'lecancel':UI.ledit=null;render();return true;
+ case'lerir':{const e=UI.edraft;if(!e)return true;e.rir=e.rir===+v?null:+v;t.parentNode.querySelectorAll('.lx-rb').forEach(b=>b.classList.toggle('on',e.rir!==null&&+b.dataset.v===e.rir));return true}
+ case'lesave':{const r=S.log.find(x=>x.id===v);if(!r)return true;const ty=metaOf(r.exercise).type;const e=UI.edraft||{};t.closest('.lx-ed').querySelectorAll('input[data-df]').forEach(i=>{const x=num(i.value);if(i.dataset.df==='w')e.w=x==null?0:x;else e.r=x});
+  if(!(e.r>0)){toast('Enter reps');return true}let w=e.w;if(ty==='load'){if(!(w>0)){toast('Enter a weight');return true}}else if(!(w>1))w=1;
+  r.weight=w;r.reps=e.r;r.rir=e.rir==null?null:e.rir;save();UI.ledit=null;render();toast('Set updated');return true}
+  case'lday':UI.lday=v;UI.lopen=undefined;render();return true;
  case'ldone':{const date=logDate(),day=logDay(),wk=weekKey(dayNum(date));const o=(S.done[wk]=S.done[wk]||{});o[day]=!o[day];save();render();toast(o[day]?day+' marked done 💪':'Unmarked');return true}
  case'lopen':UI.lopen=UI.lopen===v?'':v;render();return true;
  case'ladd':UI.ladd=!UI.ladd;render();return true;
  case'lclr':UI.lf={day:'',ex:'',week:''};render();return true;
  case'hmore':UI.hg+=10;render();return true;
  case'lrmx':{const date=logDate();UI.lx[date]=(UI.lx[date]||[]).filter(n=>n!==v);if(UI.lopen===v)UI.lopen='';render();return true}
- case'lstep':{const c=find(k);if(!c)return true;const f=t.dataset.f,d=+t.dataset.d;const dr=getDraft(c.it,c.date,c.rows);const cur=dr[f]==null?0:dr[f];let nv=Math.round((cur+d*stepOf(c.it,f))*100)/100;if(nv<0)nv=0;dr[f]=nv;dr.t=1;const inp=t.parentNode.querySelector('input');if(inp)inp.value=fmtW(nv);return true}
+ case'lstep':{if(k.startsWith('e:')){const r=S.log.find(x=>x.id===k.slice(2));const e=UI.edraft;if(!r||!e)return true;const f=t.dataset.f,d=+t.dataset.d;let nv=Math.round(((e[f]||0)+d*stepOf(metaOf(r.exercise),f))*100)/100;if(nv<0)nv=0;e[f]=nv;const inp=t.parentNode.querySelector('input');if(inp)inp.value=fmtW(nv);return true}
+  const c=find(k);if(!c)return true;const f=t.dataset.f,d=+t.dataset.d;const dr=getDraft(c.it,c.date,c.rows);const cur=dr[f]==null?0:dr[f];let nv=Math.round((cur+d*stepOf(c.it,f))*100)/100;if(nv<0)nv=0;dr[f]=nv;dr.t=1;const inp=t.parentNode.querySelector('input');if(inp)inp.value=fmtW(nv);updLbl(t);return true}
  case'lrir':{const c=find(k);if(!c)return true;const dr=getDraft(c.it,c.date,c.rows);dr.rir=dr.rir===+v?null:+v;dr.t=1;t.parentNode.querySelectorAll('.lx-rb').forEach(b=>b.classList.toggle('on',dr.rir!==null&&+b.dataset.v===dr.rir));return true}
  case'lset':{const c=find(k);if(!c)return true;const it=c.it,dr=getDraft(it,c.date,c.rows);let w=dr.w,r=dr.r;
   const inps=t.closest('.lx-entry').querySelectorAll('input[data-df]');inps.forEach(i=>{const x=num(i.value);if(i.dataset.df==='w')w=x==null?0:x;else r=x});
@@ -632,7 +700,8 @@ function logAct(a,t){const v=t.dataset.v,k=t.dataset.k;
   render();if(UI.lscroll){const nm=UI.lscroll;UI.lscroll=null;setTimeout(()=>{const el=[...document.querySelectorAll('.lx-card[data-card]')].find(x=>x.dataset.card===nm);if(el)el.scrollIntoView({block:'start'})},30)}toast('Set '+set+' · '+it.name+' · '+(w<=1&&it.type!=='load'?'BW':fmtW(w)+' lb')+' × '+r);return true}
  case'lundo':{const c=find(k);if(!c||!c.rows.length)return true;const last=c.rows[c.rows.length-1];S.log=S.log.filter(x=>x.id!==last.id);const dr=getDraft(c.it,c.date,c.rows);dr.w=last.weight<=1&&c.it.type!=='load'?0:last.weight;dr.r=last.reps;dr.rir=last.rir==null?null:last.rir;dr.t=1;save();render();toast('Removed set '+last.set);return true}
  }return false}
-document.addEventListener('input',e=>{const t=e.target;if(t.dataset&&t.dataset.dk){const dr=UI.draft[t.dataset.dk];if(dr){dr[t.dataset.df]=num(t.value);dr.t=1}}});
+function updLbl(el){const en=el.closest('.lx-entry');if(!en)return;const b=en.querySelector('.lx-log .lx-lv'),ins=en.querySelectorAll('input[data-df]');if(!b||ins.length<2)return;const key=ins[0].dataset.dk;const nm=key.slice(key.indexOf('|')+1);const it=(itemsFor(logDay(),logDate()).find(x=>x.it.name===nm)||{}).it;if(it)b.textContent=logLbl(it,num(ins[0].value)||0,num(ins[1].value))}
+document.addEventListener('input',e=>{const t=e.target;if(t.dataset&&t.dataset.dk){const k=t.dataset.dk;if(k.startsWith('e:')){if(UI.edraft)UI.edraft[t.dataset.df]=num(t.value)}else{const dr=UI.draft[k];if(dr){dr[t.dataset.df]=num(t.value);dr.t=1}updLbl(t)}}});
 document.addEventListener('focusin',e=>{const t=e.target;if(t.dataset&&t.dataset.dk)try{t.select()}catch(_){}});
 document.addEventListener('toggle',e=>{const t=e.target;if(t.dataset&&t.dataset.h!==undefined&&t.tagName==='DETAILS')UI.hopen[t.dataset.h]=t.open},true);
 document.addEventListener('change',e=>{const t=e.target;if(t.dataset&&t.dataset.a2==='ldate'&&t.value){UI.ldate=t.value===todayStr()?null:t.value;const d=dayOfDate(t.value);if(d&&d!=='SUN')UI.lday=d;UI.lopen=undefined;render()}});
