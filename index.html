@@ -95,7 +95,7 @@ tr:hover td{background:rgba(255,255,255,.02)}
 .srow.logged input{opacity:.6}
 .sug{font-size:13px;margin-top:6px}
 .sug b{color:var(--ac)}
-#toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:#1d2b3a;border:1px solid var(--line);padding:10px 16px;border-radius:12px;z-index:80;font-weight:600;opacity:0;pointer-events:none;transition:.25s;max-width:90vw;text-align:center}
+#toast{position:fixed;left:50%;top:calc(70px + env(safe-area-inset-top));transform:translateX(-50%);background:#1d2b3a;border:1px solid var(--line);padding:10px 16px;border-radius:12px;z-index:80;font-weight:600;opacity:0;pointer-events:none;transition:.25s;max-width:90vw;text-align:center}
 #toast.show{opacity:1}
 .timer{font-variant-numeric:tabular-nums;font-weight:800;font-size:20px;color:var(--am);min-width:56px}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
@@ -113,8 +113,102 @@ tr:hover td{background:rgba(255,255,255,.02)}
  nav.tabs{position:sticky;top:57px;bottom:auto;border-top:0;border-bottom:1px solid var(--line);justify-content:center;padding:6px}
  nav.tabs button{flex-direction:row;font-size:13.5px;min-width:0;padding:8px 14px;gap:7px}
  nav.tabs button span{font-size:16px}
- body{padding-bottom:30px}#toast{bottom:30px}
+ body{padding-bottom:30px}#toast{top:70px}
 }
+
+/* ===== Log v2 ===== */
+.lx-top{padding:12px}
+.lx-days{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:12px}
+.lx-day{min-height:46px;border-radius:12px;background:var(--bg2);border:1px solid var(--line);color:var(--mu);font-weight:700;font-size:14px;font-family:inherit;cursor:pointer;position:relative;padding:0}
+.lx-day.on{background:var(--ac);border-color:var(--ac);color:#04140c}
+.lx-day.today:not(.on)::after{content:"";position:absolute;top:5px;right:6px;width:7px;height:7px;border-radius:50%;background:var(--ac)}
+.lx-title b{font-size:17px}
+.lx-prog{margin-top:12px}
+.lx-rest{font-size:15px;min-width:0}
+.lx-bar{height:4px;background:#1b2733;overflow:hidden}
+.lx-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--ac2),var(--ac));transition:width .25s}
+.lx-bar.big{height:12px;border-radius:9px;margin-top:6px}
+.lx-meta{display:flex;gap:10px;align-items:flex-end;margin-top:12px}
+.lx-meta label.f{flex:1}
+.lx-meta input{min-height:46px}
+.lx-wk{display:flex;align-items:center;gap:8px}
+.lx-wk b{min-width:20px;text-align:center;font-size:17px}
+.lx-card{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden;scroll-margin-top:70px}
+.lx-card.open{border-color:#34506b}
+.lx-card.ok{border-left:4px solid var(--ac)}
+.lx-card.info{background:transparent;border-style:dashed}
+.lx-h{width:100%;display:flex;align-items:center;gap:10px;text-align:left;background:none;border:0;color:var(--tx);font-family:inherit;padding:12px 12px;min-height:60px;cursor:pointer}
+.lx-h.static{cursor:default;display:block;min-height:0;padding:10px 12px}
+.lx-hl{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.lx-n{font-weight:700;font-size:16px;line-height:1.25;overflow-wrap:anywhere}
+.lx-n i{font-style:normal;color:var(--mu);font-weight:600;margin-right:6px}
+.lx-s{color:var(--mu);font-size:12.5px}
+.lx-cnt{font-weight:800;font-size:20px;font-variant-numeric:tabular-nums;display:flex;flex-direction:column;align-items:flex-end;line-height:1.1;white-space:nowrap}
+.lx-cnt small{font-size:10.5px;color:var(--mu);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.lx-cnt.ok{color:var(--ac)}
+.lx-chev{color:var(--mu);font-size:20px;transition:transform .2s;width:18px;text-align:center}
+.lx-card.open .lx-chev{transform:rotate(180deg)}
+.lx-body{padding:4px 12px 14px}
+.lx-info{font-size:13px;margin:6px 0;line-height:1.5}
+.lx-last{display:inline-block;background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:2px 8px;margin:2px 4px 2px 0;font-variant-numeric:tabular-nums;font-weight:600}
+.lx-done{display:flex;flex-direction:column;gap:6px;margin:10px 0}
+.lx-set{display:flex;align-items:center;gap:10px;min-height:46px;width:100%;background:rgba(61,220,151,.08);border:1px solid rgba(61,220,151,.28);border-radius:12px;color:var(--tx);font-weight:600;font-size:15px;font-family:inherit;padding:0 12px;cursor:pointer;text-align:left}
+.lx-set b{width:24px;height:24px;border-radius:50%;background:var(--ac);color:#04140c;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none}
+.lx-set span{flex:1;font-variant-numeric:tabular-nums}
+.lx-set em{font-style:normal;color:var(--am);font-size:12.5px}
+.lx-set u{text-decoration:none;color:var(--mu)}
+.lx-entry{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:10px}
+.lx-et{font-weight:800;font-size:16px;margin-bottom:6px}
+.lx-et small{color:var(--mu);font-weight:600;font-size:13px}
+.lx-st{margin-top:10px}
+.lx-sl{font-size:12px;color:var(--mu);font-weight:600;margin-bottom:5px}
+.lx-sr{display:grid;grid-template-columns:60px 1fr 60px;gap:8px}
+.lx-pm{height:56px;border-radius:14px;background:var(--card2);border:1px solid var(--line);color:var(--tx);font-weight:700;font-size:28px;font-family:inherit;cursor:pointer;padding:0;touch-action:manipulation}
+.lx-pm:active{background:var(--ac2);border-color:var(--ac2)}
+.lx-pm.sm{height:44px;width:44px;font-size:22px;border-radius:12px}
+.lx-sr input{height:56px;min-height:56px;text-align:center;font-weight:800;font-size:26px;font-family:inherit;border-radius:14px;padding:0 4px;-moz-appearance:textfield}
+.lx-sr input::-webkit-outer-spin-button,.lx-sr input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.lx-rir{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.lx-rb{min-height:46px;border-radius:12px;background:var(--card2);border:1px solid var(--line);color:var(--mu);font-weight:700;font-size:16px;font-family:inherit;cursor:pointer;padding:0}
+.lx-rb.on{background:var(--am);border-color:var(--am);color:#241600}
+.lx-log{width:100%;min-height:58px;margin-top:14px;border-radius:14px;background:var(--ac);border:0;color:#04140c;font-weight:800;font-size:18px;font-family:inherit;cursor:pointer;touch-action:manipulation}
+.lx-log:active{filter:brightness(.85)}
+.lx-row2{display:flex;gap:8px;margin-top:8px}
+.lx-row2 .lx-sec{flex:1}
+.lx-sec{display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:12px;background:var(--card2);border:1px solid var(--line);color:var(--tx);font-weight:600;font-size:14.5px;font-family:inherit;cursor:pointer;padding:0 12px;text-align:center;margin:0}
+.lx-sec.wide{width:100%;margin-top:10px}
+.lx-sec.on{color:var(--ac);border-color:rgba(61,220,151,.4);background:rgba(61,220,151,.08)}
+.lx-add input{min-height:48px;font-size:16px}
+.lx-add .lx-row2{margin-top:10px}
+.lx-hist{padding:0}
+.lx-hist>summary,.lx-grp>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:52px;padding:8px 14px;cursor:pointer}
+.lx-hist>summary::-webkit-details-marker,.lx-grp>summary::-webkit-details-marker{display:none}
+.lx-hist>summary::after,.lx-grp>summary::after{content:"⌄";color:var(--mu);font-size:20px;transition:transform .2s}
+.lx-hist[open]>summary::after,.lx-grp[open]>summary::after{transform:rotate(180deg)}
+.lx-hist>summary>span:first-child{flex:1}
+.lx-hist{padding-bottom:0}
+.lx-hist[open]{padding-bottom:12px}
+.lx-hist>*:not(summary){margin-left:12px;margin-right:12px}
+.lx-filt{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:2px;margin-bottom:10px}
+.lx-filt select{min-height:46px}.lx-filt .full{grid-column:1/-1}
+.lx-grp{border:1px solid var(--line);border-radius:12px;margin-bottom:8px;background:var(--card2)}
+.lx-grp>summary{min-height:50px;padding:6px 12px}
+.lx-gt{flex:1;display:flex;flex-direction:column;line-height:1.25}
+.lx-gt small{color:var(--mu);font-size:12px}
+.lx-hx{padding:4px 12px 8px;border-top:1px solid var(--line)}
+.lx-hn{font-weight:700;font-size:14px;padding:8px 0 2px;overflow-wrap:anywhere}
+.lx-hr{display:flex;align-items:center;gap:8px;min-height:46px;border-bottom:1px dashed #1f2c3a}
+.lx-hr:last-child{border-bottom:0}
+.lx-hs{width:44px;color:var(--mu);font-size:13px}
+.lx-hv{flex:1;font-weight:600;font-variant-numeric:tabular-nums}
+.lx-hm{color:var(--am);font-size:12.5px;min-width:40px;text-align:right}
+.lx-ib{width:44px;height:44px;border-radius:10px;background:transparent;border:1px solid var(--line);color:var(--mu);font-size:16px;cursor:pointer;padding:0;flex:none}
+.lx-ib.danger{color:var(--rd);border-color:#4a2a30}
+.lx-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#modal .btn,#modal input,#modal select{min-height:46px}
+#main code{overflow-wrap:anywhere;word-break:break-word}
+.lx-hist,.lx-grp{min-width:0;overflow-wrap:anywhere}
+@media(min-width:760px){.lx-body{max-width:640px}}
 </style>
 </head>
 <body>
@@ -325,7 +419,7 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify(S));storageOK=true}c
 function backup(){try{localStorage.setItem(BKEY,JSON.stringify({at:new Date().toISOString(),data:S}))}catch(e){}}
 let UI={tab:'home',metric:'e1',ex:'all',axis:null,wsel:null,msel:'chest',bmetric:'bf',pweek:0,fam:'wife',lf:{day:'',ex:'',week:''},lpage:60,imp:null,labsel:null};
 try{Object.assign(UI,JSON.parse(localStorage.getItem(UKEY)||'{}'),{imp:null,lpage:60})}catch(e){}
-const saveUI=()=>{try{localStorage.setItem(UKEY,JSON.stringify({tab:UI.tab,fam:UI.fam,metric:UI.metric}))}catch(e){}};
+const saveUI=()=>{try{localStorage.setItem(UKEY,JSON.stringify({tab:UI.tab,fam:UI.fam,metric:UI.metric,lx:UI.lx}))}catch(e){}};
 
 /* ===== data selectors ===== */
 const L=()=>S.log.filter(r=>String(r.person||'').toLowerCase()===S.settings.person.toLowerCase());
@@ -427,32 +521,123 @@ function exOptions(selv){let h='';PROG.forEach(d=>{const its=EXNAMES.filter(e=>e
  const extra=[...new Set(L().map(r=>r.exercise))].filter(n=>!BYNAME[n]);if(extra.length)h+='<optgroup label="Other (from imports)">'+extra.map(n=>'<option'+(n===selv?' selected':'')+'>'+esc(n)+'</option>').join('')+'</optgroup>';
  return h+'<option value="__custom"'+(selv==='__custom'?' selected':'')+'>Other…</option>'}
 function sortLog(rows){return rows.slice().sort((a,b)=>(dayNum(b.date)||0)-(dayNum(a.date)||0)||(b.week||0)-(a.week||0)||exOrder(a.exercise)-exOrder(b.exercise)||a.exercise.localeCompare(b.exercise)||a.set-b.set)}
-function renderLog(){const q=quickDefaults();const rows=L();const f=UI.lf;let fr=rows.filter(r=>(!f.day||r.day===f.day)&&(!f.ex||r.exercise===f.ex)&&(!f.week||String(r.week)===String(f.week)));fr=sortLog(fr);
- const exs=[...new Set(rows.map(r=>r.exercise))].sort((a,b)=>exOrder(a)-exOrder(b));const wks=[...new Set(rows.map(r=>r.week).filter(x=>x!=null))].sort((a,b)=>a-b);const ps=persons();
- let h='<div class="card"><h2>Quick entry</h2><form data-form="quick"><div class="form">'+
- '<label class="f">Date<input type="date" name="date" value="'+q.date+'" required></label>'+
- '<label class="f">Day<select name="day">'+DAYS.slice(0,6).map(d=>'<option'+(d===q.day?' selected':'')+'>'+d+'</option>').join('')+'</select></label>'+
- '<label class="f wide">Exercise<select name="exercise" id="qex">'+exOptions(q.exercise||'__none')+'</select></label>'+
- '<label class="f" id="qcustom" style="display:'+(q.exercise==='__custom'?'flex':'none')+'">Custom name<input name="custom" value="'+esc(q.custom||'')+'"></label>'+
- '<label class="f">Week<input type="number" name="week" min="1" inputmode="numeric" value="'+q.week+'"></label>'+
- '<label class="f">Set<input type="number" name="set" min="1" inputmode="numeric" value="'+q.set+'"></label>'+
- '<label class="f">Weight (lb)<input type="number" name="weight" step="any" inputmode="decimal" value="'+esc(q.weight)+'" required></label>'+
- '<label class="f">Reps / s / m<input type="number" name="reps" step="any" inputmode="numeric" value="'+esc(q.reps)+'" required></label>'+
- '<label class="f">RIR<select name="rir"><option value="">–</option>'+[0,1,2,3,4].map(n=>'<option'+(String(q.rir)===String(n)?' selected':'')+'>'+n+'</option>').join('')+'</select></label>'+
- '</div><div class="row" style="margin-top:12px"><button class="btn primary" type="submit">＋ Add set</button><span class="note">Bodyweight / timed / distance exercises: use weight = 1.</span></div></form></div>';
- h+='<div class="card"><div class="row sp"><h2>CSV import</h2><div class="row"><a class="btn sm" href="#" data-a="template">Download template</a></div></div>'+
- '<div class="note" style="margin-bottom:8px">Columns: <code>Person,Day,Exercise,Week,Set,Weight(lbs),Reps,Date</code>. Only <b>'+esc(S.settings.person)+'</b> rows are kept by default — change which people to keep in the preview. When all dates are identical (batch export), Week (1–10) is used as the time axis.</div>'+
- '<div class="row"><label class="btn" style="margin:0">📂 Choose CSV file<input type="file" id="csvin" accept=".csv,text/csv,text/plain" hidden></label><button class="btn ghost" data-a="csvpaste">Paste CSV text</button></div>'+renderImportPreview()+'</div>';
- h+='<div class="card"><div class="row sp"><h2>Workout log <span class="mut" style="font-weight:500;font-size:13px">('+fr.length+(fr.length!==rows.length?' of '+rows.length:'')+' sets)</span></h2><div class="row"><button class="btn sm" data-a="csvexport">Export CSV</button></div></div>'+
- '<div class="row" style="margin-bottom:10px">'+
- '<select data-lf="person" style="width:auto">'+Object.keys(ps).map(p=>'<option value="'+esc(p)+'"'+(p===S.settings.person?' selected':'')+'>'+esc(p)+' ('+ps[p]+')</option>').join('')+'</select>'+
- '<select data-lf="day" style="width:auto"><option value="">All days</option>'+DAYS.slice(0,6).map(d=>'<option'+(f.day===d?' selected':'')+'>'+d+'</option>').join('')+'</select>'+
- '<select data-lf="ex" style="width:auto;max-width:200px"><option value="">All exercises</option>'+exs.map(e=>'<option'+(f.ex===e?' selected':'')+'>'+esc(e)+'</option>').join('')+'</select>'+
- '<select data-lf="week" style="width:auto"><option value="">All weeks</option>'+wks.map(e=>'<option value="'+e+'"'+(String(f.week)===String(e)?' selected':'')+'>Wk '+e+'</option>').join('')+'</select></div>';
- h+=fr.length?'<div class="tablewrap" style="max-height:520px"><table><thead><tr><th>Date</th><th>Day</th><th>Exercise</th><th class="num">Wk</th><th class="num">Set</th><th class="num">Weight</th><th class="num">Reps</th><th class="num">RIR</th><th></th></tr></thead><tbody>'+
- fr.slice(0,UI.lpage).map(r=>'<tr><td>'+fmtS(r.date)+'</td><td>'+esc(r.day||'')+'</td><td>'+esc(r.exercise)+'</td><td class="num">'+(r.week==null?'–':r.week)+'</td><td class="num">'+r.set+'</td><td class="num">'+(r.weight<=1?'BW':r.weight)+'</td><td class="num">'+r.reps+'</td><td class="num">'+(r.rir==null?'':r.rir)+'</td><td class="num"><button class="btn sm ghost" data-a="editset" data-v="'+r.id+'">Edit</button> <button class="btn sm ghost danger" data-a="delset" data-v="'+r.id+'">✕</button></td></tr>').join('')+'</tbody></table></div>'+(fr.length>UI.lpage?'<div style="margin-top:10px"><button class="btn sm" data-a="more">Show more ('+(fr.length-UI.lpage)+' left)</button></div>':''):
- emptyBox('No sets logged yet','Add a set above, start a session from the Program tab, or import your CSV.');
+/* ===== LOG v2 (mobile-first workout logger) ===== */
+UI.draft={};UI.hopen=UI.hopen||{};UI.hg=10;UI.lx=UI.lx||{};
+const dayOfDate=d=>{const n=dayNum(d);return Number.isFinite(n)?DAYS[monIdx(n)]:''};
+const logDate=()=>UI.ldate||todayStr();
+const logDay=()=>{const d=UI.lday||(todayDay()==='SUN'?'MON':todayDay());return progDay(d)?d:'MON'};
+const fmtW=v=>String(Math.round(v*100)/100);
+const wLabel=(it,w)=>it.type==='load'?(w+' lb'):(w<=1?'BW':'+'+w+' lb');
+const isLoggable=it=>it.type!=='note'&&it.type!=='cardio';
+const stepOf=(it,f)=>f==='r'?(it.type==='time'||it.type==='dist'?5:1):(it.inc==='small'?(S.settings.smallStep||2.5):(S.settings.step||5));
+function freeItem(n){const c=canon(n);if(BYNAME[c]&&isLoggable(BYNAME[c]))return Object.assign({},BYNAME[c],{free:1,sets:3});
+ const mt=metaOf(c).type;return{name:c,type:(mt==='cardio'||mt==='note')?'time':mt,sets:3,lo:8,hi:12,inc:'big',m:{},free:1}}
+const sameDayRow=(r,day)=>!r.day||r.day===day;
+function rowsFor(it,date,day){return L().filter(r=>r.date===date&&r.exercise===it.name&&sameDayRow(r,day))}
+function itemsFor(day,date){const p=progDay(day),out=[],seen=new Set();p.items.forEach(it=>{out.push({it});seen.add(it.name)});
+ const names=[];L().filter(r=>r.date===date&&sameDayRow(r,day)).forEach(r=>{if(!seen.has(r.exercise)&&!names.includes(r.exercise))names.push(r.exercise)});
+ ((UI.lx||{})[date]||[]).forEach(n=>{if(!seen.has(n)&&!names.includes(n))names.push(n)});
+ names.forEach(n=>out.push({it:freeItem(n),free:1}));return out}
+function defDraft(it,rows){const bw=it.type!=='load';let w=0,r=it.lo||8,rir=null;
+ if(rows.length){const p=rows[rows.length-1];w=p.weight;r=p.reps;rir=p.rir==null?null:p.rir}
+ else{const sg=suggest(it);if(!sg.none){w=sg.w;const lg=sg.last.rows,mw=Math.max(...lg.map(x=>x.weight)),t0=lg.find(x=>x.weight===mw)||lg[0];r=sg.add?(it.lo||t0.reps):Math.max(it.lo||0,t0.reps)}}
+ if(bw&&w<=1)w=0;return{w,r,rir}}
+function getDraft(it,date,rows){const k=date+'|'+it.name;let d=UI.draft[k];if(!d||!d.t){d=UI.draft[k]=defDraft(it,rows)}return d}
+function lstat(items,date,day){let d=0,t=0;items.forEach(o=>{if(o.free||!isLoggable(o.it)||!o.it.sets)return;const n=rowsFor(o.it,date,day).length;d+=Math.min(n,o.it.sets);t+=o.it.sets});return{d,t}}
+function stepper(key,f,label,val,unit,it){return'<div class="lx-st"><div class="lx-sl">'+label+'</div><div class="lx-sr">'+
+ '<button type="button" class="lx-pm" data-a="lstep" data-k="'+esc(key)+'" data-f="'+f+'" data-d="-1" aria-label="Decrease '+label+'">−</button>'+
+ '<input type="number" inputmode="decimal" step="any" min="0" data-dk="'+esc(key)+'" data-df="'+f+'" value="'+(val==null?'':fmtW(val))+'" aria-label="'+label+'">'+
+ '<button type="button" class="lx-pm" data-a="lstep" data-k="'+esc(key)+'" data-f="'+f+'" data-d="1" aria-label="Increase '+label+'">＋</button></div></div>'}
+function renderLogCard(o,date,day){const it=o.it;const rows=rowsFor(it,date,day);const done=rows.length;const tgt=o.free?0:it.sets;const open=UI.lopen===it.name;
+ if(!isLoggable(it)){return'<div class="lx-card info"><div class="lx-h static"><div class="lx-n">'+esc(it.name)+'</div><div class="lx-s">'+(it.type==='cardio'?it.mins+' min · not logged here':'Note')+'</div></div></div>'}
+ const pct=tgt?Math.min(100,Math.round(done/tgt*100)):(done?100:0);const ok=tgt?done>=tgt:done>0;
+ let h='<div class="lx-card'+(open?' open':'')+(ok?' ok':'')+'" data-card="'+esc(it.name)+'"><button type="button" class="lx-h" data-a="lopen" data-v="'+esc(it.name)+'" aria-expanded="'+open+'">'+
+  '<span class="lx-hl"><span class="lx-n">'+(it.n?'<i>'+it.n+'</i>':'')+esc(it.name)+'</span><span class="lx-s">'+(o.free?'Added exercise':rx(it))+(it.warm?' · warm-up':'')+(it.opt?' · optional':'')+(it.note?' · '+esc(it.note):'')+'</span></span>'+
+  '<span class="lx-cnt'+(ok?' ok':'')+'">'+(ok&&tgt?'✓ ':'')+done+(tgt?'/'+tgt:'')+'<small>sets</small></span><span class="lx-chev">⌄</span></button>'+
+  '<div class="lx-bar"><i style="width:'+pct+'%"></i></div>';
+ if(open){const key=date+'|'+it.name;const d=getDraft(it,date,rows);const sg=suggest(it);const bw=it.type!=='load';
+  h+='<div class="lx-body">';
+  if(sg.none)h+='<div class="lx-info mut">No previous session logged. Start light, 1–2 reps from failure.</div>';
+  else{h+='<div class="lx-info"><span class="mut">Last'+(sg.last.date?' ('+fmtS(sg.last.date)+')':'')+(sg.last.week!=null?' · Wk '+sg.last.week:'')+':</span> '+sg.last.rows.map(r=>'<span class="lx-last">'+(r.weight<=1?'BW':fmtW(r.weight))+'×'+r.reps+'</span>').join('')+'</div>'+
+   '<div class="lx-info"><span class="mut">Next:</span> <b class="pos">'+(bw?(sg.w<=1?'bodyweight':'+'+fmtW(sg.w)+' lb'):fmtW(sg.w)+' lb')+'</b> <span class="mut">'+esc(sg.text||'')+'</span></div>'}
+  if(rows.length){h+='<div class="lx-done">'+rows.map(r=>'<button type="button" class="lx-set" data-a="editset" data-v="'+r.id+'" aria-label="Edit set '+r.set+'"><b>'+r.set+'</b><span>'+(r.weight<=1?'BW':fmtW(r.weight))+' × '+r.reps+(it.type==='time'?'s':it.type==='dist'?'m':'')+'</span>'+(r.rir!=null?'<em>RIR '+r.rir+'</em>':'')+'<u>✎</u></button>').join('')+'</div>'}
+  const nextN=rows.length?Math.max(...rows.map(x=>x.set||0))+1:1;
+  h+='<div class="lx-entry"><div class="lx-et">Set '+nextN+(tgt?'<small> of '+tgt+(done>=tgt?' · extra':'')+'</small>':'')+'</div>'+
+   stepper(key,'w',bw?(it.type==='dist'?'Load (lb), 0 = none':'Added weight (lb), 0 = bodyweight'):'Weight (lb)',d.w,'lb',it)+
+   stepper(key,'r',it.type==='time'?'Seconds':it.type==='dist'?'Meters':'Reps',d.r,'',it)+
+   '<div class="lx-st"><div class="lx-sl">RIR <span class="mut">(optional)</span></div><div class="lx-rir">'+[0,1,2,3,4].map(n=>'<button type="button" class="lx-rb'+(d.rir===n?' on':'')+'" data-a="lrir" data-k="'+esc(key)+'" data-v="'+n+'">'+n+'</button>').join('')+'</div></div>'+
+   '<button type="button" class="lx-log" data-a="lset" data-k="'+esc(key)+'">Log set '+nextN+'</button>'+
+   '<div class="lx-row2">'+(rows.length?'<button type="button" class="lx-sec" data-a="lundo" data-k="'+esc(key)+'">↶ Undo last set</button>':'')+
+   (o.free&&!rows.length?'<button type="button" class="lx-sec" data-a="lrmx" data-v="'+esc(it.name)+'">Remove exercise</button>':'')+'</div></div></div>'}
  return h+'</div>'}
+function renderLogSession(){const date=logDate(),day=logDay(),p=progDay(day);const items=itemsFor(day,date);const st=lstat(items,date,day);
+ if(UI.lopen===undefined){const f=items.find(o=>isLoggable(o.it)&&!o.it.warm&&(o.free||rowsFor(o.it,date,day).length<o.it.sets))||items.find(o=>isLoggable(o.it)&&(o.free||rowsFor(o.it,date,day).length<o.it.sets));UI.lopen=f?f.it.name:''}
+ const wk=weekKey(dayNum(date));const isDone=!!(S.done[wk]&&S.done[wk][day]);const tdy=todayDay();
+ let h='<div class="card lx-top"><div class="lx-days" role="tablist">'+PROG.filter(d=>d.day!=='SUN').map(d=>'<button type="button" class="lx-day'+(d.day===day?' on':'')+(d.day===tdy&&date===todayStr()?' today':'')+'" data-a="lday" data-v="'+d.day+'">'+d.day.charAt(0)+d.day.slice(1).toLowerCase()+'</button>').join('')+'</div>'+
+ '<div class="lx-title"><div><b>'+esc(p.title)+'</b><div class="note">'+esc(p.time)+'</div></div></div>'+
+ (p.warn?'<div class="banner" style="margin:8px 0 0">'+esc(p.warn)+'</div>':'')+
+ '<div class="lx-prog"><div class="row sp"><span><b>'+st.d+'/'+st.t+'</b> <span class="mut">sets today</span></span><span id="lxrest" class="timer lx-rest"></span></div><div class="lx-bar big"><i style="width:'+(st.t?Math.round(st.d/st.t*100):0)+'%"></i></div></div>'+
+ '<div class="lx-meta"><label class="f">Date<input type="date" data-a2="ldate" value="'+date+'"></label><div class="lx-wk"><span class="note">Week</span><button type="button" class="lx-pm sm" data-a="wk" data-v="-1" aria-label="Previous week">−</button><b>'+S.settings.week+'</b><button type="button" class="lx-pm sm" data-a="wk" data-v="1" aria-label="Next week">＋</button></div></div>'+
+ '<button type="button" class="lx-sec wide'+(isDone?' on':'')+'" data-a="ldone">'+(isDone?'✓ '+day+' marked done (tap to undo)':'Mark '+day+' done')+'</button></div>';
+ h+=items.map(o=>renderLogCard(o,date,day)).join('');
+ h+=items.length===0||!items.some(o=>isLoggable(o.it))?'<div class="note" style="margin:8px 2px">Nothing to log for this day — add an exercise below if you did something extra.</div>':'';
+ const known=[...new Set(EXNAMES.map(e=>e.name).concat(S.log.map(r=>r.exercise)))];
+ h+=UI.ladd?'<form class="card lx-add" data-form="ladd"><h3>Add exercise</h3><input name="name" list="lxnames" placeholder="Exercise name" autocomplete="off" autocapitalize="sentences" required><datalist id="lxnames">'+known.map(n=>'<option value="'+esc(n)+'">').join('')+'</datalist><div class="lx-row2"><button class="lx-log" style="margin:0">Add</button><button type="button" class="lx-sec" data-a="ladd">Cancel</button></div></form>':
+  '<button type="button" class="lx-sec wide" data-a="ladd" style="margin-bottom:14px">＋ Add exercise not in program</button>';
+ return h}
+function renderHistory(){const all=L();const f=UI.lf;let fr=all.filter(r=>(!f.day||r.day===f.day)&&(!f.ex||r.exercise===f.ex)&&(!f.week||String(r.week)===String(f.week)));fr=sortLog(fr);
+ const exs=[...new Set(all.map(r=>r.exercise))].sort((a,b)=>exOrder(a)-exOrder(b)||a.localeCompare(b));const wks=[...new Set(all.map(r=>r.week).filter(x=>x!=null))].sort((a,b)=>a-b);const ps=persons();
+ const filtered=f.day||f.ex||f.week;
+ const groups=[];const gm=new Map();fr.forEach(r=>{const k=(r.date||'')+'|'+(r.week==null?'':r.week);let g=gm.get(k);if(!g){g={k,date:r.date,week:r.week,days:new Set(),ex:new Map(),n:0};gm.set(k,g);groups.push(g)}g.n++;if(r.day)g.days.add(r.day);if(!g.ex.has(r.exercise))g.ex.set(r.exercise,[]);g.ex.get(r.exercise).push(r)});
+ let h='<details class="card lx-hist" data-h="main"'+(UI.hopen.main?' open':'')+'><summary><span><b>History</b> <span class="mut">'+fr.length+(fr.length!==all.length?' of '+all.length:'')+' sets · '+groups.length+' sessions</span></span></summary>';
+ h+='<div class="lx-filt">'+
+  '<select data-lf="day" aria-label="Filter by day"><option value="">All days</option>'+DAYS.slice(0,6).map(d=>'<option'+(f.day===d?' selected':'')+'>'+d+'</option>').join('')+'</select>'+
+  '<select data-lf="week" aria-label="Filter by week"><option value="">All weeks</option>'+wks.map(e=>'<option value="'+e+'"'+(String(f.week)===String(e)?' selected':'')+'>Week '+e+'</option>').join('')+'</select>'+
+  '<select data-lf="ex" class="full" aria-label="Filter by exercise"><option value="">All exercises</option>'+exs.map(e=>'<option'+(f.ex===e?' selected':'')+'>'+esc(e)+'</option>').join('')+'</select>'+
+  (Object.keys(ps).length>1?'<select data-lf="person" class="full" aria-label="Person">'+Object.keys(ps).map(p=>'<option value="'+esc(p)+'"'+(p===S.settings.person?' selected':'')+'>'+esc(p)+' ('+ps[p]+')</option>').join('')+'</select>':'')+
+  (filtered?'<button type="button" class="lx-sec full" data-a="lclr">Clear filters</button>':'')+'</div>';
+ if(!groups.length)h+=emptyBox('No sets logged yet','Log a set above, or import your CSV below.');
+ else{groups.slice(0,UI.hg).forEach((g,i)=>{const gk='g|'+g.k;const op=UI.hopen[gk]===undefined?i===0:UI.hopen[gk];const dn=g.date?dayOfDate(g.date):'';
+  h+='<details class="lx-grp" data-h="'+esc(gk)+'"'+(op?' open':'')+'><summary><span class="lx-gt"><b>'+(g.date?(dn?dn.charAt(0)+dn.slice(1).toLowerCase()+', ':'')+fmtS(g.date):'No date')+'</b><small>'+[...g.days].join('/')+(g.week!=null?' · Wk '+g.week:'')+'</small></span><span class="pill">'+g.n+(g.n===1?' set':' sets')+'</span></summary>';
+  g.ex.forEach((rs,name)=>{rs=rs.slice().sort((a,b)=>a.set-b.set);h+='<div class="lx-hx"><div class="lx-hn">'+esc(name)+'</div>'+rs.map(r=>{const u=metaOf(r.exercise).type;return'<div class="lx-hr"><span class="lx-hs">Set '+r.set+'</span><span class="lx-hv">'+(r.weight<=1?'BW':fmtW(r.weight)+' lb')+' × '+r.reps+(u==='time'?' s':u==='dist'?' m':'')+'</span><span class="lx-hm">'+(r.rir==null?'':'RIR '+r.rir)+'</span><button type="button" class="lx-ib" data-a="editset" data-v="'+r.id+'" aria-label="Edit set">✎</button><button type="button" class="lx-ib danger" data-a="delset" data-v="'+r.id+'" aria-label="Delete set">✕</button></div>'}).join('')+'</div>'});
+  h+='</details>'});
+  if(groups.length>UI.hg)h+='<button type="button" class="lx-sec wide" data-a="hmore">Show more ('+(groups.length-UI.hg)+' sessions)</button>'}
+ return h+'</details>'}
+function renderLog(){
+ let h=renderLogSession()+renderHistory();
+ h+='<details class="card lx-hist" data-h="imp"'+(UI.imp||UI.hopen.imp?' open':'')+'><summary><span><b>CSV import / export</b></span></summary>'+
+ '<div class="note" style="margin:4px 0 10px">Columns: <code>Person,Day,Exercise,Week,Set,Weight(lbs),Reps,Date</code>. Only <b>'+esc(S.settings.person)+'</b> rows are kept by default. When all dates are identical (batch export), Week is used as the time axis.</div>'+
+ '<div class="lx-btns"><label class="lx-sec">📂 Choose CSV<input type="file" id="csvin" accept=".csv,text/csv,text/plain" hidden></label><button type="button" class="lx-sec" data-a="csvpaste">Paste CSV text</button><button type="button" class="lx-sec" data-a="template">Download template</button><button type="button" class="lx-sec" data-a="csvexport">⬇ Export log CSV</button></div>'+renderImportPreview()+'</details>';
+ return h}
+function logAct(a,t){const v=t.dataset.v,k=t.dataset.k;
+ const find=key=>{const i=key.indexOf('|');const date=key.slice(0,i),name=key.slice(i+1);const day=logDay();const o=itemsFor(day,date).find(x=>x.it.name===name);return o?{o,date,name,day,it:o.it,rows:rowsFor(o.it,date,day),key}:null};
+ switch(a){
+ case'lday':UI.lday=v;UI.lopen=undefined;render();return true;
+ case'ldone':{const date=logDate(),day=logDay(),wk=weekKey(dayNum(date));const o=(S.done[wk]=S.done[wk]||{});o[day]=!o[day];save();render();toast(o[day]?day+' marked done 💪':'Unmarked');return true}
+ case'lopen':UI.lopen=UI.lopen===v?'':v;render();return true;
+ case'ladd':UI.ladd=!UI.ladd;render();return true;
+ case'lclr':UI.lf={day:'',ex:'',week:''};render();return true;
+ case'hmore':UI.hg+=10;render();return true;
+ case'lrmx':{const date=logDate();UI.lx[date]=(UI.lx[date]||[]).filter(n=>n!==v);if(UI.lopen===v)UI.lopen='';render();return true}
+ case'lstep':{const c=find(k);if(!c)return true;const f=t.dataset.f,d=+t.dataset.d;const dr=getDraft(c.it,c.date,c.rows);const cur=dr[f]==null?0:dr[f];let nv=Math.round((cur+d*stepOf(c.it,f))*100)/100;if(nv<0)nv=0;dr[f]=nv;dr.t=1;const inp=t.parentNode.querySelector('input');if(inp)inp.value=fmtW(nv);return true}
+ case'lrir':{const c=find(k);if(!c)return true;const dr=getDraft(c.it,c.date,c.rows);dr.rir=dr.rir===+v?null:+v;dr.t=1;t.parentNode.querySelectorAll('.lx-rb').forEach(b=>b.classList.toggle('on',dr.rir!==null&&+b.dataset.v===dr.rir));return true}
+ case'lset':{const c=find(k);if(!c)return true;const it=c.it,dr=getDraft(it,c.date,c.rows);let w=dr.w,r=dr.r;
+  const inps=t.closest('.lx-entry').querySelectorAll('input[data-df]');inps.forEach(i=>{const x=num(i.value);if(i.dataset.df==='w')w=x==null?0:x;else r=x});
+  if(!(r>0)){toast('Enter reps');return true}
+  if(it.type==='load'){if(!(w>0)){toast('Enter a weight');return true}}else if(!(w>1))w=1;
+  const set=c.rows.length?Math.max(...c.rows.map(x=>x.set||0))+1:1;
+  S.log.push({id:uid(),person:S.settings.person,day:c.day,exercise:it.name,week:S.settings.week,set,weight:w,reps:r,rir:dr.rir==null?null:dr.rir,date:c.date,ses:c.date,src:'session'});
+  dr.w=it.type==='load'?w:(w<=1?0:w);dr.r=r;dr.t=1;save();UI.lrest=Date.now();
+  if(!c.o.free&&c.rows.length+1===it.sets){const items=itemsFor(c.day,c.date);const i0=items.findIndex(x=>x.it.name===it.name);const nx=items.slice(i0+1).concat(items.slice(0,i0)).find(x=>isLoggable(x.it)&&!x.free&&rowsFor(x.it,c.date,c.day).length<x.it.sets);UI.lopen=nx?nx.it.name:'';UI.lscroll=nx?nx.it.name:null}
+  render();if(UI.lscroll){const nm=UI.lscroll;UI.lscroll=null;setTimeout(()=>{const el=[...document.querySelectorAll('.lx-card[data-card]')].find(x=>x.dataset.card===nm);if(el)el.scrollIntoView({block:'start'})},30)}toast('Set '+set+' · '+it.name+' · '+(w<=1&&it.type!=='load'?'BW':fmtW(w)+' lb')+' × '+r);return true}
+ case'lundo':{const c=find(k);if(!c||!c.rows.length)return true;const last=c.rows[c.rows.length-1];S.log=S.log.filter(x=>x.id!==last.id);const dr=getDraft(c.it,c.date,c.rows);dr.w=last.weight<=1&&c.it.type!=='load'?0:last.weight;dr.r=last.reps;dr.rir=last.rir==null?null:last.rir;dr.t=1;save();render();toast('Removed set '+last.set);return true}
+ }return false}
+document.addEventListener('input',e=>{const t=e.target;if(t.dataset&&t.dataset.dk){const dr=UI.draft[t.dataset.dk];if(dr){dr[t.dataset.df]=num(t.value);dr.t=1}}});
+document.addEventListener('focusin',e=>{const t=e.target;if(t.dataset&&t.dataset.dk)try{t.select()}catch(_){}});
+document.addEventListener('toggle',e=>{const t=e.target;if(t.dataset&&t.dataset.h!==undefined&&t.tagName==='DETAILS')UI.hopen[t.dataset.h]=t.open},true);
+document.addEventListener('change',e=>{const t=e.target;if(t.dataset&&t.dataset.a2==='ldate'&&t.value){UI.ldate=t.value===todayStr()?null:t.value;const d=dayOfDate(t.value);if(d&&d!=='SUN')UI.lday=d;UI.lopen=undefined;render()}});
+document.addEventListener('submit',e=>{const f=e.target;if(f.dataset&&f.dataset.form==='ladd'){const nm=canon(String(new FormData(f).get('name')||'').trim());if(!nm){toast('Enter a name');return}const date=logDate();const arr=UI.lx[date]=UI.lx[date]||[];if(!arr.includes(nm))arr.push(nm);Object.keys(UI.lx).forEach(k=>{if(k<date&&dayNum(date)-dayNum(k)>14)delete UI.lx[k]});UI.ladd=false;UI.lopen=nm;render()}});
+setInterval(()=>{const e=document.getElementById('lxrest');if(!e)return;if(!UI.lrest){e.textContent='';return}const s=Math.floor((Date.now()-UI.lrest)/1000);e.textContent=s>1800?'':'Rest '+Math.floor(s/60)+':'+pad(s%60)},1000);
 function renderImportPreview(){const I=UI.imp;if(!I)return'';const keep=I.rows.filter(r=>I.keep[r.person]);const un=[...new Set(keep.map(r=>r.exercise))].filter(n=>!BYNAME[n]);const dates=[...new Set(keep.map(r=>r.date))];const wk=keep.map(r=>r.week).filter(x=>x!=null);
  const exist=new Set(S.log.map(keyOf));const dups=keep.filter(r=>exist.has(keyOf(r))).length;
  return'<div class="card" style="background:var(--bg2);margin:12px 0 0"><h3>Preview · '+I.rows.length+' rows parsed'+(I.skipped?' · '+I.skipped+' unreadable skipped':'')+'</h3><div class="note" style="margin-bottom:8px">Keep rows for person:</div><div class="chips">'+
@@ -483,7 +668,7 @@ function editSetModal(id){const r=S.log.find(x=>x.id===id);if(!r)return;openModa
  '<label class="f">Date<input type="date" name="date" value="'+(r.date||'')+'"></label><label class="f">Day<select name="day">'+DAYS.slice(0,6).map(d=>'<option'+(d===r.day?' selected':'')+'>'+d+'</option>').join('')+'</select></label>'+
  '<label class="f wide">Exercise<input name="exercise" value="'+esc(r.exercise)+'" list="exlist"></label><datalist id="exlist">'+EXNAMES.map(e=>'<option value="'+esc(e.name)+'">').join('')+'</datalist>'+
  '<label class="f">Week<input type="number" name="week" value="'+(r.week==null?'':r.week)+'"></label><label class="f">Set<input type="number" name="set" value="'+r.set+'"></label><label class="f">Weight<input type="number" step="any" name="weight" value="'+r.weight+'"></label><label class="f">Reps<input type="number" step="any" name="reps" value="'+r.reps+'"></label><label class="f">RIR<input type="number" name="rir" value="'+(r.rir==null?'':r.rir)+'"></label><label class="f">Person<input name="person" value="'+esc(r.person)+'"></label></div>'+
- '<div class="row end"><button type="button" class="btn ghost" data-a="closemodal">Cancel</button><button class="btn primary">Save</button></div></form>')}
+ '<div class="row end"><button type="button" class="btn danger" data-a="delset" data-v="'+id+'" style="margin-right:auto">Delete</button><button type="button" class="btn ghost" data-a="closemodal">Cancel</button><button class="btn primary">Save</button></div></form>')}
 
 /* ===== STRENGTH ===== */
 function exWithData(){const rows=L();const m=new Map();rows.forEach(r=>{if(!m.has(r.exercise))m.set(r.exercise,[]);m.get(r.exercise).push(r)});return[...m.entries()].sort((a,b)=>exOrder(a[0])-exOrder(b[0])||a[0].localeCompare(b[0]))}
@@ -679,12 +864,13 @@ function doExport(){S.settings.lastExport=new Date().toISOString();save();downlo
 function importJSON(text){try{const o=JSON.parse(text);const d=o&&o.data?o.data:o;if(!d||typeof d!=='object'||!Array.isArray(d.log)&&!d.body&&!d.labs)throw new Error('Not a dashboard export.');if(!confirm('Replace ALL current data with this file? (An undo copy is kept.)'))return;backup();S=normalize(d);save();toast('Imported ✓');render()}catch(e){toast('Import failed: '+e.message)}}
 function readFile(file,cb){const r=new FileReader();r.onload=()=>cb(String(r.result));r.onerror=()=>toast('Could not read file');r.readAsText(file)}
 document.addEventListener('click',e=>{const t=e.target.closest('[data-a]');if(!t)return;const a=t.dataset.a,v=t.dataset.v;if(t.tagName==='A')e.preventDefault();
+ if(logAct(a,t))return;
  const go={tab:()=>{closeModal();UI.tab=v;render(false);window.scrollTo(0,0)},export:doExport,
  template:()=>download('log-template.csv','Person,Day,Exercise,Week,Set,Weight(lbs),Reps,Date\nme,MON,Incline DB press,1,1,50,8,2026-09-30\nme,MON,Incline DB press,1,2,50,7,2026-09-30\nme,MON,Dips,1,1,1,8,2026-09-30\nme,FRI,Trap bar deadlift,1,1,185,5,2026-09-30\n','text/csv'),
  csvexport:()=>download('workout-log-'+todayStr()+'.csv',logCSV(L()),'text/csv'),
  csvpaste:()=>openModal('<h2>Paste CSV</h2><form data-form="paste"><textarea name="t" style="min-height:220px;font-family:monospace;font-size:12px" placeholder="Person,Day,Exercise,Week,Set,Weight(lbs),Reps,Date&#10;me,MON,Incline DB press,1,1,50,8,2026-09-30"></textarea><div class="row end"><button type="button" class="btn ghost" data-a="closemodal">Cancel</button><button class="btn primary">Parse</button></div></form>'),
  doimport:doImport,cancelimport:()=>{UI.imp=null;render()},closemodal:closeModal,
- delset:()=>{if(confirm('Delete this set?')){S.log=S.log.filter(r=>r.id!==v);save();render()}},editset:()=>editSetModal(v),more:()=>{UI.lpage+=100;render()},
+ delset:()=>{if(confirm('Delete this set?')){S.log=S.log.filter(r=>r.id!==v);save();closeModal();render()}},editset:()=>editSetModal(v),more:()=>{UI.lpage+=100;render()},
  axis:()=>{UI.axis=v==='auto'?null:v;S.settings.axis=v;save();render()},exsel:()=>{UI.ex=v;UI.tab='strength';render(false)},msel:()=>{UI.msel=v;render()},
  fit:()=>{UI.fit=v;render()},bm:()=>{UI.bmetric=v;render()},delbody:()=>{if(confirm('Delete this entry?')){S.body=S.body.filter(r=>r.id!==v);save();render()}},editbody:()=>editBodyModal(v),
  addlab:()=>addLabModal(),editlab:()=>addLabModal(v),labsel:()=>{UI.labsel=v;UI.tab='labs';render(false)},dellab:()=>{if(confirm('Delete this lab date?')){delete S.labs[v];save();closeModal();render()}},
@@ -711,7 +897,7 @@ document.addEventListener('submit',e=>{e.preventDefault();const f=e.target,k=f.d
  if(k==='quick'){let ex=d.exercise;if(ex==='__custom')ex=(d.custom||'').trim();if(!ex||ex==='__none'||ex==='__custom'){toast('Pick an exercise');return}const w=num(d.weight),r=num(d.reps);if(w==null||r==null)return;
   S.log.push({id:uid(),person:S.settings.person,day:d.day,exercise:canon(ex),week:num(d.week)==null?null:Math.round(num(d.week)),set:Math.round(num(d.set)||1),weight:w,reps:r,rir:d.rir===''?null:+d.rir,date:d.date,src:'manual'});save();
   UI.q={date:d.date,day:d.day,exercise:d.exercise,custom:d.custom,week:d.week,set:(num(d.set)||1)+1,weight:d.weight,reps:'',rir:d.rir};toast('Added: '+ex+' '+d.weight+'×'+d.reps);render();return}
- if(k==='editset'){const r=S.log.find(x=>x.id===d.id);if(r){Object.assign(r,{date:d.date,day:d.day,exercise:canon(d.exercise),week:num(d.week)==null?null:Math.round(num(d.week)),set:Math.round(num(d.set)||1),weight:num(d.weight)==null?r.weight:num(d.weight),reps:num(d.reps)==null?r.reps:num(d.reps),rir:d.rir===''?null:+d.rir,person:(d.person||r.person).toLowerCase()});save()}closeModal();render();return}
+ if(k==='editset'){const r=S.log.find(x=>x.id===d.id);if(r){Object.assign(r,{date:d.date,day:d.day,exercise:canon(d.exercise),week:num(d.week)==null?null:Math.round(num(d.week)),set:Math.round(num(d.set)||1),weight:num(d.weight)==null?r.weight:num(d.weight),reps:num(d.reps)==null?r.reps:num(d.reps),rir:d.rir===''?null:+d.rir,person:(d.person||r.person).toLowerCase()});if(r.ses)r.ses=d.date;save()}closeModal();render();return}
  if(k==='paste'){closeModal();startImport(d.t||'');return}
  if(k==='body'||k==='editbody'){const o={};BM.forEach(([n])=>{const v=num(d[n]);if(v!=null)o[n]=v});if(!Object.keys(o).length){toast('Enter at least one value');return}
   if(k==='body'){S.body.push(Object.assign({id:uid(),date:d.date,note:d.note||''},o))}else{const r=S.body.find(x=>x.id===d.id);BM.forEach(([n])=>{const v=num(d[n]);if(v==null)delete r[n];else r[n]=v});r.date=d.date;r.note=d.note;closeModal()}
