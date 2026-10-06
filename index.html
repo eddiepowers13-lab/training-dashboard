@@ -320,15 +320,16 @@ const PROG=[
  I('Rear delt fly',2,12,15,{n:8,m:{shoulders:1,traps:.25},inc:'small',al:['Rear delt raise','Reverse fly','Rear delt flye']})]},
 {day:'TUE',title:'Lower / Lower back / Core',time:'~70–75 min',mins:[70,75],items:[
  I('Belt squat or hack squat',3,8,12,{n:1,m:{quads:1,hamglute:.5},al:['Belt squat','Hack squat']}),
- I('Leg press',2,10,12,{n:2,m:{quads:1,hamglute:.5}}),
- I('Seated leg curl',3,10,12,{n:3,m:{hamglute:1},inc:'small',al:['Leg curl','Hamstring curl']}),
- I('Hip thrust machine',2,8,12,{n:4,m:{hamglute:1},al:['Hip thrust','Machine hip thrust']}),
- I('Hip adduction',2,12,15,{n:5,m:{addabd:1},inc:'small',al:['Adductor machine','Hip adductor']}),
- I('Hip abduction',2,15,20,{n:5,m:{addabd:1},inc:'small',al:['Abductor machine','Hip abductor']}),
- I('Standing calf raise',3,10,15,{n:6,m:{calves:1},al:['Calf raise','Standing calf raises']}),
- I('Single-leg back extension hold (weighted)',2,20,40,{n:7,type:'time',each:'each leg',m:{lowback:1,hamglute:.5},inc:'small',al:['Single leg back extension hold','Back extension hold single leg']}),
- I('Cable crunch',3,10,15,{n:8,m:{core:1},inc:'small',al:['Cable crunches','Kneeling cable crunch']}),
- I('Ab wheel rollout',2,8,12,{n:9,type:'bw',m:{core:1},al:['Ab rollout','Ab wheel','Ab wheel rollouts']}),
+ I('Leg press',1,10,12,{n:2,m:{quads:1,hamglute:.5}}),
+ I('Rear-foot-elevated split squat',2,8,8,{n:3,type:'bw',each:'each leg',m:{quads:1,hamglute:.5},note:'alt: step-up 2×8/leg',al:['RFESS','RFE split squat','Bulgarian split squat','Rear foot elevated split squat','Step-up','Step up','DB step-up']}),
+ I('Seated leg curl',3,10,12,{n:4,m:{hamglute:1},inc:'small',al:['Leg curl','Hamstring curl']}),
+ I('Hip thrust machine',2,8,12,{n:5,m:{hamglute:1},al:['Hip thrust','Machine hip thrust']}),
+ I('Hip adduction',2,12,15,{n:6,m:{addabd:1},inc:'small',al:['Adductor machine','Hip adductor']}),
+ I('Hip abduction',2,15,20,{n:6,m:{addabd:1},inc:'small',al:['Abductor machine','Hip abductor']}),
+ I('Standing calf raise',3,10,15,{n:7,m:{calves:1},al:['Calf raise','Standing calf raises']}),
+ I('Single-leg back extension hold (weighted)',2,20,40,{n:8,type:'time',each:'each leg',m:{lowback:1,hamglute:.5},inc:'small',al:['Single leg back extension hold','Back extension hold single leg']}),
+ I('Cable crunch',3,10,15,{n:9,m:{core:1},inc:'small',al:['Cable crunches','Kneeling cable crunch']}),
+ I('Ab wheel rollout',2,8,12,{n:10,type:'bw',m:{core:1},al:['Ab rollout','Ab wheel','Ab wheel rollouts']}),
  I('Tibialis raise',2,15,20,{opt:1,label:'Optional',m:{calves:.5},inc:'small',al:['Tib raise','Tibialis raises']})]},
 {day:'WED',title:'Back / Biceps / Traps / Forearms',time:'~70–75 min',mins:[70,75],items:[
  I('Chin-up or pull-up',3,6,10,{n:1,type:'bw',m:{back:1,biceps:.5},note:'unassisted',al:['Chin-up','Pull-up','Chin up','Pull up','Chinup','Pullup']}),
@@ -358,23 +359,38 @@ const PROG=[
  I('Side plank',2,30,40,{n:10,type:'time',each:'each side',m:{core:1},al:['Side planks']}),
  I('Neck work',2,12,15,{n:11,m:{neck:1},inc:'small',al:['Neck curl','Neck extension','Neck flexion']}),
  NT('Stretches: couch stretch, doorway pec stretch, thoracic rotation',{n:12,label:'Finisher'})]},
-{day:'FRI',title:'Functional hard day',time:'~70–80 min',mins:[70,80],items:[
+{day:'FRI',title:'Functional hard day',time:'~75–85 min',mins:[75,85],warn:'If the day runs long, drop lateral drag and backward drag to 1 set each first.',items:[
  NT('Warm-up: cat-camel, glute bridge, KB halo, Spiderman lunge',{label:'Warm-up'}),
- I('Med ball slam',3,8,10,{n:1,m:{core:1,back:.25,shoulders:.25},al:['Medicine ball slam','Med ball slams']}),
- I('Tire flip',4,5,6,{n:2,type:'bw',m:{quads:.75,hamglute:.75,back:.5,lowback:.5},al:['Tire flips']}),
- I('Trap bar deadlift',3,5,6,{n:3,m:{hamglute:1,quads:.5,lowback:.5,traps:.5},note:'rotate with rack pull every 4 weeks',al:['Trap-bar deadlift','Hex bar deadlift','Rack pull']}),
- I('KB pull-through',3,12,15,{n:4,m:{hamglute:1},note:'2 sets if gorilla row done',inc:'small',al:['Kettlebell pull-through','KB pull through']}),
- I('KB gorilla row',3,10,10,{n:5,each:'each side',m:{back:1,biceps:.25},note:'when right weight available',inc:'small',al:['Gorilla row','Kettlebell gorilla row']}),
- I('Sled push',4,20,20,{n:6,type:'dist',m:{quads:1,hamglute:.5},al:['Sled pushes']}),
- I('Backward sled drag',3,20,20,{n:7,type:'dist',m:{quads:1},al:['Sled drag','Backwards sled drag']}),
- I('Farmer carry',3,40,40,{n:8,type:'dist',m:{forearms:1,traps:1,core:.5},al:["Farmer's carry",'Farmers carry','Farmer walk']}),
- I('Suitcase carry',2,30,30,{n:9,type:'dist',each:'each side',m:{core:1,forearms:.5},al:['Suitcase carries']}),
- I('Sandbag carry',2,30,40,{n:10,type:'dist',m:{core:.5,back:.5,forearms:.5},al:['Sandbag carries']}),
- I('Pallof press',2,10,10,{n:11,each:'each side',m:{core:1},inc:'small',al:['Pallof']}),
- I('Cable woodchop',2,10,10,{n:11,each:'each side',m:{core:1},inc:'small',al:['Woodchop','Cable wood chop']}),
+ I('Med ball rotational scoop toss',3,5,5,{n:1,each:'each side',m:{core:1,hamglute:.25},inc:'small',al:['Rotational scoop toss','Med ball scoop toss','Medicine ball rotational scoop toss','Med ball rotational toss']}),
+ I('Med ball slam',3,8,8,{n:2,m:{core:1,back:.25,shoulders:.25},note:'overhead slam',al:['Medicine ball slam','Med ball slams','Med ball overhead slam','Overhead slam']}),
+ I('Tire flip',4,5,6,{n:3,type:'bw',m:{quads:.75,hamglute:.75,back:.5,lowback:.5},al:['Tire flips']}),
+ I('Trap bar deadlift',3,5,6,{n:4,m:{hamglute:1,quads:.5,lowback:.5,traps:.5},note:'rotate with rack pull every ~4 weeks',al:['Trap-bar deadlift','Hex bar deadlift','Rack pull']}),
+ I('Single-arm DB bench or half-kneeling landmine press',3,8,10,{n:5,each:'each side',m:{chest:.75,shoulders:.5,triceps:.5,core:.5},note:'anti-rotation',al:['Single-arm DB bench press','Single arm DB bench press','Half-kneeling single-arm landmine press','Half kneeling landmine press','Single-arm landmine press','Landmine press']}),
+ I('Landmine rotation',3,6,8,{n:6,each:'each side',m:{core:1,shoulders:.25},note:'rainbows',al:['Landmine rotations','Landmine rainbow','Landmine rainbows','Rainbows']}),
+ I('KB pull-through',3,12,15,{n:7,m:{hamglute:1},note:'2 sets if gorilla row done',inc:'small',al:['Kettlebell pull-through','KB pull through']}),
+ I('KB gorilla row',3,10,10,{n:7,each:'each side',m:{back:1,biceps:.25},note:'when right weight available',inc:'small',al:['Gorilla row','Kettlebell gorilla row']}),
+ I('Sled push',4,20,20,{n:8,type:'dist',m:{quads:1,hamglute:.5},al:['Sled pushes']}),
+ I('Backward sled drag',2,20,20,{n:9,type:'dist',m:{quads:1},al:['Sled drag','Backwards sled drag']}),
+ I('Lateral sled drag',2,20,20,{n:10,type:'dist',each:'each side',m:{addabd:.75,quads:.5,hamglute:.5},note:'alt: lateral lunge 2×8/side',al:['Lateral sled drags','Sideways sled drag']}),
+ I('Farmer carry',3,40,40,{n:11,type:'dist',m:{forearms:1,traps:1,core:.5},al:["Farmer's carry",'Farmers carry','Farmer walk']}),
+ I('Suitcase carry',2,30,30,{n:12,type:'dist',each:'each side',m:{core:1,forearms:.5},al:['Suitcase carries']}),
+ I('Sandbag carry',1,30,40,{n:13,type:'dist',m:{core:.5,back:.5,forearms:.5},al:['Sandbag carries']}),
+ I('Single-arm overhead KB carry',2,20,30,{n:14,type:'dist',each:'each side',m:{shoulders:.5,core:.5,traps:.25},al:['Overhead KB carry','KB overhead carry','Single arm overhead carry','Waiter carry','Overhead carry']}),
+ I('Pallof press',2,10,10,{n:15,each:'each side',m:{core:1},inc:'small',al:['Pallof']}),
  NT('Finish: cat-camel, 90/90 hip stretch',{label:'Finisher'})]},
-{day:'SAT',title:'Home recovery',time:'~30–45 min',mins:[30,45],warn:'No gym access Saturday.',items:[
- NT('Zone 2 walk',{}),NT('Mobility flow',{}),NT('Banded pull-aparts / face pulls / glute bridges',{})]},
+{day:'SAT',title:'Home recovery (bands only)',time:'~40–50 min',mins:[40,50],warn:'No gym access Saturday — bands only. Easy effort, no failure.',items:[
+ I('Walk',1,30,45,{type:'cardio',mins:'30–45',m:{},al:['Zone 2 walk','Easy walk']}),
+ NT('Band circuit — 2 rounds, easy effort, no failure',{label:'Circuit'}),
+ I('Banded lateral walk',2,12,15,{n:1,type:'bw',each:'steps each way',m:{},al:['Band lateral walk','Lateral band walk']}),
+ I('Banded monster walk',2,10,10,{n:2,type:'bw',each:'steps each way (fwd/back)',m:{},al:['Band monster walk','Monster walk']}),
+ I('Banded glute bridge',2,15,20,{n:3,type:'bw',m:{},note:'3–5 s hold at top',al:['Band glute bridge']}),
+ I('Banded clamshell',2,15,15,{n:4,type:'bw',each:'each side',m:{},al:['Band clamshell','Clamshell','Clamshells']}),
+ I('Band pull-apart',2,20,20,{n:5,type:'bw',m:{},al:['Band pull apart','Banded pull-apart','Pull-aparts']}),
+ I('Band face pull',2,15,15,{n:6,type:'bw',m:{},al:['Banded face pull']}),
+ I('Band external rotation',2,15,15,{n:7,type:'bw',each:'each side',m:{},al:['Banded external rotation']}),
+ I('Band Pallof hold',2,20,30,{n:8,type:'time',each:'each side',m:{},al:['Banded Pallof hold','Pallof hold']}),
+ I('Dead bug',2,8,8,{n:9,type:'bw',each:'each side',m:{},al:['Dead bugs','Deadbug']}),
+ NT('Mobility: 90/90 hip switches, couch stretch, thoracic open books — 2 min each',{label:'Mobility'})]},
 {day:'SUN',title:'Rest',time:'rest',mins:[0,0],items:[]}
 ];
 const MUSCLES=[['chest','Chest'],['shoulders','Shoulders'],['triceps','Triceps'],['biceps','Biceps'],['forearms','Forearms'],['back','Back / lats'],['traps','Traps'],['quads','Quads'],['hamglute','Hamstrings / glutes'],['calves','Calves'],['addabd','Adductors / abductors'],['lowback','Lower back'],['core','Core'],['neck','Neck']];
@@ -382,6 +398,8 @@ const MLAB=Object.fromEntries(MUSCLES);
 const DEF_TARGETS={chest:17,shoulders:14,triceps:13,biceps:11,forearms:8,back:14,traps:6,quads:10,hamglute:10,calves:8,addabd:6,lowback:6,core:10,neck:4};
 /* exercise name lookup + fuzzy match */
 const BYNAME={};PROG.forEach(d=>d.items.forEach(it=>{if(!BYNAME[it.name])BYNAME[it.name]=it}));
+/* retired exercises: kept so previously logged sets still resolve (volume, charts, name matching) */
+const RETIRED=[I('Cable woodchop',2,10,10,{each:'each side',m:{core:1},inc:'small',retired:1,al:['Woodchop','Cable wood chop']})];RETIRED.forEach(it=>{if(!BYNAME[it.name])BYNAME[it.name]=it});
 const STOP=new Set(['the','a','or','and','with','of','to']);
 const tok=s=>String(s).toLowerCase().replace(/dumbbells?/g,'db').replace(/barbell/g,'bb').replace(/kettlebell/g,'kb').replace(/extensions/g,'extension').replace(/[^a-z0-9]+/g,' ').trim().split(' ').filter(w=>w&&!STOP.has(w)).map(w=>w.length>2&&w.endsWith('s')&&!w.endsWith('ss')&&w!=='abs'?w.slice(0,-1):w);
 const CAND=[];Object.values(BYNAME).forEach(it=>{[it.name].concat(it.al||[]).forEach(n=>CAND.push({it,set:new Set(tok(n)),n}))});
