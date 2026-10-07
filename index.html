@@ -618,9 +618,10 @@ const P1RAW=()=>[
   I('Hip abduction',2,15,20,{ss:1,m:{addabd:1},inc:'small',al:['Abductor machine','Hip abductor']})),
  ...SEC('Lower back & core',
   I('Single-leg back extension hold (weighted)',2,20,40,{type:'time',each:'each leg',m:{lowback:1,hamglute:.5},inc:'small',al:['Single leg back extension hold','Back extension hold single leg']}),
-  I('Cable crunch',2,10,15,{ss:2,ck:'Core circuit',m:{core:1},inc:'small',al:['Cable crunches','Kneeling cable crunch']}),
-  I('Reverse crunch (bench)',2,10,15,{ss:2,type:'bw',m:{core:1},note:'knees bent, curl hips toward chest; not a straight-leg raise',al:['Reverse crunch','Bench reverse crunch','Reverse crunches']}),
-  I('Ab wheel rollout',2,8,12,{ss:2,type:'bw',m:{core:1},al:['Ab rollout','Ab wheel','Ab wheel rollouts']})),
+  I('Cable crunch',2,10,15,{ss:2,ck:'Core circuit',cr:[45,60],m:{core:1},inc:'small',note:'upper abs',al:['Cable crunches','Kneeling cable crunch']}),
+  I('Reverse crunch (bench)',2,10,15,{ss:2,type:'bw',m:{core:1},note:'lower abs · knees bent, curl hips toward chest; not a straight-leg raise',al:['Reverse crunch','Bench reverse crunch','Reverse crunches']}),
+  I('Ab wheel rollout',2,8,12,{ss:2,type:'bw',m:{core:1},note:'anti-extension',al:['Ab rollout','Ab wheel','Ab wheel rollouts']}),
+  I('Offset barbell front hold',2,20,45,{ss:2,type:'time',each:'each side',m:{core:1},inc:'small',note:'obliques · anti-rotation; load offset to one side',al:['Offset barbell hold','Offset front hold','Offset bar front rack hold']})),
  ...SEC('Shins',I('Tibialis raise',2,15,20,{m:{calves:.5},inc:'small',al:['Tib raise','Tibialis raises']})),
  ...SEC('Cool-down',CD('couch stretch 30 s/side, child\'s pose 30 s, supine 90/90 breathing ×5'))]},
 {day:'WED',title:'Back / Biceps / Traps / Forearms',items:[
@@ -669,7 +670,7 @@ const P1RAW=()=>[
   I('Reverse hyper',2,12,15,{ss:1,type:'bw',m:{hamglute:1,lowback:.5},note:'on the GHD: hips at the pad edge, swing legs up, squeeze glutes, controlled',al:['Reverse hyperextension','GHD reverse hyper','Reverse hypers']})),
  ...SEC('Anti-rotation',
   I('Single-arm DB bench press',3,8,10,{ss:2,ck:'Anti-rotation tri-set',each:'each side',m:{chest:.75,shoulders:.5,triceps:.5,core:.5},note:'anti-rotation',al:['Single-arm DB bench or half-kneeling landmine press','Single arm DB bench press','Single-arm dumbbell bench press']}),
-  I('Landmine rotation',3,6,8,{ss:2,each:'each side',m:{core:1,shoulders:.25},note:'rainbows',al:['Landmine rotations','Landmine rainbow','Landmine rainbows','Rainbows']}),
+  I('Half-kneeling landmine 180s',3,6,8,{ss:2,each:'each side',m:{core:1,shoulders:.25},note:'half-kneeling, hips square; arc the bar hip to hip',al:['Landmine rotation','Landmine rotations','Landmine rainbow','Landmine rainbows','Rainbows','Landmine 180s','Half kneeling landmine 180s']}),
   I('Pallof press',2,10,10,{ss:2,each:'each side',m:{core:1},inc:'small',al:['Pallof','Cable Pallof press']})),
  ...SEC('Hinge accessory',
   I('KB pull-through',3,12,15,{ss:5,optLess:1,m:{hamglute:1},note:'2 sets on gorilla-row weeks',inc:'small',al:['Kettlebell pull-through','KB pull through']}),
@@ -719,8 +720,8 @@ const P2RAW=()=>{const p=P1RAW();const D=d=>p.find(x=>x.day===d);
    I('Single-leg RDL',3,6,8,{r:'S',each:'each leg',m:{hamglute:1,lowback:.25},note:'hold a DB in the opposite hand; hips square'}),
    Object.assign(T('Seated leg curl'),{sets:2,lo:8,hi:10})),
   ...SEC('Hips',T('Hip adduction'),T('Hip abduction')),
-  ...SEC('Lower back & core',T('Single-leg back extension hold (weighted)'),T('Cable crunch'),T('Reverse crunch (bench)'),T('Ab wheel rollout')),
-  ...SEC('Calves & shins',Object.assign(T('Leg press calf press'),{cb:0,note:''}),T('Tibialis raise')),
+  ...SEC('Lower back & core',T('Single-leg back extension hold (weighted)'),T('Cable crunch'),T('Reverse crunch (bench)'),T('Ab wheel rollout'),T('Offset barbell front hold')),
+  ...SEC('Calves & shins',Object.assign(T('Leg press calf press'),{cb:0,note:'',sets:2}),T('Tibialis raise')),
   ...tue.items.filter(it=>it.blk==='cool')];
  const wed=D('WED');wed.title='Back / Biceps / Traps · strength';const W=n=>wed.items.find(x=>x.name===n);
  Object.assign(W('Pull-up'),{sets:4,lo:4,hi:6,note:'add load with a belt once 6 reps are easy'});Object.assign(W('Chest-supported row'),{sets:4,lo:6,hi:8});Object.assign(W('Single-arm neutral-grip pulldown'),{lo:8,hi:10});
@@ -766,7 +767,7 @@ const restTxt=r=>!r?'':r[0]>=120&&r[1]>=120?(r[0]===r[1]?r[0]/60+' min':r[0]/60+
 const PROG1=prepProg(P1RAW(),'build'),PROG2=prepProg(P2RAW(),'func'),PROG3=prepProg(P3RAW(),'hyp');
 const PROGS={build:PROG1,func:PROG2,hyp:PROG3};let PROG=PROG1;
 /* old names → current defined names (logs, swaps and CSV imports are migrated on load) */
-const MIGRATE={'Flat machine or Smith press':'Flat machine chest press','Belt squat or hack squat':'Hack squat','Chin-up or pull-up':'Pull-up','Cable row or chest-supported row':'Chest-supported row','Incline machine or cable press':'Incline machine press','Skull crusher or cable extension':'EZ-bar skull crusher','Spider or Bayesian curl':'EZ-bar spider curl','Single-arm DB bench or half-kneeling landmine press':'Single-arm DB bench press','Zone 2 cardio':'Incline treadmill walk (Zone 2)','Incline treadmill walk':'Incline treadmill walk (Zone 2)','Machine or Kelso shrug':'Kelso shrug','Rear delt fly':'Cable rear delt fly','Leg press calf raise':'Leg press calf press'};
+const MIGRATE={'Landmine rotation':'Half-kneeling landmine 180s','Flat machine or Smith press':'Flat machine chest press','Belt squat or hack squat':'Hack squat','Chin-up or pull-up':'Pull-up','Cable row or chest-supported row':'Chest-supported row','Incline machine or cable press':'Incline machine press','Skull crusher or cable extension':'EZ-bar skull crusher','Spider or Bayesian curl':'EZ-bar spider curl','Single-arm DB bench or half-kneeling landmine press':'Single-arm DB bench press','Zone 2 cardio':'Incline treadmill walk (Zone 2)','Incline treadmill walk':'Incline treadmill walk (Zone 2)','Machine or Kelso shrug':'Kelso shrug','Rear delt fly':'Cable rear delt fly','Leg press calf raise':'Leg press calf press'};
 /* exercise library: alternatives & swap targets (not scheduled) */
 const LX=(name,type,lo,hi,m,o)=>Object.assign({name,type,sets:3,lo,hi,m:m||{},inc:'big',lib:1},o||{});
 const LIB=[
@@ -787,7 +788,7 @@ const LIB=[
  LX('Copenhagen plank','time',15,30,{addabd:1,core:.5},{each:'each side'}),LX('Cable hip adduction','load',12,15,{addabd:1},{inc:'small',each:'each side'}),LX('Cable hip abduction','load',15,20,{addabd:1},{inc:'small',each:'each side'}),
  LX('Standing calf raise','load',10,15,{calves:1},{al:['Calf raise','Standing calf raises']}),LX('Hack squat calf raise','load',10,15,{calves:1},{al:['Hack squat calf raises','Hack calf raise']}),LX('Seated calf raise','load',10,15,{calves:1}),LX('Single-leg calf raise','bw',10,15,{calves:1},{each:'each leg'}),
  LX('45° back extension','bw',10,15,{lowback:1,hamglute:.5}),LX('Bird dog','bw',8,10,{core:1},{each:'each side'}),
- LX('Decline crunch','bw',10,15,{core:1}),LX('Hanging knee raise','bw',8,12,{core:1}),LX('Machine crunch','load',10,15,{core:1},{inc:'small'}),LX('Stability-ball rollout','bw',8,12,{core:1}),LX('Body saw','bw',8,12,{core:1}),LX('Plank','time',30,60,{core:1}),
+ LX('Decline crunch','bw',10,15,{core:1}),LX('Hanging knee raise','bw',8,12,{core:1}),LX('Machine crunch','load',10,15,{core:1},{inc:'small'}),LX('Stability-ball rollout','bw',8,12,{core:1}),LX('Body saw','bw',8,12,{core:1}),LX('Plank','time',30,60,{core:1}),LX('Offset static barbell hold (landmine)','time',20,45,{core:1},{each:'each side',inc:'small'}),LX('Suitcase hold','time',20,45,{core:1,forearms:.5},{each:'each side',inc:'small'}),LX('TRX rollout','bw',8,12,{core:1}),LX('Standing landmine 180s','load',6,8,{core:1,shoulders:.25},{each:'each side',inc:'small'}),LX('Offset barbell bench press','load',6,10,{chest:1,triceps:.5,core:.5},{inc:'small'}),
  LX('Banded tibialis raise','band',15,20,{calves:.5}),LX('Heel walk','dist',20,30,{calves:.5}),
  LX('Lat pulldown','load',8,12,{back:1,biceps:.25}),LX('Chin-up','bw',6,10,{back:1,biceps:.75},{al:['Chin up','Chinup','Chin-ups']}),LX('Assisted pull-up','load',6,10,{back:1,biceps:.5},{note:'weight = assistance'}),LX('Neutral-grip pull-up','bw',6,10,{back:1,biceps:.5}),
  LX('Seated machine row','load',8,12,{back:1,traps:.25,biceps:.25}),LX('Seated cable row','load',8,12,{back:1,traps:.25,biceps:.25},{al:['Cable row','Seated row','Low cable row']}),LX('One-arm DB row','load',8,12,{back:1,biceps:.25},{each:'each side'}),LX('T-bar row','load',8,12,{back:1,traps:.25,biceps:.25}),
@@ -820,7 +821,7 @@ const ALT={
  'Hip adduction':['Cable hip adduction','Copenhagen plank','Cossack squat'],'Hip abduction':['Cable hip abduction','Banded lateral walk','Banded clamshell'],
  'Leg press calf press':['Hack squat calf raise','Standing calf raise','Seated calf raise','Single-leg calf raise'],'Single-leg back extension hold (weighted)':['Back extension hold','45° back extension','Reverse hyper'],
  'Cable crunch':['Machine crunch','Decline crunch','Dead bug'],'Reverse crunch (bench)':['Hanging knee raise','Decline crunch','Dead bug'],
- 'Ab wheel rollout':['Stability-ball rollout','Body saw','Plank'],'Tibialis raise':['Banded tibialis raise','Heel walk'],
+ 'Ab wheel rollout':['TRX rollout','Stability-ball rollout','Body saw','Plank'],'Offset barbell front hold':['Offset static barbell hold (landmine)','Suitcase hold'],'Tibialis raise':['Banded tibialis raise','Heel walk'],
  'Pull-up':['Chin-up','Neutral-grip pull-up','Lat pulldown','Assisted pull-up'],'Chest-supported row':['Seated cable row','T-bar row','Chest-supported DB row','Seated machine row'],
  'Single-arm neutral-grip pulldown':['Lat pulldown','Straight-arm pulldown','Single-arm cable row'],'Kelso shrug':['DB shrug','Barbell shrug','Hammer Strength shrug machine','Smith shrug','Trap bar shrug'],
  'Incline DB curl':['Bayesian cable curl','DB curl','EZ-bar curl'],'Bayesian cable curl':['Incline DB curl','Cable curl','DB curl'],
@@ -831,10 +832,10 @@ const ALT={
  'Incline DB Y raise':['Cable Y raise','Prone Y-T-W','Face pull'],'EZ-bar skull crusher':['Cable triceps extension','Rope pushdown','Overhead cable triceps extension','Close-grip bench press'],
  'EZ-bar spider curl':['DB spider curl','Cable preacher curl','Bayesian cable curl'],'Cross-body hammer curl':['Hammer curl','Rope hammer curl'],
  'Neck work':['Neck harness extension','Band neck isometrics'],
- 'Med ball rotational scoop toss':['Med ball side toss','Landmine rotation','Half-kneeling cable chop'],'Med ball slam':['Med ball chest pass','Kettlebell swing','Battle rope slams'],
+ 'Med ball rotational scoop toss':['Med ball side toss','Standing landmine 180s','Half-kneeling cable chop'],'Med ball slam':['Med ball chest pass','Kettlebell swing','Battle rope slams'],
  'Tire flip':['Trap bar jump','Kettlebell swing','Sandbag-to-shoulder'],'Trap bar deadlift':['Rack pull','Romanian deadlift','Conventional deadlift'],
  'GHD hip extension':['45° back extension','Reverse hyper','Romanian deadlift'],'Reverse hyper':['GHD hip extension','45° back extension','KB pull-through'],
- 'Single-arm DB bench press':['Half-kneeling single-arm landmine press','Single-arm cable chest press','Single-arm DB floor press'],'Landmine rotation':['Med ball rotational scoop toss','Half-kneeling cable chop','Cable woodchop'],
+ 'Single-arm DB bench press':['Offset barbell bench press','Half-kneeling single-arm landmine press','Single-arm cable chest press','Single-arm DB floor press'],'Half-kneeling landmine 180s':['Standing landmine 180s','Half-kneeling cable chop','Cable woodchop'],
  'KB pull-through':['Cable pull-through','Kettlebell swing','Romanian deadlift'],'KB gorilla row':['One-arm DB row','Chest-supported DB row','Chest-supported row'],
  'Sled push':['Prowler push','Hill sprint','Assault bike sprint'],'Backward sled drag':['Sled push','Backward treadmill walk','Reverse lunge'],
  'Lateral sled drag':['Lateral lunge','Banded lateral walk','Cossack squat'],'Farmer carry':['Trap bar carry','Suitcase carry','Sandbag carry'],
@@ -854,7 +855,7 @@ const ALT={
  'Close-grip bench press':['Dips','Machine dip','Overhead cable triceps extension'],'Pendulum squat':['Hack squat','Belt squat','Smith squat'],'Reverse lunge':['Rear-foot-elevated split squat','Walking lunge','Step-up'],
  'Lying leg curl':['Seated leg curl','Nordic curl','Stability-ball leg curl'],'Hanging knee raise':['Reverse crunch (bench)','Decline crunch','Dead bug'],'Neutral-grip pull-up':['Pull-up','Chin-up','Lat pulldown'],
  'Seated cable row':['Chest-supported row','T-bar row','Seated machine row'],'Hammer Strength shrug machine':['Kelso shrug','DB shrug','Barbell shrug','Smith shrug'],'EZ-bar curl':['Incline DB curl','DB curl','Cable curl'],
- 'Zottman curl':['Reverse EZ-bar curl','Reverse cable curl'],'Rope hammer curl':['Cross-body hammer curl','Hammer curl'],'Half-kneeling single-arm landmine press':['Single-arm DB bench press','Single-arm cable chest press','Single-arm DB floor press'],'Rack pull':['Trap bar deadlift','KB pull-through','Romanian deadlift'],'Side plank':['Copenhagen plank','Suitcase carry','Band Pallof hold'],'Hammer curl':['Cross-body hammer curl','Rope hammer curl','Reverse EZ-bar curl']};
+ 'Zottman curl':['Reverse EZ-bar curl','Reverse cable curl'],'Rope hammer curl':['Cross-body hammer curl','Hammer curl'],'Half-kneeling single-arm landmine press':['Single-arm DB bench press','Offset barbell bench press','Single-arm cable chest press','Single-arm DB floor press'],'Rack pull':['Trap bar deadlift','KB pull-through','Romanian deadlift'],'Side plank':['Copenhagen plank','Suitcase carry','Band Pallof hold'],'Hammer curl':['Cross-body hammer curl','Rope hammer curl','Reverse EZ-bar curl']};
 const MUSCLES=[['chest','Chest'],['shoulders','Shoulders'],['triceps','Triceps'],['biceps','Biceps'],['forearms','Forearms'],['back','Back / lats'],['traps','Traps'],['quads','Quads'],['hamglute','Hamstrings / glutes'],['calves','Calves'],['addabd','Adductors / abductors'],['lowback','Lower back'],['core','Core'],['neck','Neck']];
 const MLAB=Object.fromEntries(MUSCLES);
 const DEF_TARGETS={chest:17,shoulders:14,triceps:13,biceps:11,forearms:8,back:14,traps:6,quads:10,hamglute:10,calves:8,addabd:6,lowback:6,core:10,neck:4};
@@ -1026,6 +1027,13 @@ Trap bar deadlift|Stand centered in the trap bar, feet hip-width, grip the handl
 GHD hip extension|Set the GHD pad so the hip crease is just off the front edge, feet locked, arms crossed.|Lower the torso by hinging at the hips, then lift back to a straight line using glutes and hamstrings.|Hinge at the hips, not the spine;Squeeze glutes to rise;Stop at a straight line|Hyperextending at the top;Rounding to get more range|Back: neutral spine throughout. Progress by holding a plate, not by going further.
 Reverse hyper|Lie face-down on the GHD pad with hips at the edge, hold the frame, legs hanging.|Swing the legs up to body level by squeezing the glutes, then lower under control.|Squeeze glutes to lift;Controlled, no whipping;Stop at a straight line|Kicking too high and arching the back;Using momentum|Back: keep it smooth and stop at hip level. Arching past neutral defeats the purpose.
 Single-arm DB bench press|Lie on a flat bench with one dumbbell, other hand on your belly, feet planted wide.|Lower to the chest with the elbow at about 45°, then press up while resisting rotation.|Hips and shoulders stay square;Brace hard, the core works too;Control the bottom|Rolling toward the weight;Arching to press|Back: glutes on the bench, ribs down. The anti-rotation is the point.
+Offset barbell front hold|Unrack a barbell loaded on one side only (or much heavier on one side) and hug it in a front-rack position, with the sleeve centered in front of your nose.|Stand tall and braced and hold for time without letting the bar tip, then switch the heavy side and repeat.|Ribs down, glutes tight;Shoulders and hips stay square;Breathe behind the brace|Leaning or twisting toward the heavy side;Letting the bar drift off-center|Back: anti-rotation work. Load light enough that the trunk doesn't move at all.
+Offset static barbell hold (landmine)|Barbell anchored in a landmine, hold the free end in both hands in front of your chest, then step so the bar sits slightly to one side.|Hold still against the bar's pull for time, then switch sides.|Stand tall;Arms firm, trunk does the work;Hips square|Rotating with the bar;Holding the breath|Back: a gentle anti-rotation hold; keep the spine still.
+Suitcase hold|One heavy dumbbell or kettlebell in one hand, standing tall.|Hold for time without leaning toward the weight, then switch hands.|Stay level;Brace the side opposite the weight;Shoulders down|Side-bending toward the load;Shrugging|Back: anti-side-bend drill. Pick the weight up with a hinge.
+Half-kneeling landmine 180s|Half-kneeling beside a landmine (inside knee down), hold the bar end in both hands at chest height, arms straight.|Arc the bar from one hip, over the top, to the other hip, keeping the hips facing forward.|Hips stay square, the trunk resists;Arms long;Slow and controlled arc|Twisting through the lower back;Rushing the arc or bending the arms|Back: control the arc from the trunk and keep the lower back quiet.
+Standing landmine 180s|Stand facing a landmine, feet wide, bar end held in both hands at chest height with straight arms.|Arc the bar from hip to hip over the top, pivoting slightly on the feet.|Arms long;Brace before each arc;Smooth tempo|Twisting through the lower back;Letting the bar drop fast|Back: keep the range small at first and move from the hips.
+TRX rollout|Hold TRX handles with straight arms, lean forward on your toes in a straight plank line.|Raise the arms overhead so the body falls forward, then pull back using the abs.|Hollow body, ribs down;Glutes squeezed;Move only as far as the hips stay level|Sagging hips;Bending the elbows|Back: start steep (more upright) and progress the angle.
+Offset barbell bench press|Bench press set up with one side loaded heavier (e.g. one extra small plate), feet planted wide.|Lower the bar to the chest and press up, keeping the bar level against the uneven load.|Bar stays level;Brace hard;Elbows about 45°|Letting the heavy side drop;Hips coming up|Back: keep the glutes on the bench and the ribs down.
 Landmine rotation|Barbell in a landmine, hold the end at chest height with straight arms, feet wide.|Rotate the bar in an arc down to one hip, then back over the top to the other hip (rainbows).|Pivot the feet and turn the hips;Arms long, core braced;Controlled speed|Twisting only from the lower back;Bending the arms|Back: hips turn with the bar. The lower back stays neutral.
 KB pull-through|Stand facing away from a low cable or with a band, rope between the legs, feet a bit wider than hips.|Hinge back letting the hands pass between the legs, then drive the hips forward to stand tall.|Push hips back, soft knees;Squeeze glutes to finish;Arms just hold, don't lift|Squatting instead of hinging;Leaning back at the top|Back: neutral spine and short range. This is a hinge pattern, not a squat.
 KB gorilla row|Two kettlebells between the feet, wide stance, hinge to a flat back with hands on the bells.|Row one bell to the hip while pressing the other into the floor, lower, alternate.|Flat back, hips high;Elbow drives to the hip;Brace against rotation|Rounding the back;Twisting the torso to lift|Back: hold a neutral hinge. If the back fatigues, switch to a chest-supported row.
@@ -1220,7 +1228,7 @@ const VID={/* curated: each ID verified via YouTube oEmbed (title + channel) on 
  "Lying leg curl":{id:"n5WDXD_mpVY",t:"Lying Leg Curl",ch:"Renaissance Periodization"},
  "Sled push":{id:"QaTrePoCT4g",t:"The ULTIMATE Sled Push/Pull Tutorial",ch:"Squat University"},
  "Neutral-grip pull-up":{id:"XWt6FQAK5wM",t:"Parallel Grip Pullup",ch:"Renaissance Periodization"}};
-const vidName=n=>String(n).replace(/\s*\([^)]*\)/g,'').trim();
+const vidName=n=>String(n).replace(/\s*\((weighted|bench|Zone 2)\)/gi,'').replace(/[()]/g,'').replace(/\s+/g,' ').trim();
 function vidUrl(n){const v=VID[n]||(BYNAME[n]&&VID[BYNAME[n].name]);return v?'https://www.youtube.com/watch?v='+v.id:'https://www.youtube.com/results?search_query='+encodeURIComponent(vidName(n)).replace(/%20/g,'+')+'+proper+form'}
 const vidOf=n=>VID[n]||(BYNAME[n]&&VID[BYNAME[n].name])||null;
 const vidLink=(n,cls,lab)=>{const v=vidOf(n);return'<a class="'+cls+(v?' cur':'')+'" href="'+esc(vidUrl(n))+'" target="_blank" rel="noopener noreferrer" data-vid="'+esc(n)+'" aria-label="Watch form video: '+esc(n)+' (opens YouTube)" title="'+esc(v?v.t+' — '+v.ch:'Search YouTube: '+vidName(n)+' proper form')+'">'+lab+'</a>'};
