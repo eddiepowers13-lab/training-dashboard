@@ -482,6 +482,34 @@ button.pg-m{background:none;border:0;color:inherit;font:inherit;text-align:left;
 .pg-tm{line-height:1.4}
 .lx-tools{grid-template-columns:1fr 1fr 1fr 48px}
 .lx-tools .lx-sec{font-size:13.5px;padding:0 6px}
+
+/* rest bar */
+.rb{position:fixed;left:8px;right:8px;bottom:calc(66px + env(safe-area-inset-bottom));z-index:45;display:flex;align-items:center;gap:8px;padding:8px 8px 8px 14px;border-radius:16px;background:#1b2633;border:1px solid #2e3d50;box-shadow:0 8px 28px rgba(0,0,0,.5);transition:background .2s,border-color .2s}
+.rb[hidden]{display:none}
+.rb-t{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.1}
+.rb-l{font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--mu)}
+.rb-c{font-size:38px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.5px;color:var(--tx);margin:1px 0}
+.rb-s{font-size:12px;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rb-b{display:grid;grid-template-columns:repeat(2,52px);grid-template-rows:44px 44px;gap:6px;flex:none}
+.rb-b button{min-width:44px;min-height:44px;border-radius:12px;border:1px solid #33465c;background:#243243;color:var(--tx);font-weight:600;font-size:14px;line-height:1;font-family:inherit;cursor:pointer;padding:0}
+.rb-b .rb-p{font-size:18px}.rb-b .rb-x{color:#ffb4a8}
+.rb.paused .rb-c{color:var(--mu)}
+.rb.go{background:#0f3b2a;border-color:#2fbf7f}.rb.go .rb-l{color:#7af0b8;font-size:15px}.rb.go .rb-c{color:#3ddc97}
+body.has-rest{padding-bottom:200px}
+@media(min-width:760px){.rb{left:auto;right:20px;bottom:20px;width:400px}body.has-rest{padding-bottom:130px}}
+/* rest settings */
+.tg-r{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:56px;padding:8px 0;background:none;border:0;border-bottom:1px solid #1c2734;color:var(--tx);font:inherit;text-align:left;cursor:pointer}
+.tg-r b{display:block;font-size:15px}.tg-r small{display:block;color:var(--mu);font-size:12.5px;margin-top:2px}
+.tg{flex:none;width:46px;height:28px;border-radius:14px;background:#2a3646;position:relative;transition:background .2s}.tg::after{content:'';position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#cfd8e3;transition:transform .2s}
+.tg.on{background:#2fbf7f}.tg.on::after{transform:translateX(18px);background:#fff}
+/* watch form */
+.ht-r{display:flex;gap:8px}.ht-r .ht-t{flex:1;min-width:0}
+.ht-v,.sw-cv{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-height:44px;padding:0 14px;border-radius:12px;border:1px solid rgba(255,80,80,.4);background:rgba(255,60,60,.10);color:#ff8a8a;font-weight:600;font-size:14px;text-decoration:none;white-space:nowrap;flex:none}
+.sw-cv{margin-top:8px}
+.pg-vd,.dl-vb,.sw-vd{width:44px;height:44px;flex:none;display:inline-flex;align-items:center;justify-content:center;border-radius:12px;border:1px solid rgba(255,80,80,.4);background:rgba(255,60,60,.08);color:#ff8a8a;font-size:15px;text-decoration:none}
+.dl-vb{margin-top:4px}
+.sw-or{display:flex;gap:8px;align-items:stretch}.sw-or .sw-opt{flex:1;min-width:0}.sw-vd{height:auto;min-height:44px;margin-bottom:8px}
+.ci-hist{margin-top:10px}.ci-ht{display:flex;flex-direction:column;gap:10px;margin:8px 0}.ci-hr{border:1px solid var(--line);border-radius:12px;padding:10px 12px}.ci-hr .ci-s{font-size:13px}
 </style>
 </head>
 <body>
@@ -897,12 +925,12 @@ const TOORDER=['psa','shbg','igf1','apob','lpa','crp','insulin','ferritin','vitd
 
 /* ===== state ===== */
 function seed(){return{v:1,
- settings:{person:'me',week:1,step:5,smallStep:2.5,axis:'auto',targetWeight:null,targetDate:'',bfLo:null,bfHi:null,targets:Object.assign({},DEF_TARGETS),bands:{},ordered:{},exMap:{},lastExport:null,
+ settings:{person:'me',restAuto:true,restSound:true,restVibe:true,week:1,step:5,smallStep:2.5,axis:'auto',targetWeight:null,targetDate:'',bfLo:null,bfHi:null,targets:Object.assign({},DEF_TARGETS),bands:{},ordered:{},exMap:{},lastExport:null,
   profile:'Goals: chest & arms, fat loss, functional strength, back-safe training.\n(Edit this in Settings — notes stay on this device only.)'},
  log:[],
  body:[],
  labs:{},
- done:{},plan:{start:'2026-10-12',shifts:{},early:{},v:2},checkins:{},ciSnooze:{},nutr:{mode:'auto',kcal:null,maint:null,waistT:null,bulkWaist:null},flare:{},sess:null,
+ done:{},plan:{start:'2026-10-12',shifts:{},early:{},v:2},checkins:{},ciSnooze:{},nutr:{mode:'auto',kcal:null,maint:null,waistT:null,bulkWaist:null},flare:{},sess:null,rest:null,
  family:{wife:{label:'Wife',sub:'',notes:'',meas:[],log:[]},son:{label:'Son',sub:'',notes:'',meas:[],log:[]},daughter:{label:'Daughter',sub:'',notes:'',meas:[],log:[]}},
  imports:[]}}
 let S,storageOK=true;
@@ -910,7 +938,7 @@ function load(){let raw=null;try{raw=localStorage.getItem(KEY)}catch(e){storageO
  const d=seed();if(raw){try{const o=JSON.parse(raw);S=normalize(o,d)}catch(e){try{localStorage.setItem(KEY+'.corrupt',raw)}catch(_){}S=normalize(d)}}else S=normalize(d);
  if(!raw||lastMig)save()}
 function normalize(o,d){d=d||seed();const s=Object.assign({},d,o);s.settings=Object.assign({},d.settings,o.settings||{});s.settings.targets=Object.assign({},DEF_TARGETS,(o.settings||{}).targets||{});
- ['log','body','imports'].forEach(k=>{if(!Array.isArray(s[k]))s[k]=d[k]});if(!s.labs||typeof s.labs!=='object')s.labs=d.labs;if(!s.done||typeof s.done!=='object')s.done={};['swaps','tswaps','custom'].forEach(k=>{if(!s[k]||typeof s[k]!=='object'||Array.isArray(s[k]))s[k]={}});migrate(s);if(!s.daily||typeof s.daily!=='object'||Array.isArray(s.daily))s.daily={};['checkins','flare'].forEach(k=>{if(!s[k]||typeof s[k]!=='object'||Array.isArray(s[k]))s[k]={}});s.plan=Object.assign({start:'2026-10-12',shifts:{},early:{}},s.plan&&typeof s.plan==='object'?s.plan:{});if(!s.plan.v){if(s.plan.start==='2026-10-05')s.plan.start='2026-10-12';s.plan.v=2}if(!s.ciSnooze||typeof s.ciSnooze!=='object'||Array.isArray(s.ciSnooze))s.ciSnooze={};s.nutr=Object.assign({mode:'auto',kcal:null,maint:null,waistT:null,bulkWaist:null},s.nutr&&typeof s.nutr==='object'?s.nutr:{});if(s.sess&&typeof s.sess!=='object')s.sess=null;if(!s.daily.days||typeof s.daily.days!=='object'||Array.isArray(s.daily.days))s.daily.days={};
+ ['log','body','imports'].forEach(k=>{if(!Array.isArray(s[k]))s[k]=d[k]});if(!s.labs||typeof s.labs!=='object')s.labs=d.labs;if(!s.done||typeof s.done!=='object')s.done={};['swaps','tswaps','custom'].forEach(k=>{if(!s[k]||typeof s[k]!=='object'||Array.isArray(s[k]))s[k]={}});migrate(s);if(!s.daily||typeof s.daily!=='object'||Array.isArray(s.daily))s.daily={};['checkins','flare'].forEach(k=>{if(!s[k]||typeof s[k]!=='object'||Array.isArray(s[k]))s[k]={}});s.plan=Object.assign({start:'2026-10-12',shifts:{},early:{}},s.plan&&typeof s.plan==='object'?s.plan:{});if(!s.plan.v){if(s.plan.start==='2026-10-05')s.plan.start='2026-10-12';s.plan.v=2}if(!s.ciSnooze||typeof s.ciSnooze!=='object'||Array.isArray(s.ciSnooze))s.ciSnooze={};s.nutr=Object.assign({mode:'auto',kcal:null,maint:null,waistT:null,bulkWaist:null},s.nutr&&typeof s.nutr==='object'?s.nutr:{});if(s.sess&&typeof s.sess!=='object')s.sess=null;if(s.rest&&(typeof s.rest!=='object'||!Number.isFinite(s.rest.end)))s.rest=null;if(!s.daily.days||typeof s.daily.days!=='object'||Array.isArray(s.daily.days))s.daily.days={};
  s.family=Object.assign({},d.family,o.family||{});Object.keys(d.family).forEach(k=>{s.family[k]=Object.assign({},d.family[k],s.family[k]);['meas','log'].forEach(a=>{if(!Array.isArray(s.family[k][a]))s.family[k][a]=[]})});return s}
 let lastMig=0;
 function migrate(s){const mv=n=>MIGRATE[n]||n;let ch=0;s.log.forEach(r=>{if(r&&MIGRATE[r.exercise]){if(!r.was)r.was=r.exercise;r.exercise=MIGRATE[r.exercise];ch++}});
@@ -1166,7 +1194,37 @@ Sled sprint|Light sled (about a quarter of a heavy push load), hands on the high
 `.split('\n').forEach(l=>{const f=l.split('|');if(f.length<6)return;HOW[f[0]]={s:f[1],m:f[2],k:f[3].split(';').filter(Boolean),x:f[4].split(';').filter(Boolean),b:f[5]}});
 const howOf=name=>HOW[name]||(BYNAME[name]&&HOW[BYNAME[name].name])||null;
 function howBody(h){return'<div class="ht-in"><div class="ht-c"><p><b>Setup</b> '+esc(h.s)+'</p><p><b>Movement</b> '+esc(h.m)+'</p><div class="ht-h">Key cues</div><ul>'+h.k.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul><div class="ht-h">Common mistakes</div><ul class="ht-x">'+h.x.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>'+(h.b?'<p class="ht-b">🛡 '+esc(h.b)+'</p>':'')+'</div></div>'}
-function howBlock(name,cls){const h=howOf(name);if(!h)return'';return'<div class="ht'+(cls?' '+cls:'')+'"><button type="button" class="ht-t" data-a="ht" aria-expanded="false"><span>📖 How to</span><i aria-hidden="true">⌄</i></button><div class="ht-p" aria-hidden="true">'+howBody(h)+'</div></div>'}
+/* form videos: YouTube search by default; curated direct links only where verified (see VID) */
+const VID={/* curated: each ID verified via YouTube oEmbed (title + channel) on Oct 6 2026 */
+ "Incline DB press":{id:"5CECBjd7HLQ",t:"Incline Dumbbell Press",ch:"Renaissance Periodization"},
+ "Flat machine chest press":{id:"NwzUje3z0qY",t:"Machine Chest Press",ch:"Renaissance Periodization"},
+ "Standing press":{id:"_RlRDWO2jfg",t:"Build Bigger Shoulders With Perfect Training Technique (The Overhead Press)",ch:"Jeff Nippard"},
+ "Dips":{id:"yN6Q1UI_xkE",t:"How To Do Dips For A Bigger Chest and Shoulders (Fix Mistakes!)",ch:"Jeff Nippard"},
+ "Hack squat":{id:"rYgNArpwE7E",t:"Hack Squat",ch:"Renaissance Periodization"},
+ "Leg press":{id:"B6rGDcfyPto",t:"How To Leg Press For Best Quad Growth | Targeting The Muscle Series",ch:"Renaissance Periodization"},
+ "Rear-foot-elevated split squat":{id:"hPlKPjohFS0",t:"The PERFECT Bulgarian Split Squat (Avoid These Errors!)",ch:"Squat University"},
+ "Hip thrust machine":{id:"xDmFkJxPzeM",t:"How To Build Great Glutes with Perfect Hip Thrust Technique (Fix Mistakes!)",ch:"Jeff Nippard"},
+ "Pull-up":{id:"Hdc7Mw6BIEE",t:"The Best Way To Do Pull Ups For A Wide Back (Optimal Training Technique)",ch:"Jeff Nippard"},
+ "Chest-supported row":{id:"0UBRfiO4zDs",t:"Chest Supported Row",ch:"Renaissance Periodization"},
+ "Incline machine press":{id:"TrTSvn5-MTk",t:"Incline Machine Chest Press",ch:"Renaissance Periodization"},
+ "Trap bar deadlift":{id:"v709aJKv-gM",t:"Trap Bar Deadlift",ch:"Renaissance Periodization"},
+ "Single-leg RDL":{id:"Zfr6wizR8rs",t:"The BEST Single-Leg RDL Tutorial (Romanian Deadlift)",ch:"Squat University"},
+ "Incline Smith press":{id:"8urE8Z8AMQ4",t:"Smith Machine Incline Press",ch:"Renaissance Periodization"},
+ "Flat DB press":{id:"YQ2s_Y7g5Qk",t:"Flat Dumbbell Bench Press",ch:"Renaissance Periodization"},
+ "Seated DB shoulder press":{id:"HzIiNhHhhtA",t:"Seated Dumbbell Shoulder Press",ch:"Renaissance Periodization"},
+ "Close-grip bench press":{id:"Cv5nS1AH_jE",t:"Close Grip Bench Pressing For Maximum Growth | Targeting The Muscle",ch:"Renaissance Periodization"},
+ "Reverse lunge":{id:"TQfhY5oJ_Sc",t:"Reverse Lunge",ch:"Renaissance Periodization"},
+ "Seated cable row":{id:"UCXxvVItLoM",t:"Seated Cable Row",ch:"Renaissance Periodization"},
+ "Rack pull":{id:"agF7TbWjQao",t:"Stop Doing Rack Pulls Like This! (SAVE A FRIEND)",ch:"ATHLEAN-X™"},
+ "Seated leg curl":{id:"Orxowest56U",t:"Seated Leg Curl",ch:"Renaissance Periodization"},
+ "Lying leg curl":{id:"n5WDXD_mpVY",t:"Lying Leg Curl",ch:"Renaissance Periodization"},
+ "Sled push":{id:"QaTrePoCT4g",t:"The ULTIMATE Sled Push/Pull Tutorial",ch:"Squat University"},
+ "Neutral-grip pull-up":{id:"XWt6FQAK5wM",t:"Parallel Grip Pullup",ch:"Renaissance Periodization"}};
+const vidName=n=>String(n).replace(/\s*\([^)]*\)/g,'').trim();
+function vidUrl(n){const v=VID[n]||(BYNAME[n]&&VID[BYNAME[n].name]);return v?'https://www.youtube.com/watch?v='+v.id:'https://www.youtube.com/results?search_query='+encodeURIComponent(vidName(n)).replace(/%20/g,'+')+'+proper+form'}
+const vidOf=n=>VID[n]||(BYNAME[n]&&VID[BYNAME[n].name])||null;
+const vidLink=(n,cls,lab)=>{const v=vidOf(n);return'<a class="'+cls+(v?' cur':'')+'" href="'+esc(vidUrl(n))+'" target="_blank" rel="noopener noreferrer" data-vid="'+esc(n)+'" aria-label="Watch form video: '+esc(n)+' (opens YouTube)" title="'+esc(v?v.t+' — '+v.ch:'Search YouTube: '+vidName(n)+' proper form')+'">'+lab+'</a>'};
+function howBlock(name,cls){const h=howOf(name);const v=vidLink(name,'ht-v','▶ Watch form');return'<div class="ht'+(cls?' '+cls:'')+'"><div class="ht-r">'+(h?'<button type="button" class="ht-t" data-a="ht" aria-expanded="false"><span>📖 How to</span><i aria-hidden="true">⌄</i></button>':'')+v+'</div>'+(h?'<div class="ht-p" aria-hidden="true">'+howBody(h)+'</div>':'')+'</div>'}
 function howToggle(t){const w=t.closest('.ht,.pg-item,.dl-row');if(!w)return;const open=!w.classList.contains('hopen');w.classList.toggle('hopen',open);t.setAttribute('aria-expanded',open);const p=w.querySelector('.ht-p');if(p)p.setAttribute('aria-hidden',!open)}
 
 /* ===== charts ===== */
@@ -1317,7 +1375,7 @@ function cardHead(o,R,done,tgt,ok,open){const it=o.it;
   '<span class="lx-rl"><span class="mut">Today</span> <b class="'+(R.bump?'up':'')+'">'+todayTxt(it,R)+'</b>'+(R.top?'<span class="mut"> · last '+setStr(it,R.top.weight,R.top.reps,R.top.band,1)+'</span>':'')+'</span>'+swapTag(it)+
   '</span><span class="lx-cnt'+(ok?' ok':'')+'">'+(ok&&tgt?'✓':'')+done+(tgt?'<small>/'+tgt+'</small>':'')+'</span></button>'}
 function renderLogCard(o,date,day){const it=o.it;
- if(!isLoggable(it)){return'<div class="lx-card info'+(it.type==='note'?' note':'')+'"><div class="lx-h static"><div class="lx-n">'+(it.type==='note'&&it.label?'<b>'+esc(it.label)+'</b>'+(it.bm?' <span class="mut">'+it.bm.join('–')+' min</span>':'')+' · ':'')+esc(it.type==='note'?it.name.replace(/^(Warm-up|Cool-down|Finish|Mobility|Stretches):\s*/,''):it.name)+'</div>'+(it.type==='cardio'?'<div class="lx-tl">'+it.mins+' min · cardio'+'</div>'+swapTag(it):'')+'</div>'+(it.type==='cardio'&&o.orig?'<div class="lx-acts one"><button type="button" class="lx-ab" data-a="swap" data-day="'+day+'" data-date="'+date+'" data-v="'+esc(o.orig.name)+'"><span>⇄</span>Swap</button>'+(it.swappedFrom?'<button type="button" class="lx-ab" data-a="swrevert" data-day="'+day+'" data-date="'+date+'" data-v="'+esc(o.orig.name)+'"><span>↶</span>Revert</button>':'')+'</div>':'')+(it.type==='cardio'?'<div class="lx-cht">'+howBlock(it.name)+'</div>':'')+'</div>'}
+ if(!isLoggable(it)){return'<div class="lx-card info'+(it.type==='note'?' note':'')+'"><div class="lx-h static"><div class="lx-n">'+(it.type==='note'&&it.label?'<b>'+esc(it.label)+'</b>'+(it.bm?' <span class="mut">'+it.bm.join('–')+' min</span>':'')+' · ':'')+esc(it.type==='note'?it.name.replace(/^(Warm-up|Cool-down|Finish|Mobility|Stretches):\s*/,''):it.name)+'</div>'+(it.type==='cardio'?'<div class="lx-tl">'+it.mins+' min · cardio'+'</div>'+swapTag(it):'')+'</div>'+(it.type==='cardio'&&o.orig?'<div class="lx-acts one"><button type="button" class="lx-ab" data-a="swap" data-day="'+day+'" data-date="'+date+'" data-v="'+esc(o.orig.name)+'"><span>⇄</span>Swap</button>'+(it.swappedFrom?'<button type="button" class="lx-ab" data-a="swrevert" data-day="'+day+'" data-date="'+date+'" data-v="'+esc(o.orig.name)+'"><span>↶</span>Revert</button>':'')+'</div>':'')+(it.type==='cardio'?'<div class="lx-cht">'+(it.type==='note'?'':howBlock(it.name))+'</div>':'')+'</div>'}
  const rows=rowsFor(it,date,day);const done=rows.length;const tgt=o.free?0:it.sets;const open=UI.lopen===it.name;
  const pct=tgt?Math.min(100,Math.round(done/tgt*100)):(done?100:0);const ok=tgt?done>=tgt:done>0;const R=rec(it);
  let h='<div class="lx-card'+(open?' open':'')+(ok?' ok':'')+'" data-card="'+esc(it.name)+'">'+cardHead(o,R,done,tgt,ok,open)+'<div class="lx-bar"><i style="width:'+pct+'%"></i></div>';
@@ -1325,7 +1383,7 @@ function renderLogCard(o,date,day){const it=o.it;
   h+='<div class="lx-body"><div class="lx-acts">'+
    (o.orig?'<button type="button" class="lx-ab" data-a="swap" data-day="'+day+'" data-date="'+date+'" data-v="'+esc(o.orig.name)+'"><span>⇄</span>Swap</button>':'')+
    (it.swappedFrom?'<button type="button" class="lx-ab" data-a="swrevert" data-day="'+day+'" data-date="'+date+'" data-v="'+esc(o.orig.name)+'"><span>↶</span>Revert</button>':'')+
-   '<button type="button" class="lx-ab" data-a="lhist" data-v="'+esc(it.name)+'"><span>🕘</span>History</button>'+
+   '<button type="button" class="lx-ab" data-a="restgo" data-v="'+esc(it.name)+'"><span>⏱</span>Rest</button><button type="button" class="lx-ab" data-a="lhist" data-v="'+esc(it.name)+'"><span>🕘</span>History</button>'+
    (rows.length?'<button type="button" class="lx-ab" data-a="lundo" data-k="'+esc(key)+'"><span>↶</span>Undo set</button>':'')+
    (o.free&&!rows.length?'<button type="button" class="lx-ab" data-a="lrmx" data-v="'+esc(it.name)+'"><span>✕</span>Remove</button>':'')+'</div>'+howBlock(it.name,'lx-ht');
   h+='<div class="lx-info">'+(it.cbg?'<div class="lx-ss">Same-station combo: '+esc(it.cbg.join(' → '))+' — stay on the machine, no setup change.</div>':'')+(it.ssg?(it.ckn?'<div class="lx-ss ck"><b>'+esc(it.ckn)+'</b> · '+Math.max(...itemsFor(day,date).filter(x=>x.it.ssl===it.ssl&&x.it.ssg===it.ssg).map(x=>x.it.sets))+' rounds: '+esc(it.ssg.join(' → '))+' — rest '+restTxt(it.rest)+' between rounds.</div>':'<div class="lx-ss">Optional superset '+it.ssl+' with <b>'+esc(it.ssg.filter(n=>n!==(o.orig||it).name).join(', '))+'</b> (same station) — alternate sets, rest '+restTxt(it.rest)+' after the pair, or do them straight.</div>')+roundBtn(it,date,day):'')+(it.rest&&!it.ssg?'<div class="lx-rt">Rest '+restTxt(it.rest)+' between sets</div>':'')+(it.dl?'<div class="lx-ss dl">Deload week · '+it.sets+' of '+it.fullSets+' sets</div>':'')+esc(R.text)+(it.note?'<div class="lx-cue">'+esc(it.note)+'</div>':'')+'</div>';
@@ -1359,7 +1417,7 @@ function renderLogSession(){const date=logDate(),day=logDay(),p=progDay(day,date
  '<div class="lx-ph"><span class="pill blue">'+esc(phLabel(W))+wkLabel(W)+'</span><span class="pill '+(W.dl?'warn':'ok')+'">Target '+rirTxt(W)+'</span></div>'+
  (W.dl?'<div class="lx-warn">Deload week — sets are halved below. Same weight or ~10% lighter, stop at RIR 4.</div>':'')+(flareOn(date)?'<div class="lx-warn flare">🩹 Back flare day — standing press → seated DB press, hack squat → leg press, trap bar deadlift → rack pull (or skip it and add a KB pull-through set), tire flip → sled push. Keep RIR 3+, brace, skip anything that hurts.</div>':'')+
  (p.warn?'<div class="lx-warn">'+esc(p.warn)+'</div>':'')+sesHtml(date,day)+
- '<div class="lx-prog"><div class="row sp"><span><b>'+st.d+'/'+st.t+'</b> <span class="mut">sets</span></span><span id="lxrest" class="lx-rest"></span></div><div class="lx-bar big"><i style="width:'+(st.t?Math.round(st.d/st.t*100):0)+'%"></i></div></div>'+
+ '<div class="lx-prog"><div class="row sp"><span><b>'+st.d+'/'+st.t+'</b> <span class="mut">sets</span></span><span id="lxrest" class="lx-rest'+(UI.ssnx?' go':'')+'">'+(UI.ssnx?'Superset → '+esc(UI.ssnx):'')+'</span></div><div class="lx-bar big"><i style="width:'+(st.t?Math.round(st.d/st.t*100):0)+'%"></i></div></div>'+
  '<div class="lx-tools"><button type="button" class="lx-sec'+(UI.lprev?' on':'')+'" data-a="lprev">'+(UI.lprev?'▶ Log':'👁 Preview')+'</button><button type="button" class="lx-sec'+(isDone?' on':'')+'" data-a="ldone">'+(isDone?'✓ Done':'Mark done')+'</button><button type="button" class="lx-sec'+(flareOn(date)?' on':'')+'" data-a="flare" aria-pressed="'+flareOn(date)+'">🩹 Flare</button><button type="button" class="lx-sec icon" data-a="lopts" aria-label="Date and week options">⚙</button></div></div>';
  h+=UI.lprev?'<div class="card lx-pvc">'+renderPreview(items,date,day)+'</div>':withSections(items,o=>renderLogCard(o,date,day));
  if(UI.lprev)return h;
@@ -1398,10 +1456,10 @@ function renderLog(){
 function lastTopOf(n){const rs=L().filter(r=>r.exercise===n);if(!rs.length)return'';const t=topSet(rs);return setStr(metaOf(n),t.weight,t.reps,t.band,1)}
 function swapSheet(){const w=UI.sw;if(!w)return;const p=progDay(w.day,w.date);const orig=p&&p.items.find(i=>i.name===w.orig);if(!orig)return;const e=effSwap(w.day,w.date,w.orig);const cur=e?e.name:w.orig;
  const opts=(e?[w.orig]:[]).concat((ALT[w.orig]||[]).filter(n=>n!==cur&&n!==w.orig));
- let h='<div class="sh-top"><div><div class="note">Swap · '+DAYNAME[w.day]+(w.date?' · '+fmtS(w.date):'')+'</div><h2>'+esc(cur)+'</h2><div class="note">Keeps the target: '+esc(rxs(orig))+'</div></div><button type="button" class="lx-ib" data-a="closemodal" aria-label="Close">✕</button></div>';
+ let h='<div class="sh-top"><div><div class="note">Swap · '+DAYNAME[w.day]+(w.date?' · '+fmtS(w.date):'')+'</div><h2>'+esc(cur)+'</h2><div class="note">Keeps the target: '+esc(rxs(orig))+'</div>'+vidLink(cur,'sw-cv','▶ Watch form')+'</div><button type="button" class="lx-ib" data-a="closemodal" aria-label="Close">✕</button></div>';
  if(e)h+='<div class="sw-cur"><span>⇄ Swapped from <b>'+esc(w.orig)+'</b> · '+(e.kind==='today'?'today only':'in program')+'</span><button type="button" class="lx-sec" data-a="swrevert" data-day="'+w.day+'" data-date="'+w.date+'" data-v="'+esc(w.orig)+'">↶ Revert</button></div>';
  h+='<div class="sw-scope" role="radiogroup" aria-label="Apply swap to"><button type="button" role="radio" aria-checked="'+(UI.swScope==='today')+'" class="'+(UI.swScope==='today'?'on':'')+'" data-a="swscope" data-v="today">Today only</button><button type="button" role="radio" aria-checked="'+(UI.swScope==='program')+'" class="'+(UI.swScope==='program'?'on':'')+'" data-a="swscope" data-v="program">Program going forward</button></div>';
- h+='<div class="sw-h">Suggested</div>'+opts.map(n=>{const b=libItem(n);const ty=b?b.type:guessType(n,orig.type);const lt=lastTopOf(n);return'<button type="button" class="sw-opt" data-a="swpick" data-v="'+esc(n)+'"><span class="sw-on">'+esc(n)+(n===w.orig?' <em class="lx-tag">original</em>':'')+'</span><span class="sw-os">'+(TYLAB[ty]||'')+(lt?' · last '+lt:'')+'</span></button>'}).join('');
+ h+='<div class="sw-h">Suggested</div>'+opts.map(n=>{const b=libItem(n);const ty=b?b.type:guessType(n,orig.type);const lt=lastTopOf(n);return'<div class="sw-or"><button type="button" class="sw-opt" data-a="swpick" data-v="'+esc(n)+'"><span class="sw-on">'+esc(n)+(n===w.orig?' <em class="lx-tag">original</em>':'')+'</span><span class="sw-os">'+(TYLAB[ty]||'')+(lt?' · last '+lt:'')+'</span></button>'+vidLink(n,'sw-vd','<span aria-hidden="true">▶</span>')+'</div>'}).join('');
  h+='<div class="sw-h">Any exercise</div><form data-form="swapf" class="sw-f"><input name="name" list="swlib" placeholder="Search or type a new exercise" autocomplete="off" autocapitalize="sentences" required><datalist id="swlib">'+allNames().filter(n=>n!==cur).sort().map(n=>'<option value="'+esc(n)+'">').join('')+'</datalist><button class="lx-log sm">Use</button></form><div class="note" style="margin-top:6px">New names are fine — they keep this target and get a sensible unit (weight, bodyweight, band, time, distance or carry).</div>';
  openModal(h,'sheet')}
 function pruneT(){const t=dayNum(todayStr());Object.keys(S.tswaps).forEach(k=>{if(t-dayNum(k.slice(0,10))>60)delete S.tswaps[k]})}
@@ -1452,7 +1510,7 @@ function logAct(a,t){const v=t.dataset.v,k=t.dataset.k;
   if(it.type==='band'){if(!dr.b){toast('Pick a band');return true}w=1;band=dr.b}else if(reqW(it)){if(!(w>0)){toast('Enter a weight');return true}}else if(!(w>1))w=1;
   const set=c.rows.length?Math.max(...c.rows.map(x=>x.set||0))+1:1;
   const row={id:uid(),person:S.settings.person,day:c.day,exercise:it.name,week:weekInfo(c.date).abs,set,weight:w,reps:r,rir:dr.rir==null?null:dr.rir,date:c.date,ses:c.date,src:'session'};if(band)row.band=band;S.log.push(row);
-  dr.w=reqW(it)?w:(w<=1?0:w);dr.r=r;dr.t=1;if(!sesFor(c.date,c.day))sesStart(c.date,c.day);save();const RS=restFor(it,c.day,c.date);UI.lrest={t:Date.now(),lo:RS.lo,hi:RS.hi,nx:RS.nx};
+  dr.w=reqW(it)?w:(w<=1?0:w);dr.r=r;dr.t=1;if(!sesFor(c.date,c.day))sesStart(c.date,c.day);save();audioUnlock();const RS=restFor(it,c.day,c.date);UI.ssnx=RS.nx||null;if(RS.nx||!restCfg().auto)restClear();else restStart(RS.lo,RS.hi,it.name);
   if(RS.nx&&!c.o.free){UI.lopen=RS.nx;render();scrollTo(RS.nx)}else if(!c.o.free&&c.rows.length+1===it.sets){const items=itemsFor(c.day,c.date);const i0=items.findIndex(x=>x.it.name===it.name);const nx=items.slice(i0+1).concat(items.slice(0,i0)).find(x=>isLoggable(x.it)&&!x.free&&rowsFor(x.it,c.date,c.day).length<x.it.sets);UI.lopen=nx?nx.it.name:'';if(nx){render();scrollTo(nx.it.name)}else render()}else render();
   toast('Set '+set+' · '+it.name+' · '+setStr(it,w,r,band));return true}
  case'lundo':{const c=find(k);if(!c||!c.rows.length)return true;const last=c.rows[c.rows.length-1];S.log=S.log.filter(x=>x.id!==last.id);const dr=getDraft(c.it,c.date,c.rows);dr.w=last.weight<=1&&!reqW(c.it)?0:last.weight;dr.r=last.reps;dr.rir=last.rir==null?null:last.rir;dr.b=last.band||dr.b;dr.t=1;save();render();toast('Removed set '+last.set);return true}
@@ -1639,7 +1697,7 @@ function dStreak(){const t=dayNum(todayStr());let dn=t;if(!dStat(fromDN(dn)).ful
  const ds=Object.keys(S.daily.days).map(dayNum).filter(Number.isFinite);let best=0,cur=0;if(ds.length){const mn=Math.min(...ds);for(let d=mn;d<=t;d++){if(dStat(fromDN(d)).full){cur++;best=Math.max(best,cur)}else cur=0}}
  let m30=0;for(let d=t-29;d<=t;d++)if(dStat(fromDN(d)).full)m30++;return{n,best,m30}}
 function dItem(x,date,cue){const on=!!(dRec(date).c||{})[x.id];const hw=cue&&howOf(x.n);
- return(hw?'<div class="dl-row"><div class="dl-rw">':'')+'<button type="button" class="dl-it'+(on?' on':'')+'" data-a="dchk" data-v="'+x.id+'" aria-pressed="'+on+'"><span class="dl-cb" aria-hidden="true">'+(on?'✓':'')+'</span><span class="dl-tx"><span class="dl-n">'+esc(x.n)+'<span class="dl-d">'+esc(x.d)+'</span></span>'+(cue?'<span class="dl-c">'+esc(x.c)+'</span>':'')+'</span></button>'+(hw?'<button type="button" class="dl-hb" data-a="ht" aria-expanded="false" aria-label="How to do '+esc(x.n)+'">📖</button></div><div class="ht-p" aria-hidden="true">'+howBody(hw)+'</div></div>':'')}
+ return(cue?'<div class="dl-row"><div class="dl-rw">':'')+'<button type="button" class="dl-it'+(on?' on':'')+'" data-a="dchk" data-v="'+x.id+'" aria-pressed="'+on+'"><span class="dl-cb" aria-hidden="true">'+(on?'✓':'')+'</span><span class="dl-tx"><span class="dl-n">'+esc(x.n)+'<span class="dl-d">'+esc(x.d)+'</span></span>'+(cue?'<span class="dl-c">'+esc(x.c)+'</span>':'')+'</span></button>'+(cue?(hw?'<button type="button" class="dl-hb" data-a="ht" aria-expanded="false" aria-label="How to do '+esc(x.n)+'">📖</button>':'')+vidLink(x.n,'dl-vb','<span aria-hidden="true">▶</span>')+'</div>'+(hw?'<div class="ht-p" aria-hidden="true">'+howBody(hw)+'</div>':'')+'</div>':'')}
 function dGroupHtml(g,date,cue,nohead){const c=dRec(date).c||{};const d=g.items.filter(x=>c[x.id]).length;
  return'<div class="dl-g'+(d===g.items.length?' ok':'')+'">'+(nohead?'':'<div class="dl-gh"><b>'+esc(g.g)+'</b><span>'+g.t+' · '+d+'/'+g.items.length+'</span></div>')+g.items.map(x=>dItem(x,date,cue)).join('')+'</div>'}
 function dailyHomeCard(){const date=todayStr();const st=dStat(date),sk=dStreak();
@@ -1724,21 +1782,28 @@ const ciDue=()=>{const wk=ciWeek();return!S.checkins[wk]&&dayNum(wk)>=firstMon()
 const ciPromptDay=()=>{const g=new Date(todayStr()+'T12:00').getDay();return g===0||g===1};
 function ciAutoPrompt(){const wk=ciDue();if(!wk||!ciPromptDay()||(S.ciSnooze||{})[wk])return false;checkinSheet(1);return true}
 const ciDlWeek=()=>{const t=dayNum(todayStr());const m=mondayOf(t);return fromDN(t-m===6?m+7:m)};
-function ciFlags(c,mon){if(!c)return[];const f=[];const dn=downThisWeek(mon);if(dn.length>=2)f.push('Performance down on '+dn.length+' lifts this week');
+const RESCUE='Rescue medication';
+const ciPrev=mon=>S.checkins[fromDN(mon-7)]||null;
+const inhalerUp=(c,p)=>c&&c.inhaler!=null&&p&&p.inhaler!=null&&c.inhaler>=p.inhaler+2&&c.inhaler>=p.inhaler*1.5;
+function ciFlags(c,mon){if(!c)return[];const f=[];const pv=ciPrev(mon);const dn=downThisWeek(mon);if(dn.length>=2)f.push('Performance down on '+dn.length+' lifts this week');
  if(c.pain!=null&&c.usual!=null&&c.pain>=c.usual+2)f.push('Back pain '+c.pain+'/10 (usual '+c.usual+')');if(c.sleep!=null&&c.sleep<6)f.push('Sleep '+c.sleep+' h avg');
- if(c.energy!=null&&c.energy<=2)f.push('Energy '+c.energy+'/5');if(c.sore!=null&&c.sore>=4)f.push('Soreness '+c.sore+'/5');return f}
+ if(c.energy!=null&&c.energy<=2)f.push('Energy '+c.energy+'/5');if(c.sore!=null&&c.sore>=4)f.push('Soreness '+c.sore+'/5');if(c.stress!=null&&c.stress>=4)f.push('Stress '+c.stress+'/5');if(inhalerUp(c,pv))f.push(RESCUE+' '+c.inhaler+'× (prev '+pv.inhaler+'×)');return f}
+function ciNudges(c){const o=[];if(c&&c.prot!=null&&c.prot<=3)o.push('Protein target hit only '+c.prot+'/7 days — prioritise protein at every meal (a shake or Greek yogurt makes up the gap).');return o}
 function deloadAdvice(){const wk=ciWeek();const c=S.checkins[wk];const w=weekInfo(fromDN(dayNum(ciDlWeek())));if(!c||w.dl||w.pre)return null;const f=ciFlags(c,dayNum(wk));return f.length>=2?f:null}
 function checkinSheet(auto){const wk=ciWeek();const last=Object.keys(S.checkins).sort().filter(k=>k!==wk).pop();const c=S.checkins[wk]||{};const p=last?S.checkins[last]:{};const usual=c.usual!=null?c.usual:(p.usual!=null?p.usual:'');
  const seg=(n,lab,val,lo,hi)=>'<div class="ci-f"><div class="lx-sl">'+lab+'</div><div class="ci-seg">'+Array.from({length:hi-lo+1},(_,i)=>i+lo).map(v=>'<label><input type="radio" name="'+n+'" value="'+v+'"'+(+val===v&&val!==''&&val!=null?' checked':'')+'><span>'+v+'</span></label>').join('')+'</div></div>';
  openModal('<div class="sh-top"><div><div class="note">Weekly check-in · '+ciRange(wk)+'</div><h2>'+(auto?'Check-in due — how did the week go?':'How was the week?')+'</h2></div><button type="button" class="lx-ib" data-a="closemodal" aria-label="Close">✕</button></div>'+
- (auto?'<div class="ci-due"><span>Takes ~30 s. It shows again next time you open the app until it\'s done.</span><div class="ci-dueb"><button type="button" class="lx-sec" data-a="closemodal">Not now</button><button type="button" class="lx-sec" data-a="cisnooze" data-v="'+wk+'">Snooze this week</button></div></div>':'')+
+ (auto?'<div class="ci-due"><span>Takes under a minute. It shows again next time you open the app until it\'s done.</span><div class="ci-dueb"><button type="button" class="lx-sec" data-a="closemodal">Not now</button><button type="button" class="lx-sec" data-a="cisnooze" data-v="'+wk+'">Snooze this week</button></div></div>':'')+
  '<form data-form="checkin" class="ci"><div class="ci-2"><label class="f">Sleep, avg hours<input type="number" name="sleep" step="0.25" min="0" max="14" inputmode="decimal" value="'+(c.sleep==null?'':c.sleep)+'" placeholder="e.g. 7"></label>'+
  '<label class="f">Usual back pain (0–10)<input type="number" name="usual" min="0" max="10" step="1" inputmode="numeric" value="'+usual+'"></label></div>'+
- seg('pain','Back pain this week (0–10)',c.pain,0,10)+seg('energy','Energy (1 = drained · 5 = great)',c.energy,1,5)+seg('sore','Soreness (1 = none · 5 = very sore)',c.sore,1,5)+
+ seg('pain','Back pain this week (0–10)',c.pain,0,10)+seg('energy','Energy (1 = drained · 5 = great)',c.energy,1,5)+seg('sore','Soreness (1 = none · 5 = very sore)',c.sore,1,5)+seg('stress','Stress (1 = calm · 5 = very high)',c.stress,1,5)+seg('prot','Days you hit your protein target (0–7)',c.prot,0,7)+
+ '<div class="ci-2"><label class="f">'+RESCUE+' uses this week<input type="number" name="inhaler" min="0" max="99" step="1" inputmode="numeric" value="'+(c.inhaler==null?'':c.inhaler)+'" placeholder="0"></label>'+
+ '<label class="f">Avg daily steps <span class="mut">(optional)</span><input type="number" name="steps" min="0" max="60000" step="100" inputmode="numeric" value="'+(c.steps==null?'':c.steps)+'" placeholder="e.g. 8000"></label></div>'+
  '<div class="ci-2"><label class="f">Weekly avg bodyweight <span class="mut">(optional)</span><input type="number" name="bw" step="0.1" inputmode="decimal" value="'+(c.bw==null?'':c.bw)+'" placeholder="lb"></label>'+
  '<label class="f">Waist <span class="mut">(optional)</span><input type="number" name="waist" step="0.1" inputmode="decimal" value="'+(c.waist==null?'':c.waist)+'" placeholder="in"></label></div>'+
- '<button class="lx-log">Save check-in</button><div class="note" style="margin-top:6px">Two or more red flags (performance down on 2+ lifts, back pain 2+ above usual, sleep under 6 h, energy ≤ 2, soreness ≥ 4) trigger an early-deload suggestion.</div></form>','sheet')}
-function saveCheckin(d){const wk=ciWeek();const n=k=>num(d[k]);const c={date:todayStr(),sleep:n('sleep'),usual:n('usual'),pain:n('pain'),energy:n('energy'),sore:n('sore'),bw:n('bw'),waist:n('waist')};
+ '<div class="ci-2"><label class="f">Resting heart rate <span class="mut">(optional)</span><input type="number" name="rhr" min="25" max="140" step="1" inputmode="numeric" value="'+(c.rhr==null?'':c.rhr)+'" placeholder="bpm"></label><div></div></div>'+
+ '<button class="lx-log">Save check-in</button><div class="note" style="margin-top:6px">Two or more red flags (performance down on 2+ lifts, back pain 2+ above usual, sleep under 6 h, energy ≤ 2, soreness ≥ 4, stress ≥ 4, '+RESCUE.toLowerCase()+' use notably up on last week) trigger an early-deload suggestion. Protein days ≤ 3 adds a nutrition nudge; steps feed the cut-stall rule.</div></form>','sheet')}
+function saveCheckin(d){const wk=ciWeek();const n=k=>num(d[k]);const c={date:todayStr(),sleep:n('sleep'),usual:n('usual'),pain:n('pain'),energy:n('energy'),sore:n('sore'),bw:n('bw'),waist:n('waist'),stress:n('stress'),prot:n('prot'),inhaler:n('inhaler'),steps:n('steps'),rhr:n('rhr')};
  if([c.sleep,c.pain,c.energy,c.sore].every(v=>v==null)){toast('Fill in at least sleep, pain, energy or soreness');return false}S.checkins[wk]=c;save();return true}
 /* ---- body composition: cut · maintenance · lean bulk ---- */
 function wkAvgs(){const m=new Map();S.body.forEach(b=>{if(b.weight==null||!Number.isFinite(dayNum(b.date)))return;const k=mondayOf(dayNum(b.date));if(!m.has(k))m.set(k,[]);m.get(k).push(b.weight)});
@@ -1751,12 +1816,15 @@ function bcOf(date){const w=weekInfo(date);const N=S.nutr||{};let m;if(N.mode&&N
  if(m==='cut'&&w.dl)return{m:'brk',w};return{m,w}}
 function cutExit(){const bf=bfNow(),wa=latestOf('waist'),N=S.nutr||{};const drop=liftsDropping();
  return[{ok:!!(bf&&!bf.est&&bf.v<=15.5),t:'Body fat ~15%',v:bf?r1(bf.v)+'% ('+bf.src+')':'log body fat'},{ok:!!(wa&&N.waistT!=null&&wa.v<=N.waistT),t:'Waist target'+(N.waistT!=null?' '+N.waistT+' in':''),v:wa?wa.v+' in':'log waist'},{ok:drop.length>=3,t:'Strength dropping on 3+ main lifts',v:drop.length+' dropping'}]}
+const k1=n=>n>=1000?(Math.round(n/100)/10)+'k':String(Math.round(n));
+function stepsTrend(){const ks=Object.keys(S.checkins).sort().filter(k=>S.checkins[k]&&S.checkins[k].steps!=null);if(!ks.length)return null;const cur=S.checkins[ks[ks.length-1]].steps;const p=ks.length>1?S.checkins[ks[ks.length-2]].steps:null;return{cur,prev:p}}
 function nutrAdvice(bc){const R=wkRates();const last=R[R.length-1],prev=R[R.length-2];const dn=downThisWeek();const out=[];
  if(bc.m==='cut'){if(!last)out.push(['','Log weigh-ins (or the weekly average in the check-in) for 2+ weeks to get rate-based adjustments.']);
   else if(last.loss>1.25)out.push(['warn','Losing '+r1(last.loss)+'%/wk (over 1.25%) → add ~150–200 kcal/day, mostly carbs on training days.']);
-  else if(last.loss<.25&&prev&&prev.loss<.25)out.push(['warn','Under 0.25%/wk for 2 weeks → cut ~150–200 kcal/day or add ~2–3k steps/day.']);
+  else if(last.loss<.25&&prev&&prev.loss<.25){const sp=stepsTrend();out.push(['warn',sp&&sp.prev!=null&&sp.cur<=sp.prev-1500?'Under 0.25%/wk for 2 weeks — but steps fell from ~'+k1(sp.prev)+' to ~'+k1(sp.cur)+'/day. Get steps back up first, then cut ~150–200 kcal/day if it still stalls.':sp&&sp.cur<8000?'Under 0.25%/wk for 2 weeks → add ~2–3k steps/day first (you\'re at ~'+k1(sp.cur)+'), or cut ~150–200 kcal/day.':sp&&sp.cur>=10000?'Under 0.25%/wk for 2 weeks with steps already ~'+k1(sp.cur)+'/day → cut ~150–200 kcal/day.':'Under 0.25%/wk for 2 weeks → cut ~150–200 kcal/day or add ~2–3k steps/day.'])}
   else if(last.loss<.5)out.push(['','Losing '+r1(last.loss)+'%/wk — a little under target; hold another week before changing anything.']);
   else out.push(['ok','Losing '+r1(last.loss)+'%/wk — on target (0.5–1%). No change.']);
+  {const lc=S.checkins[ciWeek()];ciNudges(lc).forEach(x=>out.push(['warn',x]))}
   if(dn.length>=2||liftsDropping().length>=2)out.push(['warn','Strength falling on the cut → raise training-day carbs (~25–50 g), keep calories the same on rest days.'])}
  else if(bc.m==='bulk'){const A=wkAvgs();const a=A[A.length-1],b=A.filter(x=>x.dn<=(a?a.dn:0)-28).pop();if(a&&b){const mo=(a.avg-b.avg)/b.avg*100*28/(a.dn-b.dn);out.push([mo>.5?'warn':mo<.25?'':'ok','Gaining '+r1(mo)+'%/month (target 0.25–0.5%).'+(mo>.5?' Trim ~100–150 kcal.':mo<.25?' Add ~100–150 kcal.':'')])}else out.push(['','Needs 4+ weeks of weigh-ins to judge the monthly rate.']);
   const N=S.nutr||{};const wa=latestOf('waist');if(N.bulkWaist!=null&&wa&&wa.v-N.bulkWaist>1)out.push(['bad','Waist up '+r1(wa.v-N.bulkWaist)+' in since the bulk started → stop the bulk, return to maintenance.'])}
@@ -1800,12 +1868,16 @@ function phaseCard(){const t=todayStr();const w=weekInfo(t);const P=timeline().p
  '<div class="ph-c"><button type="button" class="lx-sec" data-a="pdeload">'+(early?'Cancel early deload':'Start deload now')+'</button><button type="button" class="lx-sec" data-a="pshift" data-v="1">Shift +1 wk</button><button type="button" class="lx-sec" data-a="pshift" data-v="-1">Shift −1 wk</button>'+(nshift||Object.keys(pl.early).length?'<button type="button" class="lx-sec" data-a="preset">Reset schedule</button>':'')+'</div>'+
  '<div class="note">Shift +1 wk repeats last week\'s place in the plan from this week on (e.g. after a missed week); −1 wk skips ahead. Start deload now makes this week the deload and starts the next phase next Monday.'+(nshift?' Net shift: '+(nshift>0?'+':'')+nshift+' wk.':'')+'</div></details></div>'}
 function checkinCard(){const wk=ciWeek();const c=S.checkins[wk];const f=c?ciFlags(c,dayNum(wk)):[];const adv=deloadAdvice();
- const due=ciDue();let h='<div class="card ci-c'+(due?' due':'')+'"><div class="row sp"><div><h2>Weekly check-in</h2><div class="note">'+ciRange(wk)+'</div></div>'+(due?'<span class="pill warn">Check-in due</span>':c?'<span class="pill '+(f.length>=2?'bad':f.length?'warn':'ok')+'">'+(f.length?f.length+' flag'+(f.length>1?'s':''):'All clear')+'</span>':'<span class="pill">30 s</span>')+'</div>';
- if(c)h+='<div class="ci-s"><span>😴 '+(c.sleep==null?'–':c.sleep+' h')+'</span><span>🦴 '+(c.pain==null?'–':c.pain+'/10')+(c.usual!=null?' <small>(usual '+c.usual+')</small>':'')+'</span><span>⚡ '+(c.energy==null?'–':c.energy+'/5')+'</span><span>💢 '+(c.sore==null?'–':c.sore+'/5')+'</span></div>'+(f.length?'<div class="ci-fl">'+f.map(x=>'<span class="pill warn">'+esc(x)+'</span>').join('')+'</div>':'');
- else h+='<div class="note">Sleep, back pain vs usual, energy, soreness — plus optional weekly bodyweight and waist. Drives deload and nutrition suggestions.</div>';
+ const due=ciDue();let h='<div class="card ci-c'+(due?' due':'')+'"><div class="row sp"><div><h2>Weekly check-in</h2><div class="note">'+ciRange(wk)+'</div></div>'+(due?'<span class="pill warn">Check-in due</span>':c?'<span class="pill '+(f.length>=2?'bad':f.length?'warn':'ok')+'">'+(f.length?f.length+' flag'+(f.length>1?'s':''):'All clear')+'</span>':'<span class="pill">&lt;1 min</span>')+'</div>';
+ if(c)h+='<div class="ci-s"><span>😴 '+(c.sleep==null?'–':c.sleep+' h')+'</span><span>🦴 '+(c.pain==null?'–':c.pain+'/10')+(c.usual!=null?' <small>(usual '+c.usual+')</small>':'')+'</span><span>⚡ '+(c.energy==null?'–':c.energy+'/5')+'</span><span>💢 '+(c.sore==null?'–':c.sore+'/5')+'</span>'+(c.stress!=null?'<span>🧠 '+c.stress+'/5</span>':'')+(c.prot!=null?'<span>🥩 '+c.prot+'/7 d</span>':'')+(c.inhaler!=null?'<span>💨 '+c.inhaler+'×</span>':'')+(c.steps!=null?'<span>👟 '+Math.round(c.steps).toLocaleString()+'</span>':'')+(c.rhr!=null?'<span>❤️ '+c.rhr+'</span>':'')+'</div>'+ciNudges(c).map(x=>'<div class="nu-a warn">'+esc(x)+'</div>').join('')+(f.length?'<div class="ci-fl">'+f.map(x=>'<span class="pill warn">'+esc(x)+'</span>').join('')+'</div>':'');
+ else h+='<div class="note">Sleep, back pain vs usual, energy, soreness, stress, protein days, '+RESCUE.toLowerCase()+' uses — plus optional steps, resting HR, bodyweight and waist. Drives deload and nutrition suggestions.</div>';
  if(adv)h+='<div class="lx-warn ci-dl"><b>2+ red flags → consider deloading early.</b> <button type="button" class="lx-sec" data-a="pdeload" data-w="'+ciDlWeek()+'">'+(ciDlWeek()===fromDN(mondayOf(dayNum(todayStr())))?'Start deload now':'Deload next week')+'</button></div>';
  const st=mainLifts().map(n=>[n,stallOf(n)]).filter(x=>x[1]);if(st.length)h+='<div class="nu-h">Stalled lifts</div>'+st.map(([n,x])=>'<div class="nu-a warn"><b>'+esc(n)+'</b> — '+esc(x.why)+' → reset ~10%'+(x.reset?' to '+x.reset+' lb':'')+' and build back, or Swap.</div>').join('');
- return h+'<button type="button" class="lx-sec wide" data-a="checkin">'+(c?'Edit check-in':'Start check-in')+'</button></div>'}
+ return h+'<button type="button" class="lx-sec wide" data-a="checkin">'+(c?'Edit check-in':'Start check-in')+'</button>'+ciHistory()+'</div>'}
+function ciHistory(){const ks=Object.keys(S.checkins).sort().reverse();if(!ks.length)return'';const v=(x,s)=>x==null?'–':x+(s||'');
+ return'<details class="pg-how ci-hist"><summary>History ('+ks.length+')</summary><div class="ci-ht">'+ks.map(k=>{const c=S.checkins[k]||{};const f=ciFlags(c,dayNum(k));return'<div class="ci-hr"><div class="row sp"><b>'+ciRange(k)+'</b><span class="pill '+(f.length>=2?'bad':f.length?'warn':'ok')+'">'+(f.length?f.length+' flag'+(f.length>1?'s':''):'clear')+'</span></div><div class="ci-s"><span>😴 '+v(c.sleep,' h')+'</span><span>🦴 '+v(c.pain,'/10')+'</span><span>⚡ '+v(c.energy,'/5')+'</span><span>💢 '+v(c.sore,'/5')+'</span><span>🧠 '+v(c.stress,'/5')+'</span><span>🥩 '+v(c.prot,'/7')+'</span><span>💨 '+v(c.inhaler,'×')+'</span><span>👟 '+(c.steps==null?'–':Math.round(c.steps).toLocaleString())+'</span><span>❤️ '+v(c.rhr)+'</span>'+(c.bw!=null?'<span>⚖️ '+c.bw+'</span>':'')+(c.waist!=null?'<span>📏 '+c.waist+' in</span>':'')+'</div>'+(f.length?'<div class="note">'+esc(f.join(' · '))+'</div>':'')+'</div>'}).join('')+'</div><button type="button" class="lx-sec wide" data-a="ciexport">Export check-ins CSV</button></details>'}
+function ciCSV(){const F=['week','date','sleep','usual','pain','energy','sore','stress','prot','inhaler','steps','rhr','bw','waist','flags'];const q=x=>{x=x==null?'':String(x);return/[",\n]/.test(x)?'"'+x.replace(/"/g,'""')+'"':x};
+ return F.map(f=>f==='inhaler'?RESCUE.toLowerCase().replace(/ /g,'_')+'_uses':f==='prot'?'protein_days':f).join(',')+'\n'+Object.keys(S.checkins).sort().map(k=>{const c=S.checkins[k]||{};return F.map(f=>q(f==='week'?k:f==='flags'?ciFlags(c,dayNum(k)).join('; '):c[f])).join(',')}).join('\n')+'\n'}
 /* ---- session timer (Log tab) ---- */
 const SES_CAP=75,SES_WARN=70;
 function sesFor(date,day){const s=S.sess;return s&&s.date===date&&s.day===day?s:null}
@@ -1820,10 +1892,33 @@ function restFor(it,day,date){const items=itemsFor(day,date);const o=items.find(
  if(x.ssg){const g=items.filter(y=>y.it.ssl===x.ssl&&y.it.ssg===x.ssg&&isLoggable(y.it));const k=rowsFor(x,date,day).length;const i=g.findIndex(y=>y.it.name===x.name);
   const nx=g.slice(i+1).find(y=>rowsFor(y.it,date,day).length<k&&y.it.sets>=k);if(nx)return{lo:15,hi:30,nx:nx.it.name,lab:'→ '+nx.it.name};return{lo:x.rest[0],hi:x.rest[1],lab:restTxt(x.rest)+' between rounds'}}
  const r=x.rest||REST.A;return{lo:r[0],hi:r[1],lab:restTxt(r)}}
-function restTick(){const e=document.getElementById('lxrest');if(!e)return;const R=UI.lrest;if(!R||!R.t){e.textContent='';e.className='lx-rest';return}const s=Math.floor((Date.now()-R.t)/1000);
- if(s>1800){e.textContent='';return}let t,c='';if(s<R.lo){const l=R.lo-s;t=(R.nx?'Switch → '+R.nx+' · ':'Rest ')+Math.floor(l/60)+':'+pad(l%60)}else if(s<R.hi){t='✓ Go'+(R.nx?' → '+R.nx:'')+' · '+Math.floor(s/60)+':'+pad(s%60);c=' go'}else{t='Go now · '+Math.floor(s/60)+':'+pad(s%60);c=' late'}
- if(e.textContent!==t)e.textContent=t;e.className='lx-rest'+c;if(s===R.lo&&!R.bz){R.bz=1;try{navigator.vibrate&&navigator.vibrate([150,80,150])}catch(_){}}}
-setInterval(()=>{restTick();sesTick()},1000);
+/* ---- rest timer: sticky bar, timestamp-based (survives screen lock / background) ---- */
+const restCfg=()=>{const s=S.settings;return{auto:s.restAuto!==false,sound:s.restSound!==false,vibe:s.restVibe!==false}};
+let AC=null;function audioUnlock(){try{if(!AC){const C=window.AudioContext||window.webkitAudioContext;if(C)AC=new C()}if(AC&&AC.state==='suspended')AC.resume()}catch(_){}}
+function beep(){try{audioUnlock();if(!AC)return;const t0=AC.currentTime+.02;[0,.24].forEach(d=>{const o=AC.createOscillator(),g=AC.createGain();o.type='sine';o.frequency.value=880;g.gain.setValueAtTime(.0001,t0+d);g.gain.exponentialRampToValueAtTime(.35,t0+d+.02);g.gain.exponentialRampToValueAtTime(.0001,t0+d+.17);o.connect(g);g.connect(AC.destination);o.start(t0+d);o.stop(t0+d+.2)})}catch(_){}}
+function buzz(){try{navigator.vibrate&&navigator.vibrate([200,100,200])}catch(_){}}
+function restStart(lo,hi,ex){S.rest={end:Date.now()+lo*1000,lo,hi:hi||lo,ex:ex||'',paused:null,fired:0};save();restBar()}
+const restLeft=()=>{const r=S.rest;return!r?0:r.paused!=null?r.paused:r.end-Date.now()};
+function restAdj(d){const r=S.rest;if(!r)return;if(r.paused!=null)r.paused=Math.max(0,r.paused+d*1000);else r.end=Math.max(Date.now(),r.end+d*1000);if(restLeft()>500)r.fired=0;save();restBar()}
+function restPause(){const r=S.rest;if(!r)return;if(r.paused!=null){r.end=Date.now()+r.paused;r.paused=null}else r.paused=Math.max(0,r.end-Date.now());save();restBar()}
+function restClear(){if(S.rest){S.rest=null;save()}restBar()}
+function restOfItem(name,day,date){const o=itemsFor(day,date).find(x=>x.it.name===name);const it=o?o.it:null;const r=it&&it.rest||REST.A;return{lo:r[0],hi:r[1]}}
+const mmss=ms=>{const s=Math.max(0,Math.ceil(ms/1000));return Math.floor(s/60)+':'+pad(s%60)};
+function restBar(){let el=document.getElementById('restbar');const r=S&&S.rest;
+ if(!el){if(!r)return;el=document.createElement('div');el.id='restbar';el.className='rb';el.setAttribute('role','timer');el.setAttribute('aria-live','off');
+  el.innerHTML='<div class="rb-t"><span class="rb-l"></span><b class="rb-c"></b><span class="rb-s"></span></div><div class="rb-b"><button type="button" data-a="restadj" data-v="-15" aria-label="15 seconds less">−15s</button><button type="button" data-a="restadj" data-v="15" aria-label="15 seconds more">+15s</button><button type="button" class="rb-p" data-a="restpause" aria-label="Pause">❚❚</button><button type="button" class="rb-x" data-a="restskip" aria-label="Skip rest">Skip</button></div>';document.body.appendChild(el)}
+ if(!r){el.hidden=true;document.body.classList.remove('has-rest');return}
+ const left=restLeft(),go=left<=0;
+ if(go&&!r.fired){r.fired=1;save();const late=-left;const c=restCfg();if(late<30000){if(c.sound)beep();if(c.vibe)buzz()}}
+ if(go&&-left>15*60000){restClear();return}
+ el.hidden=false;document.body.classList.add('has-rest');el.classList.toggle('go',go);el.classList.toggle('paused',r.paused!=null);
+ const set=(s,v)=>{const e=el.querySelector(s);if(e.textContent!==v)e.textContent=v};
+ set('.rb-l',go?'Go: next set':r.paused!=null?'Paused':'Rest');
+ set('.rb-c',go?'+'+mmss(-left):mmss(left));
+ set('.rb-s',(r.ex?r.ex+' · ':'')+(go?'rested '+mmss(-left+r.lo*1000):restTxt([r.lo,r.hi])));
+ const pb=el.querySelector('.rb-p');const pl=r.paused!=null?'▶':'❚❚';if(pb.textContent!==pl){pb.textContent=pl;pb.setAttribute('aria-label',r.paused!=null?'Resume':'Pause')}}
+setInterval(()=>{restBar();sesTick()},250);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){restBar();sesTick()}});window.addEventListener('pageshow',()=>{restBar();sesTick()});window.addEventListener('focus',()=>restBar());
 function planAct(a,t){const v=t.dataset.v;
  switch(a){
  case'pdeload':{const k=t.dataset.w||fromDN(weekInfo(todayStr()).mon);S.plan=Object.assign(planOf(),S.plan||{});S.plan.early=Object.assign({},S.plan.early||{});if(S.plan.early[k])delete S.plan.early[k];else S.plan.early[k]=1;TLc=null;save();closeModal();render();toast(S.plan.early[k]?(k===fromDN(mondayOf(dayNum(todayStr())))?'Deload starts now — sets halved this week':'Deload set for the week of '+fmtS(k)):'Early deload cancelled');return true}
@@ -1833,6 +1928,12 @@ function planAct(a,t){const v=t.dataset.v;
  const k=fromDN(mondayOf(dayNum(todayStr())));S.plan=Object.assign(planOf(),S.plan||{});S.plan.shifts=Object.assign({},S.plan.shifts||{});S.plan.shifts[k]=(+S.plan.shifts[k]||0)+(+v);if(!S.plan.shifts[k])delete S.plan.shifts[k];TLc=null;save();render();const w=weekInfo(todayStr());toast('Schedule shifted '+(+v>0?'+1':'−1')+' wk → '+phLabel(w)+', week '+w.wk);return true}
  case'preset':if(confirm('Reset all schedule shifts and early deloads?')){S.plan={start:planOf().start,shifts:{},early:{},v:2};TLc=null;save();render()}return true;
  case'checkin':checkinSheet();return true;
+ case'ciexport':download('checkins-'+todayStr()+'.csv',ciCSV(),'text/csv');return true;
+ case'restadj':restAdj(+v);return true;
+ case'restpause':restPause();return true;
+ case'restskip':restClear();toast('Rest skipped');return true;
+ case'restgo':{audioUnlock();const R=restOfItem(v,logDay(),logDate());restStart(R.lo,R.hi,v);return true}
+ case'rset':{audioUnlock();S.settings[v]=S.settings[v]===false;save();render();if(v==='restSound'&&S.settings[v])beep();if(v==='restVibe'&&S.settings[v])buzz();return true}
  case'nmode':S.nutr=Object.assign({},S.nutr,{mode:v});if(v==='bulk'){const wa=latestOf('waist');S.nutr.bulkWaist=wa?wa.v:null}save();render();toast('Nutrition phase: '+BC[v].n);return true;
  case'sesgo':sesStart(logDate(),logDay());render();return true;
  case'sesend':if(confirm('Reset the session timer?')){S.sess=null;save();render()}return true;
@@ -1840,13 +1941,13 @@ function planAct(a,t){const v=t.dataset.v;
  case'lround':{const date=logDate(),day=logDay();const items=itemsFor(day,date);const g=items.filter(o=>o.it.ssl===t.dataset.g&&o.it.ssg&&isLoggable(o.it));const n=+v;let k=0;
   g.forEach(o=>{const it=o.it;const rows=rowsFor(it,date,day);if(rows.length>=n||it.sets<n)return;const d=getDraft(it,date,rows);let w=d.w,r=d.r,band=null;if(!(r>0))return;if(it.type==='band'){if(!d.b)return;w=1;band=d.b}else if(reqW(it)){if(!(w>0))return}else if(!(w>1))w=1;
    const row={id:uid(),person:S.settings.person,day,exercise:it.name,week:weekInfo(date).abs,set:rows.length+1,weight:w,reps:r,rir:d.rir==null?null:d.rir,date,ses:date,src:'session'};if(band)row.band=band;S.log.push(row);k++});
-  if(!k){toast('Set a weight/reps (or band) on each exercise first');return true}if(!sesFor(date,day))sesStart(date,day);save();const r0=g[0]?g[0].it.rest:SSREST;UI.lrest={t:Date.now(),lo:r0[0],hi:r0[1]};render();toast('Round '+n+' logged · '+k+' exercise'+(k>1?'s':''));return true}
+  if(!k){toast('Set a weight/reps (or band) on each exercise first');return true}if(!sesFor(date,day))sesStart(date,day);save();const r0=g[0]?g[0].it.rest:SSREST;if(restCfg().auto)restStart(r0[0],r0[1],'Round '+n);else restClear();render();toast('Round '+n+' logged · '+k+' exercise'+(k>1?'s':''));return true}
  }return false}
 
 /* ===== PROGRAM ===== */
 function renderProgram(){const off=UI.pweek||0;const base=mondayOf(dayNum(todayStr()))+off*7;const wk=fromDN(base);const dd=S.done[wk]||{};const ad=adherence(wk);const tdy=todayDay();const W=weekInfo(wk);const PG=progFor(wk);
  let tot=0;PG.forEach(p=>{if(p.day!=='SUN')tot+=p.total});const nsw=Object.keys(S.swaps||{}).length;
- let h='<div class="card pg-top"><div class="pg-wk"><button type="button" class="lx-pm sm" data-a="pw" data-v="-1" aria-label="Previous week">‹</button><div class="pg-wkt"><b>Week of '+fmtS(wk)+'</b><span class="note">'+(off===0?'This week':(off>0?'+':'')+off+' wk')+' · '+esc(phLabel(W))+' · wk '+W.wk+'</span></div><button type="button" class="lx-pm sm" data-a="pw" data-v="1" aria-label="Next week">›</button></div>'+
+ let h='<div class="card pg-top"><div class="pg-wk"><button type="button" class="lx-pm sm" data-a="pw" data-v="-1" aria-label="Previous week">‹</button><div class="pg-wkt"><b>Week of '+fmtS(wk)+'</b><span class="note">'+(off===0?'This week':(off>0?'+':'')+off+' wk')+' · '+(W.pre?'before Phase 1':esc(phLabel(W))+wkLabel(W).replace(' · wk ',' · wk '))+'</span></div><button type="button" class="lx-pm sm" data-a="pw" data-v="1" aria-label="Next week">›</button></div>'+
  '<div class="row sp" style="margin-top:12px"><span><b>'+ad.done+'/'+ad.tot+'</b> <span class="mut">sessions done</span></span><span class="note">~'+(tot/60).toFixed(1)+' h / week</span></div><div class="lx-bar big"><i style="width:'+(ad.tot?ad.done/ad.tot*100:0)+'%"></i></div>'+
  '<div class="lx-ph"><span class="pill blue">'+esc(phLabel(W))+'</span><span class="pill '+(W.dl?'warn':'ok')+'">'+rirTxt(W)+'</span>'+(W.dl?'<span class="pill warn">Deload · sets halved</span>':'')+'</div>'+
  (nsw?'<div class="note" style="margin-top:6px">⇄ '+nsw+' program swap'+(nsw>1?'s':'')+' active — tap ⇄ on an exercise to change or revert.</div>':'')+
@@ -1862,7 +1963,7 @@ function renderProgram(){const off=UI.pweek||0;const base=mondayOf(dayNum(todayS
    if(it.type==='note'){h+='<div class="pg-note">'+(it.label?'<b>'+esc(it.label)+(it.bm?' '+it.bm.join('–')+' min':'')+':</b> ':'')+esc(it.name.replace(/^(Warm-up|Cool-down|Finish|Mobility|Stretches):\s*/,''))+'</div>';return}
    let e=effSwap(p.day,date,it.name);if(!e&&it.altwk&&W.abs%2===0)e={name:it.altwk,kind:'week'};let x=e?swapItem(it,e.name,e.kind):it;x=adjItem(x,W);
    const sub=[x.note,it.warm?(it.label||'warm-up').toLowerCase():'',it.opt?'optional':'',it.ckn&&it.ssg&&it.ssg[0]===it.name?it.ckn.toLowerCase():'',x.type!=='load'&&TYLAB[x.type]?TYLAB[x.type].toLowerCase():'',x.rest&&x.type!=='cardio'&&!(it.ssg&&it.ssg[it.ssg.length-1]!==it.name)?'rest '+restTxt(x.rest)+(it.ssg?' / round':''):''].filter(Boolean).join(' · ');
-   const hw=howOf(x.name);h+='<div class="pg-item"><div class="pg-row'+(it.warm||it.opt?' dim':'')+(it.ssl?' ss':'')+'"><span class="pg-n'+(it.ssl||it.cbg?' ss':'')+(it.cbg?' cb':'')+(it.ckn?' ck':'')+'"'+(it.ssl?' title="'+(it.ckn?esc(it.ckn):'Optional superset '+it.ssl)+'"':'')+'>'+(it.n||'')+'</span>'+(hw?'<button type="button" class="pg-m" data-a="ht" aria-expanded="false">':'<div class="pg-m">')+'<div class="pg-name">'+esc(x.name)+'</div>'+(sub?'<div class="pg-sub">'+esc(sub)+'</div>':'')+swapTag(x)+(hw?'<span class="pg-hw">📖 How to <i aria-hidden="true">⌄</i></span></button>':'</div>')+'<span class="pg-rx">'+esc(rxs(x))+'</span><button type="button" class="pg-sw" data-a="swap" data-day="'+p.day+'" data-date="'+date+'" data-v="'+esc(it.name)+'" aria-label="Swap '+esc(x.name)+'">⇄</button></div>'+(hw?'<div class="ht-p" aria-hidden="true">'+howBody(hw)+'</div>':'')+'</div>'});
+   const hw=howOf(x.name);h+='<div class="pg-item"><div class="pg-row'+(it.warm||it.opt?' dim':'')+(it.ssl?' ss':'')+'"><span class="pg-n'+(it.ssl||it.cbg?' ss':'')+(it.cbg?' cb':'')+(it.ckn?' ck':'')+'"'+(it.ssl?' title="'+(it.ckn?esc(it.ckn):'Optional superset '+it.ssl)+'"':'')+'>'+(it.n||'')+'</span>'+(hw?'<button type="button" class="pg-m" data-a="ht" aria-expanded="false">':'<div class="pg-m">')+'<div class="pg-name">'+esc(x.name)+'</div>'+(sub?'<div class="pg-sub">'+esc(sub)+'</div>':'')+swapTag(x)+(hw?'<span class="pg-hw">📖 How to <i aria-hidden="true">⌄</i></span></button>':'</div>')+'<span class="pg-rx">'+esc(rxs(x))+'</span>'+vidLink(x.name,'pg-vd','<span aria-hidden="true">▶</span>')+'<button type="button" class="pg-sw" data-a="swap" data-day="'+p.day+'" data-date="'+date+'" data-v="'+esc(it.name)+'" aria-label="Swap '+esc(x.name)+'">⇄</button></div>'+(hw?'<div class="ht-p" aria-hidden="true">'+howBody(hw)+'</div>':'')+'</div>'});
   h+='<button type="button" class="lx-sec wide" data-a="plog" data-v="'+p.day+'">▶ Log '+DAYNAME[p.day]+'</button></div>'});
  return h+'</div>'}
 /* session view */
@@ -1912,7 +2013,9 @@ function chartsFamily(){if(!$('#c-fam'))return;const f=S.family[UI.fam];const m=
 
 /* ===== SETTINGS ===== */
 function renderSettings(){const s=S.settings;const sizeKB=(()=>{try{return Math.round((localStorage.getItem(KEY)||'').length/1024)}catch(e){return 0}})();
- let h='<div class="card"><h2>Settings</h2><form data-form="settings"><div class="form">'+
+ const tg=(k,l,sub)=>{const on=s[k]!==false;return'<button type="button" class="tg-r" role="switch" aria-checked="'+on+'" data-a="rset" data-v="'+k+'"><span><b>'+l+'</b><small>'+sub+'</small></span><i class="tg'+(on?' on':'')+'" aria-hidden="true"></i></button>'};
+ let h='<div class="card rs-c"><h2>Rest timer</h2>'+tg('restAuto','Auto-start after each set','Uses the exercise\'s prescribed rest; supersets start after the last exercise of the round')+tg('restSound','Sound','Short beep at 0')+tg('restVibe','Vibration','Buzz at 0 (phones that support it)')+'<div class="note">The timer runs from a timestamp, so it stays right if the screen locks or you switch apps. The beep/buzz can only fire while the page is open.</div></div>';
+ h+='<div class="card"><h2>Settings</h2><form data-form="settings"><div class="form">'+
  '<label class="f">Big-lift weight step (lb)<input type="number" step="0.25" min="0.25" name="step" value="'+s.step+'"></label>'+
  '<label class="f">Small/isolation step (lb)<input type="number" step="0.25" min="0.25" name="small" value="'+s.smallStep+'"></label>'+
  
@@ -1933,7 +2036,7 @@ function renderSettings(){const s=S.settings;const sizeKB=(()=>{try{return Math.
 /* ===== render ===== */
 const R={home:renderHome,log:renderLog,daily:renderDaily,strength:renderStrength,volume:renderVolume,body:renderBody,labs:renderLabs,program:renderProgram,family:renderFamily,settings:renderSettings};
 const CR={strength:chartsStrength,volume:chartsVolume,body:chartsBody,labs:chartsLabs,family:chartsFamily};
-function render(keepScroll){const y=window.scrollY;PROG=progFor(todayStr());S.settings.week=weekInfo(todayStr()).abs;killCharts();buildNav();try{$('#main').innerHTML='<div class="tab on">'+R[UI.tab]()+'</div>';if(CR[UI.tab])CR[UI.tab]();try{restTick();sesTick()}catch(_){}}catch(e){console.error(e);$('#main').innerHTML='<div class="card"><h2>Something went wrong rendering this tab</h2><pre class="note" style="white-space:pre-wrap">'+esc(e.stack||e)+'</pre><button class="btn" data-a="export">Export JSON (your data is safe)</button></div>'}
+function render(keepScroll){const y=window.scrollY;PROG=progFor(todayStr());S.settings.week=weekInfo(todayStr()).abs;killCharts();buildNav();try{$('#main').innerHTML='<div class="tab on">'+R[UI.tab]()+'</div>';if(CR[UI.tab])CR[UI.tab]();try{restBar();sesTick()}catch(_){}}catch(e){console.error(e);$('#main').innerHTML='<div class="card"><h2>Something went wrong rendering this tab</h2><pre class="note" style="white-space:pre-wrap">'+esc(e.stack||e)+'</pre><button class="btn" data-a="export">Export JSON (your data is safe)</button></div>'}
  if(keepScroll!==false)window.scrollTo(0,y);dLastDay=todayStr();saveUI()}
 
 /* ===== events ===== */
