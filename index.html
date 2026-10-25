@@ -594,7 +594,7 @@ const P1RAW=()=>[
  ...SEC('Warm-up + power primer',WU('5 min easy bike building gradually, 90/90 breathing ×5 long exhales, the cuff work and chest passes below, then 2 ramp-up sets of bench'),
   I('Cable external rotation',2,12,12,{warm:1,inc:'small',label:'Warm-up'}),
   I('Cable internal rotation',2,12,12,{warm:1,inc:'small',label:'Warm-up'}),
-  I('Med ball chest pass',2,5,5,{warm:1,inc:'small',m:{},label:'Power primer',note:'explosive off the wall, full reset each rep'})),
+  I('Med ball chest pass',2,5,5,{warm:1,inc:'small',m:{},label:'Power primer',note:'explosive off the wall, full reset each rep · assumes Planet Fitness has a med ball — if not, swap to Speed cable chest press'})),
  ...SEC('Presses & dips',
   I('Barbell bench press',4,5,8,{r:'M',m:{chest:1,shoulders:.5,triceps:.5},note:'main lift toward 315 · shoulder blades pinned, leg drive, exhale through the sticking point',al:['Bench press','Flat bench press','Barbell bench','Flat barbell bench press']}),
   I('Incline DB press',3,6,10,{r:'S',m:{chest:1,shoulders:.5,triceps:.5},al:['Incline dumbbell press']}),
@@ -603,14 +603,13 @@ const P1RAW=()=>[
  ...SEC('Chest & triceps · cable',
   I('Deep-stretch cable fly',2,10,15,{ss:1,m:{chest:1},inc:'small',al:['Cable fly','Cable chest fly']}),
   I('Overhead cable triceps extension',3,10,15,{ss:1,m:{triceps:1},inc:'small',al:['Overhead triceps extension','Cable overhead extension']})),
- ...SEC('Delts & lower traps · dumbbells',
-  I('DB lateral raise',3,12,20,{ss:2,m:{shoulders:1},inc:'small',al:['Dumbbell lateral raise','DB lateral raises']}),
-  I('Incline DB Y raise',2,10,12,{ss:2,m:{traps:.5,shoulders:.5},inc:'small',note:'light DBs, chest on an incline bench; thumbs up, raise to a Y — lower traps',al:['Incline prone Y raise','Prone Y raise','Incline Y raise']})),
+ ...SEC('Side delts',
+  I('DB lateral raise',3,12,20,{m:{shoulders:1},inc:'small',al:['Dumbbell lateral raise','DB lateral raises']})),
  ...SEC('Cool-down',CD('doorway pec stretch 30 s/side, lat stretch 30 s/side, 5 nasal breaths with a long 6–8 s exhale'))]},
 {day:'TUE',title:'Lower · knees, back & core',items:[
- ...SEC('Warm-up + power primer',NT('Warm-up: 4 min bike, cat-camel ×8, glute bridge ×10, 2 min backward walk, the knee prep and box jumps below, then 2 ramp-up sets of hack squat',{label:'Warm-up',blk:'warm',bm:[8,10]}),
+ ...SEC('Warm-up + power primer',NT('Warm-up: 4 min bike, cat-camel ×8, glute bridge ×10, 2 min backward walk, the knee prep and explosive step-ups below, then 2 ramp-up sets of hack squat',{label:'Warm-up',blk:'warm',bm:[8,10]}),
   I('Poliquin step-up',1,10,10,{warm:1,type:'bw',each:'each leg',m:{},label:'Knee prep',note:'heel on a slant board or plate, knee travels over the toes',al:['Poliquin step up','Peterson step-up','Petersen step-up']}),
-  I('Box jump',2,3,3,{warm:1,type:'bw',m:{},label:'Power primer',note:'low box, stick the landing, step down'})),
+  I('Explosive step-up',2,3,3,{warm:1,type:'bw',each:'each leg',m:{},label:'Power primer',note:'bench or low step · drive up fast, step down slowly — no jumping',al:['Speed step-up','Explosive bench step-up']})),
  ...SEC('Quads & calves',
   I('Hack squat',3,6,10,{r:'M',inc:'lower',m:{quads:1,hamglute:.5},note:'heavy',al:['Belt squat or hack squat','Hack squats','Machine hack squat']}),
   I('Leg press',2,12,15,{r:'S',inc:'lower',cb:1,m:{quads:1,hamglute:.5},note:'feet low and narrow on the platform for quads'}),
@@ -631,12 +630,13 @@ const P1RAW=()=>[
  ...SEC('Cool-down',CD('couch stretch 30 s/side, child\'s pose 30 s, 90/90 breathing ×5 long exhales'))]},
 {day:'WED',title:'Pull · back / traps / biceps / grip',items:[
  ...SEC('Warm-up + power primer',WU('3 min rower, band pull-apart ×15, scap pull-up ×8, the med ball tosses below, then 1–2 easy pull-up sets'),
-  I('Med ball backward overhead toss',2,5,5,{warm:1,m:{},inc:'small',label:'Power primer',note:'explosive hip extension · open space or a wall behind you',al:['Backward overhead med ball toss','Med ball backward toss','Overhead backward throw']})),
+  I('Explosive cable pull-through',2,5,5,{warm:1,m:{},inc:'small',label:'Power primer',note:'light-moderate rope on a low cable · slow hinge back, snap the hips through · flat back, no rounding',al:['Speed cable pull-through']})),
  ...SEC('Back & traps',
   I('Pull-up',3,6,10,{r:'M',type:'bw',m:{back:1,biceps:.5},note:'unassisted',al:['Chin-up or pull-up','Pull up','Pullup','Pull-ups']}),
   I('Chest-supported row',3,8,12,{r:'S',m:{back:1,traps:.25,biceps:.25},al:['Cable row or chest-supported row','Chest supported row','Chest-supported machine row']}),
   I('Single-arm neutral-grip pulldown',2,10,12,{m:{back:1,biceps:.25},inc:'small',al:['Single arm pulldown','Neutral grip pulldown','Single-arm pulldown']}),
-  I('Kelso shrug',3,10,15,{m:{traps:1},note:'chest on an incline bench; squeeze shoulder blades back and together',al:['Machine or Kelso shrug','Kelso shrugs','Chest-supported shrug','Shrug','Shrugs']}),
+  I('Kelso shrug',3,10,15,{ss:5,m:{traps:1},note:'chest on an incline bench; squeeze shoulder blades back and together',al:['Machine or Kelso shrug','Kelso shrugs','Chest-supported shrug','Shrug','Shrugs']}),
+  I('Incline DB Y raise',2,10,12,{ss:5,m:{traps:.5,shoulders:.5},inc:'small',note:'light DBs, chest on an incline bench; thumbs up, raise to a Y — lower traps',al:['Incline prone Y raise','Prone Y raise','Incline Y raise']}),
   I('Face pull',3,15,15,{m:{shoulders:.75,traps:.5},inc:'small',note:'rear delts + cuff · pull to the eyes and rotate out',al:['Face pulls','Cable face pull']})),
  ...SEC('Biceps',
   I('Incline DB curl',3,8,12,{m:{biceps:1},inc:'small',al:['Incline dumbbell curl','Incline curl']}),
@@ -708,12 +708,12 @@ const P2RAW=()=>{const p=P1RAW();const D=d=>p.find(x=>x.day===d);
  const si=mon.items.indexOf(M('Standing press'));mon.items[si]=Object.assign(I('Push press',3,4,6,{r:'M',m:{shoulders:1,triceps:.5,quads:.25},note:'dip-and-drive power; ribs down, no layback'}),{g:'Presses & dips'});
  Object.assign(M('Dips'),{sets:3,lo:5,hi:8,note:'add load with a belt'});
  const tue=D('TUE');tue.title='Lower · strength, power & single-leg';const T=n=>tue.items.find(x=>x.name===n);
- const bj=tue.items.indexOf(T('Box jump'));tue.items[bj]=Object.assign(I('Broad jump',3,3,3,{warm:1,type:'bw',m:{},label:'Power primer',note:'jump forward, stick the landing, walk back'}),{g:T('Box jump').g});
+ Object.assign(T('Explosive step-up'),{sets:3});
  Object.assign(T('Hack squat'),{sets:4,lo:4,hi:6});Object.assign(T('ATG split squat'),{sets:3,lo:6,hi:8,note:'heavier — hold dumbbells'});
  tue.items=tue.items.filter(x=>x.name!=='Leg press'&&x.name!=='Hip thrust machine');Object.assign(T('Leg press calf press'),{cb:0,sets:2,note:'',r:'A'});
  const lc=tue.items.indexOf(T('Seated leg curl'));tue.items.splice(lc,0,Object.assign(I('Single-leg RDL',2,6,8,{r:'A',each:'each leg',m:{hamglute:1,lowback:.25},note:'DB in the opposite hand; hips square'}),{g:'Hamstrings & glutes'}));Object.assign(T('Seated leg curl'),{sets:2,lo:8,hi:10});
  const wed=D('WED');wed.title='Pull · strength & grip';const W=n=>wed.items.find(x=>x.name===n);
- Object.assign(W('Med ball backward overhead toss'),{sets:3});Object.assign(W('Pull-up'),{sets:4,lo:4,hi:6,note:'add load with a belt once 6 reps are easy'});Object.assign(W('Chest-supported row'),{sets:4,lo:6,hi:8});Object.assign(W('Single-arm neutral-grip pulldown'),{lo:8,hi:10});
+ Object.assign(W('Explosive cable pull-through'),{sets:3});Object.assign(W('Pull-up'),{sets:4,lo:4,hi:6,note:'add load with a belt once 6 reps are easy'});Object.assign(W('Chest-supported row'),{sets:4,lo:6,hi:8});Object.assign(W('Single-arm neutral-grip pulldown'),{lo:8,hi:10});
  const thu=D('THU');Object.assign(thu.items.find(x=>x.name==='Incline machine press'),{lo:6,hi:10});thu.title='Zone 2 + intervals · chest, delts, triceps & neck';thu.warn='No sled access Thursday. '+AIR;
  const z=thu.items.find(x=>x.type==='cardio');Object.assign(z,{mins:'12–15',lo:12,hi:15,note:'nasal breathing · doubles as the 10–15 min gradual warm-up for the intervals'});thu.items.splice(thu.items.indexOf(z)+1,0,Object.assign(BIKEINT(6,[10,12]),{g:'Cardio'}));
  const fri=D('FRI');fri.title='Functional power & conditioning';const F=n=>fri.items.find(x=>x.name===n);
@@ -790,7 +790,7 @@ const LIB=[
  LX('Stationary bike','cardio',30,30,{},{mins:30}),LX('Elliptical','cardio',30,30,{},{mins:30}),LX('Rower','cardio',20,20,{},{mins:20}),
  LX('Neck harness extension','load',12,15,{neck:1},{inc:'small'}),LX('Band neck isometrics','band',15,30,{neck:1},{u:'s'}),
  LX('Dead hang','time',30,60,{forearms:1},{inc:'small'}),LX('Med ball side toss','load',5,5,{core:1},{inc:'small',each:'each side'}),LX('Med ball chest pass','load',8,8,{chest:.25,core:.5},{inc:'small'}),LX('Battle rope slams','time',20,30,{shoulders:.5,core:.5}),
- LX('Trap bar jump','load',3,5,{quads:.5,hamglute:.5}),LX('Sandbag-to-shoulder','load',3,5,{hamglute:.5,back:.5,core:.5},{each:'each side'}),
+ LX('Speed cable chest press','load',5,5,{chest:.25,triceps:.25},{inc:'small'}),LX('Single-arm overhead KB carry','carry',20,25,{shoulders:.5,core:.5,traps:.25},{sets:2,each:'each side'}),LX('Trap bar jump','load',3,5,{quads:.5,hamglute:.5}),LX('Sandbag-to-shoulder','load',3,5,{hamglute:.5,back:.5,core:.5},{each:'each side'}),
  LX('Rack pull','load',3,6,{hamglute:.75,back:.5,traps:.5,lowback:.5}),LX('Romanian deadlift','load',6,10,{hamglute:1,lowback:.5}),LX('Conventional deadlift','load',3,6,{hamglute:1,quads:.5,lowback:.5,traps:.5}),
  LX('Single-arm cable chest press','load',8,10,{chest:.75,triceps:.5,core:.5},{inc:'small',each:'each side',al:['Single-arm cable press']}),LX('Half-kneeling single-arm landmine press','load',8,10,{chest:.5,shoulders:.75,triceps:.5,core:.5},{each:'each side',al:['Half kneeling landmine press','Half-kneeling landmine press','Single-arm landmine press','Landmine press']}),LX('Single-arm DB floor press','load',8,10,{chest:.75,triceps:.5,core:.5},{each:'each side'}),
  LX('Half-kneeling cable chop','load',8,10,{core:1},{inc:'small',each:'each side'}),LX('Half-kneeling Pallof press','load',10,10,{core:1},{inc:'small',each:'each side'}),
@@ -842,8 +842,8 @@ const ALT={
  'Banded clamshell':['Banded lateral walk','Side-lying leg raise'],'Band Pallof hold':['Side plank','Dead bug','Bird dog'],
  'Cable Y raise':['Incline DB Y raise','Prone Y-T-W','Face pull'],'Back extension hold':['Single-leg back extension hold (weighted)','45° back extension','Bird dog'],
  'McGill curl-up':['Dead bug','Bird dog','Plank'],
- 'Push press':['Standing press','Seated DB shoulder press','Half-kneeling single-arm landmine press'],'Single-leg RDL':['Romanian deadlift','KB pull-through','Single-leg glute bridge'],'Box jump':['Trap bar jump','Step-up','Med ball slam'],
- 'Sled sprint':['Hill sprint','Assault bike sprint','Prowler push'],'Med ball chest pass':['Push-up','Med ball slam'],'Front-rack KB carry':['Suitcase carry','Zercher carry','Farmer carry'],'Trap bar carry':['Farmer carry','Suitcase carry','Front-rack KB carry'],
+ 'Push press':['Standing press','Seated DB shoulder press','Half-kneeling single-arm landmine press'],'Single-leg RDL':['Romanian deadlift','KB pull-through','Single-leg glute bridge'],'Explosive step-up':['Step-up','Explosive cable pull-through'],'Explosive cable pull-through':['KB pull-through','Speed cable chest press'],'Speed cable chest press':['Med ball chest pass','Push-up'],
+ 'Sled sprint':['Hill sprint','Assault bike sprint','Prowler push'],'Med ball chest pass':['Speed cable chest press','Push-up'],'Front-rack KB carry':['Suitcase carry','Zercher carry','Farmer carry'],'Trap bar carry':['Farmer carry','Suitcase carry','Front-rack KB carry'],
  'Incline Smith press':['Incline DB press','Low-incline barbell press','Incline machine press'],'Flat DB press':['Flat machine chest press','Flat Smith press','Barbell bench press'],'Seated DB shoulder press':['Standing press','Machine shoulder press','Arnold press'],
  'Close-grip bench press':['Dips','Machine dip','Overhead cable triceps extension'],'Pendulum squat':['Hack squat','Belt squat','Smith squat'],'Reverse lunge':['Rear-foot-elevated split squat','Walking lunge','Step-up'],
  'Lying leg curl':['Seated leg curl','Nordic curl','Stability-ball leg curl'],'Hanging knee raise':['Reverse crunch (bench)','Decline crunch','Dead bug'],'Neutral-grip pull-up':['Pull-up','Chin-up','Lat pulldown'],
@@ -1137,7 +1137,7 @@ Rower|Feet strapped, sit tall, arms straight on the handle.|Drive with the legs,
 Neck harness extension|Harness on the head with a light plate, hands on the knees, torso hinged and neutral.|Lower the chin toward the chest, then extend the head back to neutral.|Light weight;Slow and smooth;Pain-free range|Jerking;Going heavy|Back and neck: neutral torso. Stop if you feel any nerve symptoms.
 Band neck isometrics|Band around the head anchored to one side, or use your own hand for resistance.|Hold the head still against the pull for the target time. Rotate through front, back and both sides.|Gentle effort, no movement;Breathe;Tall posture|Pushing too hard;Holding the breath|
 Med ball side toss|Stand side-on to a wall holding the ball at the chest.|Rotate away, then rotate through the hips to throw the ball into the wall. Catch and repeat.|Hips drive the throw;Pivot the back foot;Brace|Arm-only throwing;Twisting from the low back|Back: rotate from the hips.
-Med ball chest pass|Face a solid wall about 2-3 m away, ball at the chest, athletic stance.|Explosively push the ball into the wall with both hands, catch it on the rebound, reset and repeat.|Fast, crisp throws;Step into the throw;Brace the trunk|Lazy, slow pushes;Rounding the back to throw|
+Med ball chest pass|Face a solid wall about 2-3 m away, ball at the chest, athletic stance.|Explosively push the ball into the wall with both hands, catch it on the rebound, reset and repeat.|Fast, crisp throws;Step into the throw;Brace the trunk|Lazy, slow pushes;Rounding the back to throw|Planet Fitness: assumes a med ball and clear wall space; if not, use Speed cable chest press.
 Kettlebell swing|Kettlebell a foot in front of you, hinge and grip it with a flat back.|Hike the bell back, then snap the hips forward to float it to chest height. Let it fall into the next hinge.|Hips drive it, arms just guide;Plank at the top;Hike between the legs|Squatting;Lifting with the arms|Back: a hinge, not a squat. Neutral spine, and stop when form fades.
 Battle rope slams|Hold the rope ends, athletic stance, hips slightly back.|Lift both arms and slam the ropes down hard and fast for the interval.|Use the whole body;Brace the core;Fast rhythm|Standing too upright;Using only the arms|Back: hinge slightly with a neutral spine.
 Trap bar jump|Light trap bar (about 20-30% of your deadlift), stand centered, quarter squat.|Jump explosively, land softly and reset fully before each rep.|Light load;Land softly, knees out;Reset each rep|Going heavy;Stiff, loud landings|Back: brace and land quietly. Skip if the back is off.
@@ -1206,6 +1206,9 @@ Chin tuck|Sit or stand tall, or lie on your back with the head on the floor.|Gli
 Foam roller T-spine extension|Lie with a foam roller across the mid-back, hands supporting the head, hips on the floor.|Gently extend over the roller for a few breaths, then move it an inch up or down; stay in the mid-back.|Ribs down;Slow exhales;Keep it in the upper/mid back|Rolling onto the low back;Cranking the neck|Back: never extend over the lumbar spine.
 Doorway pec stretch|Forearm on a door frame, elbow at shoulder height, step through with the same-side foot.|Turn the chest gently away until you feel the stretch across the chest, hold 30–45 s per side.|Shoulder down, not forward;Ribs down;Breathe slowly|Forcing the shoulder into pain;Arching the low back|Back: stay tall and braced while you lean.
 Upper trap + levator stretch|Sit tall, hold the bench with one hand to keep that shoulder down.|For upper trap tilt the ear to the opposite shoulder; for levator turn the nose toward the opposite armpit; light hand assist, hold 30 s per side.|Shoulder stays down;Light assist only;Slow breathing|Pulling hard on the head;Shrugging the anchored shoulder|Neck: gentle stretch only, never sharp or tingling.
+Explosive step-up|Bench or low step (knee height or lower) in front of you; one whole foot on it. Planet Fitness: any flat bench works.|Drive through the top foot and stand up as fast as you can to full hip lockout, then step down slowly with control; no jumping.|Push through the whole foot;Fast up, slow down;Stand tall at the top|Pushing off the floor leg;Hopping or jumping off the step|Back: no landing impact or spinal load; keep the torso tall.
+Explosive cable pull-through|Rope on a low cable pulley (any Planet Fitness cable stack), facing away, rope between the legs, light-moderate weight.|Hinge back slowly with soft knees, then snap the hips forward to stand tall and squeeze the glutes; reset each rep.|Hips back, not down;Flat back the whole time;Fast hips, slow return|Rounding to reach the rope;Pulling with the arms|Back: hips do the work, spine stays neutral; skip if hinging hurts.
+Speed cable chest press|Stand in a split stance between two cable stacks set at chest height, light weight. Use this if Planet Fitness has no med ball.|Press both handles forward as fast as possible, pause briefly, then return slowly; stop each set before speed drops.|Light load, max speed;Brace and exhale on each press;Staggered stance|Going heavy;Leaning into the press|Back: brace lightly, no arching.
 `.split('\n').forEach(l=>{const f=l.split('|');if(f.length<6)return;HOW[f[0]]={s:f[1],m:f[2],k:f[3].split(';').filter(Boolean),x:f[4].split(';').filter(Boolean),b:f[5]}});
 const howOf=name=>HOW[name]||(BYNAME[name]&&HOW[BYNAME[name].name])||null;
 function howBody(h){return'<div class="ht-in"><div class="ht-c"><p><b>Setup</b> '+esc(h.s)+'</p><p><b>Movement</b> '+esc(h.m)+'</p><div class="ht-h">Key cues</div><ul>'+h.k.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul><div class="ht-h">Common mistakes</div><ul class="ht-x">'+h.x.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>'+(h.b?'<p class="ht-b">🛡 '+esc(h.b)+'</p>':'')+'</div></div>'}
@@ -1948,7 +1951,7 @@ document.addEventListener('visibilitychange',()=>{if(!document.hidden){restBar()
 const RH={'Barbell bench press':'Flat machine chest press','Flat DB press':'Flat machine chest press','Incline DB press':'Incline machine press','Incline Smith press':'Incline machine press','Standing press':'Machine shoulder press','Push press':'Machine shoulder press','Seated DB shoulder press':'Machine shoulder press','Dips':'Cable triceps extension','Close-grip bench press':'Cable triceps extension','Pull-up':'Lat pulldown','Neutral-grip pull-up':'Lat pulldown',
  'Single-arm DB bench press':'Flat machine chest press','Half-kneeling single-arm landmine press':'Flat machine chest press','KB gorilla row':'Chest-supported row','Leg press calf press':'Seated calf raise',
  'Single-leg back extension hold (weighted)':'Bird dog','Offset barbell front hold':'Side plank',
- 'Med ball chest pass':null,'Box jump':null,'Broad jump':null,'Poliquin step-up':null,'Med ball backward overhead toss':null,'Med ball rotational scoop toss':null,'Med ball slam':null,
+ 'Med ball chest pass':null,'Speed cable chest press':null,'Explosive step-up':null,'Explosive cable pull-through':null,'Box jump':null,'Broad jump':null,'Poliquin step-up':null,'Med ball backward overhead toss':null,'Med ball rotational scoop toss':null,'Med ball slam':null,
  'Hack squat':null,'Pendulum squat':null,'Leg press':null,'ATG split squat':null,'Single-leg RDL':null,'Hip thrust machine':null,'Tire flip':null,'Trap bar deadlift':null,'GHD hip extension':null,'Reverse hyper':null,'KB pull-through':null,
  'Cable crunch':null,'Reverse crunch (bench)':null,'Hanging knee raise':null,'Ab wheel rollout':null,'Half-kneeling landmine 180s':null,
  'Sled push':null,'Backward sled drag':null,'Lateral sled drag':null,'Sled sprint':null,'Bike intervals':null,
