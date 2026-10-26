@@ -642,7 +642,7 @@ const P1RAW=()=>[
   I('Incline DB curl',3,8,12,{m:{biceps:1},inc:'small',al:['Incline dumbbell curl','Incline curl']}),
   I('Bayesian cable curl',2,10,15,{ss:1,m:{biceps:1},inc:'small',al:['Bayesian curl']}),
   I('Cable preacher curl',2,10,12,{ss:1,m:{biceps:1},inc:'small',al:['Preacher curl']}),
-  I('Reverse EZ-bar curl',2,12,15,{m:{forearms:1,biceps:.5},inc:'small',al:['Reverse curl','Reverse EZ curl','Reverse EZ bar curl']})),
+  I('Reverse cable curl',2,12,15,{m:{forearms:1,biceps:.5},inc:'small',note:'straight bar on a low pulley, overhand grip',al:['Reverse curl']})),
  ...SEC('Grip',
   I('Towel hang',2,20,40,{type:'time',m:{forearms:1},inc:'small',note:'towel over the bar in each hand; feet can touch if needed',al:['Towel dead hang','Towel grip hang']}),
   I('Plate pinch carry',2,30,30,{type:'carry',m:{forearms:1},inc:'small',note:'two plates smooth side out in each hand, tall posture',al:['Plate pinch walk','Pinch carry','Plate pinch']})),
@@ -651,7 +651,7 @@ const P1RAW=()=>[
  ...SEC('Cardio',I('Incline treadmill walk (Zone 2)',1,20,25,{type:'cardio',mins:'20–25',m:{},note:'nasal breathing only — if you need to mouth-breathe, slow down',al:['Zone 2 cardio','Incline treadmill walk','Incline walk','Treadmill incline walk']})),
  ...SEC('Warm-up',WU('band pull-apart ×15, arm circles, cable external rotation ×12/side, then 1–2 ramp-up sets of incline machine press')),
  ...SEC('Chest',
-  I('Incline machine press',3,8,12,{r:'S',m:{chest:1,shoulders:.5,triceps:.5},note:'2 RIR',al:['Incline machine or cable press','Incline machine chest press','Incline chest press machine']}),
+  I('Incline cable press',3,8,12,{r:'S',m:{chest:1,shoulders:.5,triceps:.5},note:'2 RIR · bench at 30° between two low pulleys',al:['Incline machine or cable press']}),
   I('Cable fly low-to-high',2,12,15,{m:{chest:1},inc:'small',al:['Low-to-high cable fly','Low to high cable fly']})),
  ...SEC('Delts & triceps · cable',
   I('Cable lateral raise',3,12,20,{ss:1,m:{shoulders:1},inc:'small',al:['Lateral raise','Cable lateral raises']}),
@@ -714,7 +714,7 @@ const P2RAW=()=>{const p=P1RAW();const D=d=>p.find(x=>x.day===d);
  const lc=tue.items.indexOf(T('Seated leg curl'));tue.items.splice(lc,0,Object.assign(I('Single-leg RDL',2,6,8,{r:'A',each:'each leg',m:{hamglute:1,lowback:.25},note:'DB in the opposite hand; hips square'}),{g:'Hamstrings & glutes'}));Object.assign(T('Seated leg curl'),{sets:2,lo:8,hi:10});
  const wed=D('WED');wed.title='Pull · strength & grip';const W=n=>wed.items.find(x=>x.name===n);
  Object.assign(W('Explosive cable pull-through'),{sets:3});Object.assign(W('Pull-up'),{sets:4,lo:4,hi:6,note:'add load with a belt once 6 reps are easy'});Object.assign(W('Chest-supported row'),{sets:4,lo:6,hi:8});Object.assign(W('Landmine Meadows row'),{lo:6,hi:8});W('Face pull').sets=2;
- const thu=D('THU');Object.assign(thu.items.find(x=>x.name==='Incline machine press'),{lo:6,hi:10});thu.title='Zone 2 + intervals · chest, delts, triceps & neck';thu.warn='No sled access Thursday. '+AIR;
+ const thu=D('THU');Object.assign(thu.items.find(x=>x.name==='Incline cable press'),{lo:6,hi:10});thu.title='Zone 2 + intervals · chest, delts, triceps & neck';thu.warn='No sled access Thursday. '+AIR;
  const z=thu.items.find(x=>x.type==='cardio');Object.assign(z,{mins:'12–15',lo:12,hi:15,note:'nasal breathing · doubles as the 10–15 min gradual warm-up for the intervals'});thu.items.splice(thu.items.indexOf(z)+1,0,Object.assign(BIKEINT(6,[10,12]),{g:'Cardio'}));
  const fri=D('FRI');fri.title='Functional power & conditioning';const F=n=>fri.items.find(x=>x.name===n);
  Object.assign(F('Tire flip'),{lo:3,hi:5,note:'explode off the floor'});Object.assign(F('Trap bar deadlift'),{lo:4,hi:6});
@@ -723,9 +723,9 @@ const P2RAW=()=>{const p=P1RAW();const D=d=>p.find(x=>x.day===d);
  fri.warn='Stage the tire, trap bar, landmine, KBs and sleds before you start. '+AIR+' Running long? Drop the sled sprints to 4 first.';
  return p};
 /* ---- Phase 3 · Hypertrophy, new variations (Phase 1 structure, 1–2 swaps per muscle group) + 8-round bike intervals ---- */
-const P3SW={'Incline DB press':'Incline Smith press','Standing DB shoulder press':'Half-kneeling single-arm landmine press','Dips':'Close-grip bench press',
+const P3SW={'Standing DB shoulder press':'Half-kneeling single-arm landmine press','Dips':'DB crush press',
  'Hack squat':'Pendulum squat','Seated leg curl':'Lying leg curl','Reverse crunch (bench)':'Hanging knee raise',
- 'Pull-up':'Neutral-grip pull-up','Chest-supported row':'Seated cable row','Kelso shrug':'Hammer Strength shrug machine','Incline DB curl':'DB curl','Reverse EZ-bar curl':'Zottman curl',
+ 'Pull-up':'Neutral-grip pull-up','Chest-supported row':'Seated cable row','Kelso shrug':'DB shrug','Incline DB curl':'DB curl','Reverse EZ-bar curl':'Zottman curl',
  'Towel hang':'Fat-grip hang'};
 const P3RAW=()=>{const p=P1RAW();p.forEach(d=>{if(d.day!=='SAT'&&d.day!=='SUN')d.title+=' · new variations';d.items.forEach(it=>{const n=P3SW[it.name];if(!n)return;it.v3=it.name;it.name=n;it.al=null;it.note=it.name==='Pendulum squat'?'heavy · belt squat if no pendulum':it.name==='Close-grip bench press'?'shoulder-width grip, elbows tucked':it.name==='Fat-grip hang'?'fat grips on the bar; feet can touch if needed':'';if(n==='Close-grip bench press'||n==='Hammer Strength shrug machine')it.type='load'})});
  p.forEach(d=>d.items.forEach(it=>{if(it.name==='Half-kneeling landmine 180s'){it.name='Standing landmine 180s';it.note='standing progression · pivot the back foot, hips and ribs turn together, no low-back twist';it.al=null}if(it.name==='Half-kneeling single-arm landmine press'&&d.day==='MON'){it.each='each side';it.note='if your gym has a landmine (else Swap: seated DB shoulder press) · press up and slightly forward, ribs down'}}));
@@ -767,7 +767,7 @@ const LIB=[
  LX('Flat DB press','load',8,12,{chest:1,shoulders:.5,triceps:.5}),LX('Flat Smith press','load',6,10,{chest:1,shoulders:.5,triceps:.5},{al:['Smith press','Smith machine press','Smith bench press']}),LX('Incline cable press','load',8,12,{chest:1,shoulders:.5,triceps:.5},{inc:'small',al:['Incline cable chest press']}),LX('Barbell bench press','load',5,8,{chest:1,shoulders:.5,triceps:.5}),LX('Push-up','bw',8,15,{chest:1,triceps:.5,shoulders:.25}),
  LX('Seated DB shoulder press','load',8,12,{shoulders:1,triceps:.5}),LX('Machine shoulder press','load',8,12,{shoulders:1,triceps:.5}),LX('Arnold press','load',8,12,{shoulders:1,triceps:.25}),
  LX('Pec deck','load',10,15,{chest:1},{inc:'small'}),LX('DB fly','load',10,15,{chest:1},{inc:'small'}),
- LX('Machine dip','load',8,12,{chest:1,triceps:.5,shoulders:.5}),LX('Close-grip bench press','load',6,10,{triceps:1,chest:.5}),
+ LX('Machine dip','load',8,12,{chest:1,triceps:.5,shoulders:.5}),LX('DB crush press','load',8,12,{triceps:1,chest:.5}),LX('Reverse EZ-bar curl','load',12,15,{forearms:1,biceps:.5},{inc:'small'}),LX('Incline machine press','load',8,12,{chest:1,shoulders:.5,triceps:.5}),LX('Close-grip bench press','load',6,10,{triceps:1,chest:.5}),
  LX('Overhead DB triceps extension','load',10,15,{triceps:1},{inc:'small'}),LX('Cable triceps extension','load',10,15,{triceps:1},{inc:'small',al:['Triceps pushdown','Cable pushdown','Straight-bar pushdown','Cable triceps pushdown']}),LX('Rope pushdown','load',10,15,{triceps:1},{inc:'small'}),
  LX('Machine lateral raise','load',12,20,{shoulders:1},{inc:'small'}),LX('Lean-away lateral raise','load',12,15,{shoulders:1},{inc:'small',each:'each side'}),
  LX('Reverse pec deck','load',12,15,{shoulders:1,traps:.25},{inc:'small'}),
@@ -815,7 +815,7 @@ const ALT={
  'Cable crunch':['Machine crunch','Ab wheel rollout','Decline crunch','Dead bug'],'Reverse crunch (bench)':['Hanging knee raise','Decline crunch','Dead bug'],
  'Ab wheel rollout':['TRX rollout','Stability-ball rollout','Body saw','Plank'],'Offset barbell front hold':['Offset static barbell hold (landmine)','Suitcase hold'],'Tibialis raise':['Banded tibialis raise','Heel walk'],
  'Pull-up':['Chin-up','Neutral-grip pull-up','Lat pulldown','Assisted pull-up'],'Chest-supported row':['Seated cable row','T-bar row','Chest-supported DB row','Seated machine row'],
- 'Single-arm neutral-grip pulldown':['Lat pulldown','Straight-arm pulldown','Single-arm cable row'],'Kelso shrug':['DB shrug','Barbell shrug','Hammer Strength shrug machine','Smith shrug','Trap bar shrug'],
+ 'Single-arm neutral-grip pulldown':['Lat pulldown','Straight-arm pulldown','Single-arm cable row'],'DB shrug':['Hammer Strength shrug machine','Kelso shrug'],'Kelso shrug':['DB shrug','Barbell shrug','Hammer Strength shrug machine','Smith shrug','Trap bar shrug'],
  'Incline DB curl':['Bayesian cable curl','DB curl','EZ-bar curl'],'Bayesian cable curl':['Incline DB curl','Cable curl','DB curl'],
  'Cable preacher curl':['Machine preacher curl','EZ-bar preacher curl','EZ-bar spider curl'],'Reverse EZ-bar curl':['Reverse cable curl','Zottman curl','Hammer curl'],
  'Barbell bench press':['Flat DB press','Flat Smith press','Flat machine chest press','Offset barbell bench press'],'ATG split squat':['Rear-foot-elevated split squat','Split squat','Reverse lunge','Step-up'],'Poliquin step-up':['Step-up','Backward sled drag','Tibialis raise'],
@@ -846,7 +846,7 @@ const ALT={
  'DB push press':['Push press','Standing DB shoulder press','Half-kneeling single-arm landmine press'],'Standing DB shoulder press':['Standing press','Seated DB shoulder press','Half-kneeling single-arm landmine press'],'Landmine Meadows row':['Single-arm neutral-grip pulldown','Seated cable row','Chest-supported row'],'Standing landmine 180s':['Half-kneeling landmine 180s','Pallof press','Half-kneeling cable chop'],'DB curl':['EZ-bar curl','Incline DB curl','Cable curl'],'DB skull crusher':['EZ-bar skull crusher','Cable triceps extension','Rope pushdown'],'Single-leg RDL':['Romanian deadlift','KB pull-through','Single-leg glute bridge'],'Explosive step-up':['Step-up','Explosive cable pull-through'],'Explosive cable pull-through':['KB pull-through','Speed cable chest press'],'Speed cable chest press':['Med ball chest pass','Push-up'],
  'Sled sprint':['Hill sprint','Assault bike sprint','Prowler push'],'Med ball chest pass':['Speed cable chest press','Push-up'],'Front-rack KB carry':['Suitcase carry','Zercher carry','Farmer carry'],'Trap bar carry':['Farmer carry','Suitcase carry','Front-rack KB carry'],
  'Incline Smith press':['Incline DB press','Low-incline barbell press','Incline machine press'],'Flat DB press':['Flat machine chest press','Flat Smith press','Barbell bench press'],'Seated DB shoulder press':['Standing press','Machine shoulder press','Arnold press'],
- 'Close-grip bench press':['Dips','Machine dip','Overhead cable triceps extension'],'Pendulum squat':['Hack squat','Belt squat','Smith squat'],'Reverse lunge':['Rear-foot-elevated split squat','Walking lunge','Step-up'],
+ 'DB crush press':['Close-grip bench press','Dips','Overhead cable triceps extension'],'Reverse cable curl':['Reverse EZ-bar curl','Zottman curl','Hammer curl'],'Incline cable press':['Incline machine press','Incline DB press','Incline Smith press'],'Close-grip bench press':['Dips','Machine dip','Overhead cable triceps extension'],'Pendulum squat':['Hack squat','Belt squat','Smith squat'],'Reverse lunge':['Rear-foot-elevated split squat','Walking lunge','Step-up'],
  'Lying leg curl':['Seated leg curl','Nordic curl','Stability-ball leg curl'],'Hanging knee raise':['Reverse crunch (bench)','Decline crunch','Dead bug'],'Neutral-grip pull-up':['Pull-up','Chin-up','Lat pulldown'],
  'Seated cable row':['Chest-supported row','T-bar row','Seated machine row'],'Hammer Strength shrug machine':['Kelso shrug','DB shrug','Barbell shrug','Smith shrug'],'EZ-bar curl':['Incline DB curl','DB curl','Cable curl'],
  'Zottman curl':['Reverse EZ-bar curl','Reverse cable curl'],'Rope hammer curl':['Cross-body hammer curl','Hammer curl'],'Half-kneeling single-arm landmine press':['Seated DB shoulder press','Single-arm DB bench press','Offset barbell bench press','Single-arm cable chest press','Single-arm DB floor press'],'Rack pull':['Trap bar deadlift','KB pull-through','Romanian deadlift'],'Side plank':['Copenhagen plank','Suitcase carry','Band Pallof hold'],'Hammer curl':['Cross-body hammer curl','Rope hammer curl','Reverse EZ-bar curl']};
@@ -1214,6 +1214,7 @@ Standing DB shoulder press|Stand hip-width with dumbbells at the shoulders, palm
 DB push press|Stand with dumbbells at the shoulders, palms in, feet hip-width.|Dip a few inches at the knees, then drive up through the legs and press the dumbbells overhead in one motion; lower under control.|Short, fast dip;Legs start it, arms finish;Exhale on the drive|Deep squat dip;Arching the low back at the top|Back: keep the torso vertical; no layback.
 DB skull crusher|Lie on a flat bench holding dumbbells over the shoulders with a neutral grip (palms facing).|Bend only at the elbows to lower the dumbbells beside the head, then extend the arms back up.|Elbows point up, stay still;Slow lowering;Squeeze at the top|Flaring the elbows;Swinging the weight from the shoulders|Back: feet flat, keep the natural arch.
 Landmine Meadows row|Stand side-on to the end of a landmine bar in a staggered stance; grip the thick end with an overhand grip; brace on your thigh with the free arm.|Row the bar end up toward the hip by driving the elbow back and up, then lower under control.|Flat back, hips high;Elbow drives back;Pause at the top|Twisting the torso to lift;Rounding the back|Back: brace on the thigh, flat back; skip if the hinge hurts. Equipment: if your Planet Fitness has a landmine; otherwise Swap to a single-arm neutral-grip pulldown.
+DB crush press|Lie on a flat bench, dumbbells pressed together over the chest with a neutral grip, elbows tucked.|Lower both dumbbells together to the lower chest while squeezing them into each other, then press up.|Squeeze the bells together the whole set;Elbows tucked;Controlled lowering|Letting the bells drift apart;Flaring the elbows|Back: feet planted, slight natural arch, glutes on the bench.
 `.split('\n').forEach(l=>{const f=l.split('|');if(f.length<6)return;HOW[f[0]]={s:f[1],m:f[2],k:f[3].split(';').filter(Boolean),x:f[4].split(';').filter(Boolean),b:f[5]}});
 const howOf=name=>HOW[name]||(BYNAME[name]&&HOW[BYNAME[name].name])||null;
 function howBody(h){return'<div class="ht-in"><div class="ht-c"><p><b>Setup</b> '+esc(h.s)+'</p><p><b>Movement</b> '+esc(h.m)+'</p><div class="ht-h">Key cues</div><ul>'+h.k.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul><div class="ht-h">Common mistakes</div><ul class="ht-x">'+h.x.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>'+(h.b?'<p class="ht-b">🛡 '+esc(h.b)+'</p>':'')+'</div></div>'}
@@ -1354,7 +1355,7 @@ function swapItem(orig,name,kind){const b=libItem(name);let ty=b?b.type:guessTyp
 const sameDayRow=(r,day)=>!r.day||r.day===day;
 function rowsFor(it,date,day){return L().filter(r=>r.date===date&&r.exercise===it.name&&sameDayRow(r,day))}
 function itemsFor(day,date){const p=progDay(day,date),out=[],seen=new Set(),skipped=[];const W=weekInfo(date);
- p.items.forEach(it=>{let e=it.type==='note'?null:effSwap(day,date,it.name);if(!e&&it.altwk&&W.abs%2===0)e={name:it.altwk,kind:'week'};let x=e?swapItem(it,e.name,e.kind):it;if(x.type!=='note'&&seen.has(x.name))return;x=adjItem(x,W);const rx=rehabX(x);if(rx===null){skipped.push(x.name);return}x=rx;if(x.type!=='note'&&seen.has(x.name))return;out.push({it:x,orig:it});seen.add(x.name)});
+ p.items.forEach(it=>{let e=it.type==='note'?null:effSwap(day,date,it.name);if(!e){const aw=altWk(it,W);if(aw)e={name:aw,kind:'week'}}let x=e?swapItem(it,e.name,e.kind):it;x=benchNote(x,it,W);if(x.type!=='note'&&seen.has(x.name))return;x=adjItem(x,W);const rx=rehabX(x);if(rx===null){skipped.push(x.name);return}x=rx;if(x.type!=='note'&&seen.has(x.name))return;out.push({it:x,orig:it});seen.add(x.name)});
  if(skipped.length>=3&&!out.some(o=>o.it.type==='cardio')){const wk=RHWALK();out.splice(out.findIndex(o=>o.it.type!=='note'),0,{it:wk,orig:wk});seen.add('Walk')}out.rhSkip=skipped;
  const names=[];L().filter(r=>r.date===date&&sameDayRow(r,day)).forEach(r=>{if(!seen.has(r.exercise)&&!names.includes(r.exercise))names.push(r.exercise)});
  ((UI.lx||{})[date]||[]).forEach(n=>{if(!seen.has(n)&&!names.includes(n))names.push(n)});
@@ -1790,6 +1791,10 @@ const phLabel=w=>w.pre?startTxt()+' · '+cdTxt(daysToStart()):'Phase '+(w.ph+1)+
 const wkLabel=w=>w.pre?'':' · wk '+w.wk+'/'+phLen(w.ph);
 /* deload / flare / alternate-week adjustments applied to the day's items */
 const FLARE={'Standing press':'Seated DB shoulder press','Push press':'Seated DB shoulder press','Hack squat':'Leg press','Pendulum squat':'Leg press','Trap bar deadlift':'Rack pull','Tire flip':'Sled push'};
+/* bench: barbell flat bench every week; deload weeks swap to flat DB bench (logged separately) */
+const isBenchSlot=it=>it&&it.name==='Barbell bench press'&&it.r==='M';
+const altWk=(it,w)=>isBenchSlot(it)?(w&&w.dl?'Flat DB press':null):(it.altwk&&w.abs%2===0?it.altwk:null);
+function benchNote(x,it,w){if(!isBenchSlot(it)||!w||!w.dl||x.swapKind!=='week')return x;return Object.assign({},x,{note:'Deload week: flat DB bench replaces barbell bench · logged separately'})}
 function adjItem(x,w){if(w&&w.dl&&x.type!=='note'&&x.type!=='cardio'&&!x.warm&&x.sets>1)return Object.assign({},x,{sets:Math.ceil(x.sets/2),dl:1,fullSets:x.sets});return x}
 function flareOn(date){return!!(S.flare&&S.flare[date])}
 function toggleFlare(date,day){S.flare=S.flare||{};const f=S.flare[date];
@@ -1953,7 +1958,7 @@ function restBar(){let el=document.getElementById('restbar');const r=S&&S.rest;
 setInterval(()=>{restBar();sesTick()},250);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden){restBar();sesTick()}});window.addEventListener('pageshow',()=>{restBar();sesTick()});window.addEventListener('focus',()=>restBar());
 /* ===== Rehab mode: until a doctor clears you, swap out straining, breath-holding, heavy axial and direct ab-flexion work ===== */
-const RH={'Barbell bench press':'Flat machine chest press','Flat DB press':'Flat machine chest press','Incline DB press':'Incline machine press','Incline Smith press':'Incline machine press','Standing press':'Machine shoulder press','Push press':'Machine shoulder press','Seated DB shoulder press':'Machine shoulder press','Dips':'Cable triceps extension','Close-grip bench press':'Cable triceps extension','Pull-up':'Lat pulldown','Neutral-grip pull-up':'Lat pulldown',
+const RH={'DB crush press':'Cable triceps extension','Barbell bench press':'Flat machine chest press','Flat DB press':'Flat machine chest press','Incline DB press':'Incline machine press','Incline Smith press':'Incline machine press','Standing press':'Machine shoulder press','Push press':'Machine shoulder press','Seated DB shoulder press':'Machine shoulder press','Dips':'Cable triceps extension','Close-grip bench press':'Cable triceps extension','Pull-up':'Lat pulldown','Neutral-grip pull-up':'Lat pulldown',
  'Single-arm DB bench press':'Flat machine chest press','Half-kneeling single-arm landmine press':'Flat machine chest press','KB gorilla row':'Chest-supported row','Leg press calf press':'Seated calf raise',
  'Single-leg back extension hold (weighted)':'Bird dog','Offset barbell front hold':'Side plank',
  'Med ball chest pass':null,'Speed cable chest press':null,'Explosive step-up':null,'Explosive cable pull-through':null,'Box jump':null,'Broad jump':null,'Poliquin step-up':null,'Med ball backward overhead toss':null,'Med ball rotational scoop toss':null,'Med ball slam':null,
@@ -2033,7 +2038,7 @@ function renderProgram(){const off=UI.pweek||0;const base=mondayOf(dayNum(todayS
   let g=null;
   p.items.forEach(it=>{if(it.g&&it.g!==g){h+='<div class="pg-gh">'+esc(it.g)+'</div>';g=it.g}
    if(it.type==='note'){h+='<div class="pg-note">'+(it.label?'<b>'+esc(it.label)+(it.bm?' '+it.bm.join('–')+' min':'')+':</b> ':'')+esc(it.name.replace(/^(Warm-up|Cool-down|Finish|Mobility|Stretches):\s*/,''))+'</div>';return}
-   let e=effSwap(p.day,date,it.name);if(!e&&it.altwk&&W.abs%2===0)e={name:it.altwk,kind:'week'};let x=e?swapItem(it,e.name,e.kind):it;x=adjItem(x,W);if(rehabOn()){const rx=rehabX(x);if(rx===null){h+='<div class="pg-note rh">🩺 Skipped in rehab: '+esc(x.name)+'</div>';return}x=rx}
+   let e=effSwap(p.day,date,it.name);if(!e){const aw=altWk(it,W);if(aw)e={name:aw,kind:'week'}}let x=e?swapItem(it,e.name,e.kind):it;x=benchNote(x,it,W);x=adjItem(x,W);if(rehabOn()){const rx=rehabX(x);if(rx===null){h+='<div class="pg-note rh">🩺 Skipped in rehab: '+esc(x.name)+'</div>';return}x=rx}
    const sub=[x.note,it.warm?(it.label||'warm-up').toLowerCase():'',it.opt?'optional':'',it.ckn&&it.ssg&&it.ssg[0]===it.name?it.ckn.toLowerCase():'',x.type!=='load'&&TYLAB[x.type]?TYLAB[x.type].toLowerCase():'',x.rest&&x.type!=='cardio'&&!(it.ssg&&it.ssg[it.ssg.length-1]!==it.name)?'rest '+restTxt(x.rest)+(it.ssg?' / round':''):''].filter(Boolean).join(' · ');
    const hw=howOf(x.name);h+='<div class="pg-item"><div class="pg-row'+(it.warm||it.opt?' dim':'')+(it.ssl?' ss':'')+'"><span class="pg-n'+(it.ssl||it.cbg?' ss':'')+(it.cbg?' cb':'')+(it.ckn?' ck':'')+'"'+(it.ssl?' title="'+(it.ckn?esc(it.ckn):'Optional superset '+it.ssl)+'"':'')+'>'+(it.n||'')+'</span>'+(hw?'<button type="button" class="pg-m" data-a="ht" aria-expanded="false">':'<div class="pg-m">')+'<div class="pg-name">'+esc(x.name)+'</div>'+(sub?'<div class="pg-sub">'+esc(sub)+'</div>':'')+swapTag(x)+(hw?'<span class="pg-hw">📖 How to <i aria-hidden="true">⌄</i></span></button>':'</div>')+'<span class="pg-rx">'+esc(rxs(x))+'</span>'+vidLink(x.name,'pg-vd','<span aria-hidden="true">▶</span>')+'<button type="button" class="pg-sw" data-a="swap" data-day="'+p.day+'" data-date="'+date+'" data-v="'+esc(it.name)+'" aria-label="Swap '+esc(x.name)+'">⇄</button></div>'+(hw?'<div class="ht-p" aria-hidden="true">'+howBody(hw)+'</div>':'')+'</div>'});
   h+='<button type="button" class="lx-sec wide" data-a="plog" data-v="'+p.day+'">▶ Log '+DAYNAME[p.day]+'</button></div>'});
@@ -2170,7 +2175,7 @@ $('#modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()})
 window.addEventListener('storage',e=>{if(e.key===KEY&&!SES){load();render()}});
 
 load();render(false);try{ciAutoPrompt()}catch(e){console.error(e)}
-window.__dash={get S(){return S},render,UI,parseLogCSV,canon,suggest,epley,lr,ALT,BYNAME,get PROG(){return PROG},PROG1,PROG2,PROG3,LIB,metaOf,HOW,MIGRATE,RETIRED,howOf,weekInfo,timeline,progFor,stallOf,itemsFor,bcOf,wkRates,downThisWeek,ciFlags,ciWeek,ciDue,firstMon,dayTime,MUSCLES,rehabX,toggleRehab,dGroups};
+window.__dash={altWk,weekInfo,get S(){return S},render,UI,parseLogCSV,canon,suggest,epley,lr,ALT,BYNAME,get PROG(){return PROG},PROG1,PROG2,PROG3,LIB,metaOf,HOW,MIGRATE,RETIRED,howOf,weekInfo,timeline,progFor,stallOf,itemsFor,bcOf,wkRates,downThisWeek,ciFlags,ciWeek,ciDue,firstMon,dayTime,MUSCLES,rehabX,toggleRehab,dGroups};
 })();
 
 </script>
